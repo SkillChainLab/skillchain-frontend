@@ -7,6 +7,7 @@ import Footer from '@/components/Footer'
 import { useWallet } from '@/contexts/WalletContext'
 import { profileApi } from '@/lib/api'
 import { ProfileImageUpload } from '@/lib/profileImageUpload'
+import { socialApi, UserConnection } from '@/lib/socialApi'
 
 interface UserProfile {
   id: string
@@ -68,6 +69,12 @@ export default function ProfilePage() {
   const [profileIndex, setProfileIndex] = useState<string>('')
   const [isUploadingImage, setIsUploadingImage] = useState(false)
   const [uploadError, setUploadError] = useState<string | null>(null)
+  
+  // Social features state
+  const [connectionStatus, setConnectionStatus] = useState<'none' | 'pending' | 'connected' | 'loading'>('none')
+  const [isConnecting, setIsConnecting] = useState(false)
+  const [isMessaging, setIsMessaging] = useState(false)
+  
   const { walletInfo } = useWallet()
 
   // Profile form state
@@ -98,6 +105,13 @@ export default function ProfilePage() {
       loadUserProfile()
     }
   }, [walletInfo])
+
+  // Load social connection status when viewing other user's profile
+  useEffect(() => {
+    if (walletInfo && user && !user.isOwnProfile) {
+      loadConnectionStatus()
+    }
+  }, [walletInfo, user])
 
   // Debug avatar values
   useEffect(() => {
@@ -203,6 +217,26 @@ export default function ProfilePage() {
       setUser(null)
     } finally {
       setIsLoading(false)
+    }
+  }
+
+  const loadConnectionStatus = async () => {
+    if (!walletInfo || !user || user.isOwnProfile) return
+    
+    try {
+      const connections = await socialApi.getUserConnections(walletInfo.address)
+      const connection = connections.find(conn => 
+        conn.toUser === user.address || conn.fromUser === user.address
+      )
+      
+      if (connection) {
+        setConnectionStatus(connection.status === 'accepted' ? 'connected' : 'pending')
+      } else {
+        setConnectionStatus('none')
+      }
+    } catch (error) {
+      console.error('Failed to load connection status:', error)
+      setConnectionStatus('none')
     }
   }
 
@@ -591,13 +625,55 @@ Your skill is now on the blockchain!`)
     }
   }
 
-  const handleConnect = () => {
-    if (!user) return
-    setUser(prev => prev ? ({ 
-      ...prev, 
-      isConnected: !prev.isConnected, 
-      connections: prev.isConnected ? prev.connections - 1 : prev.connections + 1 
-    }) : null)
+  const handleConnect = async () => {
+    if (!walletInfo || !user || user.isOwnProfile) return
+
+    setIsConnecting(true)
+    try {
+      if (connectionStatus === 'none') {
+        // Send connection request
+        await socialApi.sendConnectionRequest(user.address)
+        setConnectionStatus('pending')
+        
+        // Update user connections count
+        setUser(prev => prev ? {
+          ...prev,
+          connections: prev.connections + 1
+        } : null)
+        
+        alert('Connection request sent successfully! 🤝')
+      } else if (connectionStatus === 'connected') {
+        // Remove connection (would need additional API endpoint)
+        // For now, just show a message
+        alert('Connection management features coming soon!')
+      }
+    } catch (error: any) {
+      console.error('Failed to handle connection:', error)
+      alert(`Failed to ${connectionStatus === 'none' ? 'send connection request' : 'manage connection'}: ${error.message}`)
+    } finally {
+      setIsConnecting(false)
+    }
+  }
+
+  const handleMessage = async () => {
+    if (!walletInfo || !user || user.isOwnProfile) return
+
+    setIsMessaging(true)
+    try {
+      // Create or get existing conversation
+      const conversation = await socialApi.createConversation(user.address, {
+        profileName: user.name,
+        profileTitle: user.title
+      })
+      
+      // Redirect to messages page with conversation ID
+      window.location.href = `/messages?conversation=${conversation.id}`
+    } catch (error: any) {
+      console.error('Failed to start conversation:', error)
+      alert(`Failed to start conversation: ${error.message}`)
+    } finally {
+      setIsMessaging(false)
+    }
   }
 
   // Profile image upload handler
@@ -1152,18 +1228,27 @@ Your skill is now on the blockchain!`)
                       <>
                         <button
                           onClick={handleConnect}
-                          className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all transform hover:scale-105 ${
-                            user?.isConnected 
-                              ? 'bg-gray-600 hover:bg-gray-700' 
+                          disabled={isConnecting}
+                          className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed ${
+                            connectionStatus === 'connected'
+                              ? 'bg-green-600 hover:bg-green-700' 
+                              : connectionStatus === 'pending'
+                              ? 'bg-yellow-600 hover:bg-yellow-700'
                               : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700'
                           }`}
                         >
                           <UserPlus className="w-4 h-4" />
-                          {user?.isConnected ? 'Connected' : 'Connect'}
+                          {isConnecting ? 'Connecting...' : 
+                           connectionStatus === 'connected' ? 'Connected' :
+                           connectionStatus === 'pending' ? 'Request Sent' : 'Connect'}
                         </button>
-                        <button className="flex items-center gap-2 border border-gray-500 hover:bg-white/10 px-6 py-3 rounded-xl font-semibold transition-colors">
+                        <button 
+                          onClick={handleMessage}
+                          disabled={isMessaging}
+                          className="flex items-center gap-2 border border-gray-500 hover:bg-white/10 px-6 py-3 rounded-xl font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
                           <MessageSquare className="w-4 h-4" />
-                          Message
+                          {isMessaging ? 'Starting...' : 'Message'}
                         </button>
                       </>
                     )}
