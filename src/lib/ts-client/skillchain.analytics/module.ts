@@ -6,61 +6,55 @@ import { msgTypes } from './registry';
 import { IgniteClient } from "../client"
 import { MissingWalletError } from "../helpers"
 import { Api } from "./rest";
-import { QueryParamsRequest } from "./types/skillchain/analytics/query";
-import { QueryParamsResponse } from "./types/skillchain/analytics/query";
+import { MsgCreateRevenueRecord } from "./types/skillchain/analytics/tx";
 import { QueryGetPlatformMetricResponse } from "./types/skillchain/analytics/query";
-import { QueryAllPlatformMetricResponse } from "./types/skillchain/analytics/query";
+import { QueryAllUserActivityRequest } from "./types/skillchain/analytics/query";
 import { QueryGetRevenueRecordRequest } from "./types/skillchain/analytics/query";
 import { QueryAllRevenueRecordResponse } from "./types/skillchain/analytics/query";
-import { MsgCreatePlatformMetric } from "./types/skillchain/analytics/tx";
-import { MsgDeletePlatformMetricResponse } from "./types/skillchain/analytics/tx";
-import { MsgCreateRevenueRecord } from "./types/skillchain/analytics/tx";
-import { QueryGetPlatformMetricRequest } from "./types/skillchain/analytics/query";
-import { UserActivity } from "./types/skillchain/analytics/user_activity";
-import { GenesisState } from "./types/skillchain/analytics/genesis";
-import { MsgDeleteUserActivity } from "./types/skillchain/analytics/tx";
-import { MsgUpdatePlatformMetricResponse } from "./types/skillchain/analytics/tx";
-import { MsgUpdateRevenueRecord } from "./types/skillchain/analytics/tx";
-import { MsgUpdateParams } from "./types/skillchain/analytics/tx";
-import { MsgCreatePlatformMetricResponse } from "./types/skillchain/analytics/tx";
+import { QueryAllUserActivityResponse } from "./types/skillchain/analytics/query";
+import { RevenueRecord } from "./types/skillchain/analytics/revenue_record";
+import { MsgUpdatePlatformMetric } from "./types/skillchain/analytics/tx";
 import { MsgCreateUserActivity } from "./types/skillchain/analytics/tx";
+import { GenesisState } from "./types/skillchain/analytics/genesis";
+import { PlatformMetric } from "./types/skillchain/analytics/platform_metric";
+import { QueryGetUserActivityRequest } from "./types/skillchain/analytics/query";
 import { MsgUpdateParamsResponse } from "./types/skillchain/analytics/tx";
 import { MsgCreateUserActivityResponse } from "./types/skillchain/analytics/tx";
-import { MsgUpdateRevenueRecordResponse } from "./types/skillchain/analytics/tx";
-import { RevenueRecord } from "./types/skillchain/analytics/revenue_record";
-import { MsgUpdateUserActivity } from "./types/skillchain/analytics/tx";
-import { Params } from "./types/skillchain/analytics/params";
-import { MsgDeleteRevenueRecordResponse } from "./types/skillchain/analytics/tx";
-import { QueryGetUserActivityResponse } from "./types/skillchain/analytics/query";
-import { QueryGetRevenueRecordResponse } from "./types/skillchain/analytics/query";
-import { PlatformMetric } from "./types/skillchain/analytics/platform_metric";
-import { MsgUpdatePlatformMetric } from "./types/skillchain/analytics/tx";
 import { MsgDeleteUserActivityResponse } from "./types/skillchain/analytics/tx";
-import { MsgCreateRevenueRecordResponse } from "./types/skillchain/analytics/tx";
-import { MsgDeleteRevenueRecord } from "./types/skillchain/analytics/tx";
-import { QueryAllPlatformMetricRequest } from "./types/skillchain/analytics/query";
-import { QueryGetUserActivityRequest } from "./types/skillchain/analytics/query";
-import { MsgDeletePlatformMetric } from "./types/skillchain/analytics/tx";
-import { MsgUpdateUserActivityResponse } from "./types/skillchain/analytics/tx";
-import { QueryAllUserActivityRequest } from "./types/skillchain/analytics/query";
-import { QueryAllUserActivityResponse } from "./types/skillchain/analytics/query";
+import { MsgUpdateRevenueRecord } from "./types/skillchain/analytics/tx";
+import { QueryGetUserActivityResponse } from "./types/skillchain/analytics/query";
 import { QueryAllRevenueRecordRequest } from "./types/skillchain/analytics/query";
+import { MsgDeleteUserActivity } from "./types/skillchain/analytics/tx";
+import { QueryGetPlatformMetricRequest } from "./types/skillchain/analytics/query";
+import { MsgCreatePlatformMetricResponse } from "./types/skillchain/analytics/tx";
+import { MsgDeletePlatformMetricResponse } from "./types/skillchain/analytics/tx";
+import { QueryParamsRequest } from "./types/skillchain/analytics/query";
+import { QueryAllPlatformMetricResponse } from "./types/skillchain/analytics/query";
+import { MsgDeletePlatformMetric } from "./types/skillchain/analytics/tx";
+import { MsgCreateRevenueRecordResponse } from "./types/skillchain/analytics/tx";
+import { QueryParamsResponse } from "./types/skillchain/analytics/query";
+import { QueryAllPlatformMetricRequest } from "./types/skillchain/analytics/query";
+import { QueryGetRevenueRecordResponse } from "./types/skillchain/analytics/query";
+import { Params } from "./types/skillchain/analytics/params";
+import { MsgUpdateParams } from "./types/skillchain/analytics/tx";
+import { MsgCreatePlatformMetric } from "./types/skillchain/analytics/tx";
+import { MsgUpdateRevenueRecordResponse } from "./types/skillchain/analytics/tx";
+import { UserActivity } from "./types/skillchain/analytics/user_activity";
+import { MsgDeleteRevenueRecord } from "./types/skillchain/analytics/tx";
+import { MsgUpdatePlatformMetricResponse } from "./types/skillchain/analytics/tx";
+import { MsgUpdateUserActivity } from "./types/skillchain/analytics/tx";
+import { MsgUpdateUserActivityResponse } from "./types/skillchain/analytics/tx";
+import { MsgDeleteRevenueRecordResponse } from "./types/skillchain/analytics/tx";
 
 import { Params as typeParams} from "./types"
 import { PlatformMetric as typePlatformMetric} from "./types"
 import { RevenueRecord as typeRevenueRecord} from "./types"
 import { UserActivity as typeUserActivity} from "./types"
 
-export { QueryParamsRequest, QueryParamsResponse, QueryGetPlatformMetricResponse, QueryAllPlatformMetricResponse, QueryGetRevenueRecordRequest, QueryAllRevenueRecordResponse, MsgCreatePlatformMetric, MsgDeletePlatformMetricResponse, MsgCreateRevenueRecord, QueryGetPlatformMetricRequest, UserActivity, GenesisState, MsgDeleteUserActivity, MsgUpdatePlatformMetricResponse, MsgUpdateRevenueRecord, MsgUpdateParams, MsgCreatePlatformMetricResponse, MsgCreateUserActivity, MsgUpdateParamsResponse, MsgCreateUserActivityResponse, MsgUpdateRevenueRecordResponse, RevenueRecord, MsgUpdateUserActivity, Params, MsgDeleteRevenueRecordResponse, QueryGetUserActivityResponse, QueryGetRevenueRecordResponse, PlatformMetric, MsgUpdatePlatformMetric, MsgDeleteUserActivityResponse, MsgCreateRevenueRecordResponse, MsgDeleteRevenueRecord, QueryAllPlatformMetricRequest, QueryGetUserActivityRequest, MsgDeletePlatformMetric, MsgUpdateUserActivityResponse, QueryAllUserActivityRequest, QueryAllUserActivityResponse, QueryAllRevenueRecordRequest };
+export { MsgCreateRevenueRecord, QueryGetPlatformMetricResponse, QueryAllUserActivityRequest, QueryGetRevenueRecordRequest, QueryAllRevenueRecordResponse, QueryAllUserActivityResponse, RevenueRecord, MsgUpdatePlatformMetric, MsgCreateUserActivity, GenesisState, PlatformMetric, QueryGetUserActivityRequest, MsgUpdateParamsResponse, MsgCreateUserActivityResponse, MsgDeleteUserActivityResponse, MsgUpdateRevenueRecord, QueryGetUserActivityResponse, QueryAllRevenueRecordRequest, MsgDeleteUserActivity, QueryGetPlatformMetricRequest, MsgCreatePlatformMetricResponse, MsgDeletePlatformMetricResponse, QueryParamsRequest, QueryAllPlatformMetricResponse, MsgDeletePlatformMetric, MsgCreateRevenueRecordResponse, QueryParamsResponse, QueryAllPlatformMetricRequest, QueryGetRevenueRecordResponse, Params, MsgUpdateParams, MsgCreatePlatformMetric, MsgUpdateRevenueRecordResponse, UserActivity, MsgDeleteRevenueRecord, MsgUpdatePlatformMetricResponse, MsgUpdateUserActivity, MsgUpdateUserActivityResponse, MsgDeleteRevenueRecordResponse };
 
-type sendQueryParamsRequestParams = {
-  value: QueryParamsRequest,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryParamsResponseParams = {
-  value: QueryParamsResponse,
+type sendMsgCreateRevenueRecordParams = {
+  value: MsgCreateRevenueRecord,
   fee?: StdFee,
   memo?: string
 };
@@ -71,8 +65,8 @@ type sendQueryGetPlatformMetricResponseParams = {
   memo?: string
 };
 
-type sendQueryAllPlatformMetricResponseParams = {
-  value: QueryAllPlatformMetricResponse,
+type sendQueryAllUserActivityRequestParams = {
+  value: QueryAllUserActivityRequest,
   fee?: StdFee,
   memo?: string
 };
@@ -89,32 +83,26 @@ type sendQueryAllRevenueRecordResponseParams = {
   memo?: string
 };
 
-type sendMsgCreatePlatformMetricParams = {
-  value: MsgCreatePlatformMetric,
+type sendQueryAllUserActivityResponseParams = {
+  value: QueryAllUserActivityResponse,
   fee?: StdFee,
   memo?: string
 };
 
-type sendMsgDeletePlatformMetricResponseParams = {
-  value: MsgDeletePlatformMetricResponse,
+type sendRevenueRecordParams = {
+  value: RevenueRecord,
   fee?: StdFee,
   memo?: string
 };
 
-type sendMsgCreateRevenueRecordParams = {
-  value: MsgCreateRevenueRecord,
+type sendMsgUpdatePlatformMetricParams = {
+  value: MsgUpdatePlatformMetric,
   fee?: StdFee,
   memo?: string
 };
 
-type sendQueryGetPlatformMetricRequestParams = {
-  value: QueryGetPlatformMetricRequest,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendUserActivityParams = {
-  value: UserActivity,
+type sendMsgCreateUserActivityParams = {
+  value: MsgCreateUserActivity,
   fee?: StdFee,
   memo?: string
 };
@@ -125,38 +113,14 @@ type sendGenesisStateParams = {
   memo?: string
 };
 
-type sendMsgDeleteUserActivityParams = {
-  value: MsgDeleteUserActivity,
+type sendPlatformMetricParams = {
+  value: PlatformMetric,
   fee?: StdFee,
   memo?: string
 };
 
-type sendMsgUpdatePlatformMetricResponseParams = {
-  value: MsgUpdatePlatformMetricResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgUpdateRevenueRecordParams = {
-  value: MsgUpdateRevenueRecord,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgUpdateParamsParams = {
-  value: MsgUpdateParams,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgCreatePlatformMetricResponseParams = {
-  value: MsgCreatePlatformMetricResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgCreateUserActivityParams = {
-  value: MsgCreateUserActivity,
+type sendQueryGetUserActivityRequestParams = {
+  value: QueryGetUserActivityRequest,
   fee?: StdFee,
   memo?: string
 };
@@ -173,32 +137,14 @@ type sendMsgCreateUserActivityResponseParams = {
   memo?: string
 };
 
-type sendMsgUpdateRevenueRecordResponseParams = {
-  value: MsgUpdateRevenueRecordResponse,
+type sendMsgDeleteUserActivityResponseParams = {
+  value: MsgDeleteUserActivityResponse,
   fee?: StdFee,
   memo?: string
 };
 
-type sendRevenueRecordParams = {
-  value: RevenueRecord,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgUpdateUserActivityParams = {
-  value: MsgUpdateUserActivity,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendParamsParams = {
-  value: Params,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgDeleteRevenueRecordResponseParams = {
-  value: MsgDeleteRevenueRecordResponse,
+type sendMsgUpdateRevenueRecordParams = {
+  value: MsgUpdateRevenueRecord,
   fee?: StdFee,
   memo?: string
 };
@@ -209,50 +155,44 @@ type sendQueryGetUserActivityResponseParams = {
   memo?: string
 };
 
-type sendQueryGetRevenueRecordResponseParams = {
-  value: QueryGetRevenueRecordResponse,
+type sendQueryAllRevenueRecordRequestParams = {
+  value: QueryAllRevenueRecordRequest,
   fee?: StdFee,
   memo?: string
 };
 
-type sendPlatformMetricParams = {
-  value: PlatformMetric,
+type sendMsgDeleteUserActivityParams = {
+  value: MsgDeleteUserActivity,
   fee?: StdFee,
   memo?: string
 };
 
-type sendMsgUpdatePlatformMetricParams = {
-  value: MsgUpdatePlatformMetric,
+type sendQueryGetPlatformMetricRequestParams = {
+  value: QueryGetPlatformMetricRequest,
   fee?: StdFee,
   memo?: string
 };
 
-type sendMsgDeleteUserActivityResponseParams = {
-  value: MsgDeleteUserActivityResponse,
+type sendMsgCreatePlatformMetricResponseParams = {
+  value: MsgCreatePlatformMetricResponse,
   fee?: StdFee,
   memo?: string
 };
 
-type sendMsgCreateRevenueRecordResponseParams = {
-  value: MsgCreateRevenueRecordResponse,
+type sendMsgDeletePlatformMetricResponseParams = {
+  value: MsgDeletePlatformMetricResponse,
   fee?: StdFee,
   memo?: string
 };
 
-type sendMsgDeleteRevenueRecordParams = {
-  value: MsgDeleteRevenueRecord,
+type sendQueryParamsRequestParams = {
+  value: QueryParamsRequest,
   fee?: StdFee,
   memo?: string
 };
 
-type sendQueryAllPlatformMetricRequestParams = {
-  value: QueryAllPlatformMetricRequest,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryGetUserActivityRequestParams = {
-  value: QueryGetUserActivityRequest,
+type sendQueryAllPlatformMetricResponseParams = {
+  value: QueryAllPlatformMetricResponse,
   fee?: StdFee,
   memo?: string
 };
@@ -263,45 +203,101 @@ type sendMsgDeletePlatformMetricParams = {
   memo?: string
 };
 
+type sendMsgCreateRevenueRecordResponseParams = {
+  value: MsgCreateRevenueRecordResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryParamsResponseParams = {
+  value: QueryParamsResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryAllPlatformMetricRequestParams = {
+  value: QueryAllPlatformMetricRequest,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryGetRevenueRecordResponseParams = {
+  value: QueryGetRevenueRecordResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendParamsParams = {
+  value: Params,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateParamsParams = {
+  value: MsgUpdateParams,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgCreatePlatformMetricParams = {
+  value: MsgCreatePlatformMetric,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateRevenueRecordResponseParams = {
+  value: MsgUpdateRevenueRecordResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendUserActivityParams = {
+  value: UserActivity,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgDeleteRevenueRecordParams = {
+  value: MsgDeleteRevenueRecord,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdatePlatformMetricResponseParams = {
+  value: MsgUpdatePlatformMetricResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateUserActivityParams = {
+  value: MsgUpdateUserActivity,
+  fee?: StdFee,
+  memo?: string
+};
+
 type sendMsgUpdateUserActivityResponseParams = {
   value: MsgUpdateUserActivityResponse,
   fee?: StdFee,
   memo?: string
 };
 
-type sendQueryAllUserActivityRequestParams = {
-  value: QueryAllUserActivityRequest,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryAllUserActivityResponseParams = {
-  value: QueryAllUserActivityResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryAllRevenueRecordRequestParams = {
-  value: QueryAllRevenueRecordRequest,
+type sendMsgDeleteRevenueRecordResponseParams = {
+  value: MsgDeleteRevenueRecordResponse,
   fee?: StdFee,
   memo?: string
 };
 
 
-type queryParamsRequestParams = {
-  value: QueryParamsRequest,
-};
-
-type queryParamsResponseParams = {
-  value: QueryParamsResponse,
+type msgCreateRevenueRecordParams = {
+  value: MsgCreateRevenueRecord,
 };
 
 type queryGetPlatformMetricResponseParams = {
   value: QueryGetPlatformMetricResponse,
 };
 
-type queryAllPlatformMetricResponseParams = {
-  value: QueryAllPlatformMetricResponse,
+type queryAllUserActivityRequestParams = {
+  value: QueryAllUserActivityRequest,
 };
 
 type queryGetRevenueRecordRequestParams = {
@@ -312,52 +308,32 @@ type queryAllRevenueRecordResponseParams = {
   value: QueryAllRevenueRecordResponse,
 };
 
-type msgCreatePlatformMetricParams = {
-  value: MsgCreatePlatformMetric,
+type queryAllUserActivityResponseParams = {
+  value: QueryAllUserActivityResponse,
 };
 
-type msgDeletePlatformMetricResponseParams = {
-  value: MsgDeletePlatformMetricResponse,
+type revenueRecordParams = {
+  value: RevenueRecord,
 };
 
-type msgCreateRevenueRecordParams = {
-  value: MsgCreateRevenueRecord,
+type msgUpdatePlatformMetricParams = {
+  value: MsgUpdatePlatformMetric,
 };
 
-type queryGetPlatformMetricRequestParams = {
-  value: QueryGetPlatformMetricRequest,
-};
-
-type userActivityParams = {
-  value: UserActivity,
+type msgCreateUserActivityParams = {
+  value: MsgCreateUserActivity,
 };
 
 type genesisStateParams = {
   value: GenesisState,
 };
 
-type msgDeleteUserActivityParams = {
-  value: MsgDeleteUserActivity,
+type platformMetricParams = {
+  value: PlatformMetric,
 };
 
-type msgUpdatePlatformMetricResponseParams = {
-  value: MsgUpdatePlatformMetricResponse,
-};
-
-type msgUpdateRevenueRecordParams = {
-  value: MsgUpdateRevenueRecord,
-};
-
-type msgUpdateParamsParams = {
-  value: MsgUpdateParams,
-};
-
-type msgCreatePlatformMetricResponseParams = {
-  value: MsgCreatePlatformMetricResponse,
-};
-
-type msgCreateUserActivityParams = {
-  value: MsgCreateUserActivity,
+type queryGetUserActivityRequestParams = {
+  value: QueryGetUserActivityRequest,
 };
 
 type msgUpdateParamsResponseParams = {
@@ -368,80 +344,104 @@ type msgCreateUserActivityResponseParams = {
   value: MsgCreateUserActivityResponse,
 };
 
-type msgUpdateRevenueRecordResponseParams = {
-  value: MsgUpdateRevenueRecordResponse,
+type msgDeleteUserActivityResponseParams = {
+  value: MsgDeleteUserActivityResponse,
 };
 
-type revenueRecordParams = {
-  value: RevenueRecord,
-};
-
-type msgUpdateUserActivityParams = {
-  value: MsgUpdateUserActivity,
-};
-
-type paramsParams = {
-  value: Params,
-};
-
-type msgDeleteRevenueRecordResponseParams = {
-  value: MsgDeleteRevenueRecordResponse,
+type msgUpdateRevenueRecordParams = {
+  value: MsgUpdateRevenueRecord,
 };
 
 type queryGetUserActivityResponseParams = {
   value: QueryGetUserActivityResponse,
 };
 
-type queryGetRevenueRecordResponseParams = {
-  value: QueryGetRevenueRecordResponse,
+type queryAllRevenueRecordRequestParams = {
+  value: QueryAllRevenueRecordRequest,
 };
 
-type platformMetricParams = {
-  value: PlatformMetric,
+type msgDeleteUserActivityParams = {
+  value: MsgDeleteUserActivity,
 };
 
-type msgUpdatePlatformMetricParams = {
-  value: MsgUpdatePlatformMetric,
+type queryGetPlatformMetricRequestParams = {
+  value: QueryGetPlatformMetricRequest,
 };
 
-type msgDeleteUserActivityResponseParams = {
-  value: MsgDeleteUserActivityResponse,
+type msgCreatePlatformMetricResponseParams = {
+  value: MsgCreatePlatformMetricResponse,
 };
 
-type msgCreateRevenueRecordResponseParams = {
-  value: MsgCreateRevenueRecordResponse,
+type msgDeletePlatformMetricResponseParams = {
+  value: MsgDeletePlatformMetricResponse,
 };
 
-type msgDeleteRevenueRecordParams = {
-  value: MsgDeleteRevenueRecord,
+type queryParamsRequestParams = {
+  value: QueryParamsRequest,
 };
 
-type queryAllPlatformMetricRequestParams = {
-  value: QueryAllPlatformMetricRequest,
-};
-
-type queryGetUserActivityRequestParams = {
-  value: QueryGetUserActivityRequest,
+type queryAllPlatformMetricResponseParams = {
+  value: QueryAllPlatformMetricResponse,
 };
 
 type msgDeletePlatformMetricParams = {
   value: MsgDeletePlatformMetric,
 };
 
+type msgCreateRevenueRecordResponseParams = {
+  value: MsgCreateRevenueRecordResponse,
+};
+
+type queryParamsResponseParams = {
+  value: QueryParamsResponse,
+};
+
+type queryAllPlatformMetricRequestParams = {
+  value: QueryAllPlatformMetricRequest,
+};
+
+type queryGetRevenueRecordResponseParams = {
+  value: QueryGetRevenueRecordResponse,
+};
+
+type paramsParams = {
+  value: Params,
+};
+
+type msgUpdateParamsParams = {
+  value: MsgUpdateParams,
+};
+
+type msgCreatePlatformMetricParams = {
+  value: MsgCreatePlatformMetric,
+};
+
+type msgUpdateRevenueRecordResponseParams = {
+  value: MsgUpdateRevenueRecordResponse,
+};
+
+type userActivityParams = {
+  value: UserActivity,
+};
+
+type msgDeleteRevenueRecordParams = {
+  value: MsgDeleteRevenueRecord,
+};
+
+type msgUpdatePlatformMetricResponseParams = {
+  value: MsgUpdatePlatformMetricResponse,
+};
+
+type msgUpdateUserActivityParams = {
+  value: MsgUpdateUserActivity,
+};
+
 type msgUpdateUserActivityResponseParams = {
   value: MsgUpdateUserActivityResponse,
 };
 
-type queryAllUserActivityRequestParams = {
-  value: QueryAllUserActivityRequest,
-};
-
-type queryAllUserActivityResponseParams = {
-  value: QueryAllUserActivityResponse,
-};
-
-type queryAllRevenueRecordRequestParams = {
-  value: QueryAllRevenueRecordRequest,
+type msgDeleteRevenueRecordResponseParams = {
+  value: MsgDeleteRevenueRecordResponse,
 };
 
 
@@ -474,31 +474,17 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 
   return {
 		
-		async sendQueryParamsRequest({ value, fee, memo }: sendQueryParamsRequestParams): Promise<DeliverTxResponse> {
+		async sendMsgCreateRevenueRecord({ value, fee, memo }: sendMsgCreateRevenueRecordParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendQueryParamsRequest: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgCreateRevenueRecord: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryParamsRequest({ value: QueryParamsRequest.fromPartial(value) })
+				let msg = this.msgCreateRevenueRecord({ value: MsgCreateRevenueRecord.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendQueryParamsRequest: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryParamsResponse({ value, fee, memo }: sendQueryParamsResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryParamsResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryParamsResponse({ value: QueryParamsResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryParamsResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgCreateRevenueRecord: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -516,17 +502,17 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendQueryAllPlatformMetricResponse({ value, fee, memo }: sendQueryAllPlatformMetricResponseParams): Promise<DeliverTxResponse> {
+		async sendQueryAllUserActivityRequest({ value, fee, memo }: sendQueryAllUserActivityRequestParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendQueryAllPlatformMetricResponse: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendQueryAllUserActivityRequest: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryAllPlatformMetricResponse({ value: QueryAllPlatformMetricResponse.fromPartial(value) })
+				let msg = this.queryAllUserActivityRequest({ value: QueryAllUserActivityRequest.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendQueryAllPlatformMetricResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendQueryAllUserActivityRequest: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -558,73 +544,59 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendMsgCreatePlatformMetric({ value, fee, memo }: sendMsgCreatePlatformMetricParams): Promise<DeliverTxResponse> {
+		async sendQueryAllUserActivityResponse({ value, fee, memo }: sendQueryAllUserActivityResponseParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgCreatePlatformMetric: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendQueryAllUserActivityResponse: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgCreatePlatformMetric({ value: MsgCreatePlatformMetric.fromPartial(value) })
+				let msg = this.queryAllUserActivityResponse({ value: QueryAllUserActivityResponse.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreatePlatformMetric: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendQueryAllUserActivityResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendMsgDeletePlatformMetricResponse({ value, fee, memo }: sendMsgDeletePlatformMetricResponseParams): Promise<DeliverTxResponse> {
+		async sendRevenueRecord({ value, fee, memo }: sendRevenueRecordParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgDeletePlatformMetricResponse: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendRevenueRecord: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDeletePlatformMetricResponse({ value: MsgDeletePlatformMetricResponse.fromPartial(value) })
+				let msg = this.revenueRecord({ value: RevenueRecord.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeletePlatformMetricResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendRevenueRecord: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendMsgCreateRevenueRecord({ value, fee, memo }: sendMsgCreateRevenueRecordParams): Promise<DeliverTxResponse> {
+		async sendMsgUpdatePlatformMetric({ value, fee, memo }: sendMsgUpdatePlatformMetricParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgCreateRevenueRecord: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgUpdatePlatformMetric: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgCreateRevenueRecord({ value: MsgCreateRevenueRecord.fromPartial(value) })
+				let msg = this.msgUpdatePlatformMetric({ value: MsgUpdatePlatformMetric.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreateRevenueRecord: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgUpdatePlatformMetric: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendQueryGetPlatformMetricRequest({ value, fee, memo }: sendQueryGetPlatformMetricRequestParams): Promise<DeliverTxResponse> {
+		async sendMsgCreateUserActivity({ value, fee, memo }: sendMsgCreateUserActivityParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendQueryGetPlatformMetricRequest: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgCreateUserActivity: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryGetPlatformMetricRequest({ value: QueryGetPlatformMetricRequest.fromPartial(value) })
+				let msg = this.msgCreateUserActivity({ value: MsgCreateUserActivity.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendQueryGetPlatformMetricRequest: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendUserActivity({ value, fee, memo }: sendUserActivityParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendUserActivity: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.userActivity({ value: UserActivity.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendUserActivity: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgCreateUserActivity: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -642,87 +614,31 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendMsgDeleteUserActivity({ value, fee, memo }: sendMsgDeleteUserActivityParams): Promise<DeliverTxResponse> {
+		async sendPlatformMetric({ value, fee, memo }: sendPlatformMetricParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgDeleteUserActivity: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendPlatformMetric: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDeleteUserActivity({ value: MsgDeleteUserActivity.fromPartial(value) })
+				let msg = this.platformMetric({ value: PlatformMetric.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeleteUserActivity: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendPlatformMetric: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendMsgUpdatePlatformMetricResponse({ value, fee, memo }: sendMsgUpdatePlatformMetricResponseParams): Promise<DeliverTxResponse> {
+		async sendQueryGetUserActivityRequest({ value, fee, memo }: sendQueryGetUserActivityRequestParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdatePlatformMetricResponse: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendQueryGetUserActivityRequest: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdatePlatformMetricResponse({ value: MsgUpdatePlatformMetricResponse.fromPartial(value) })
+				let msg = this.queryGetUserActivityRequest({ value: QueryGetUserActivityRequest.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdatePlatformMetricResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgUpdateRevenueRecord({ value, fee, memo }: sendMsgUpdateRevenueRecordParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateRevenueRecord: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateRevenueRecord({ value: MsgUpdateRevenueRecord.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateRevenueRecord: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgUpdateParams({ value, fee, memo }: sendMsgUpdateParamsParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateParams: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateParams({ value: MsgUpdateParams.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateParams: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgCreatePlatformMetricResponse({ value, fee, memo }: sendMsgCreatePlatformMetricResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgCreatePlatformMetricResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgCreatePlatformMetricResponse({ value: MsgCreatePlatformMetricResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreatePlatformMetricResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgCreateUserActivity({ value, fee, memo }: sendMsgCreateUserActivityParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgCreateUserActivity: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgCreateUserActivity({ value: MsgCreateUserActivity.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreateUserActivity: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendQueryGetUserActivityRequest: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -754,73 +670,31 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendMsgUpdateRevenueRecordResponse({ value, fee, memo }: sendMsgUpdateRevenueRecordResponseParams): Promise<DeliverTxResponse> {
+		async sendMsgDeleteUserActivityResponse({ value, fee, memo }: sendMsgDeleteUserActivityResponseParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateRevenueRecordResponse: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgDeleteUserActivityResponse: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateRevenueRecordResponse({ value: MsgUpdateRevenueRecordResponse.fromPartial(value) })
+				let msg = this.msgDeleteUserActivityResponse({ value: MsgDeleteUserActivityResponse.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateRevenueRecordResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgDeleteUserActivityResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendRevenueRecord({ value, fee, memo }: sendRevenueRecordParams): Promise<DeliverTxResponse> {
+		async sendMsgUpdateRevenueRecord({ value, fee, memo }: sendMsgUpdateRevenueRecordParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendRevenueRecord: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgUpdateRevenueRecord: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.revenueRecord({ value: RevenueRecord.fromPartial(value) })
+				let msg = this.msgUpdateRevenueRecord({ value: MsgUpdateRevenueRecord.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendRevenueRecord: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgUpdateUserActivity({ value, fee, memo }: sendMsgUpdateUserActivityParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateUserActivity: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateUserActivity({ value: MsgUpdateUserActivity.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateUserActivity: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendParams({ value, fee, memo }: sendParamsParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendParams: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.params({ value: Params.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendParams: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgDeleteRevenueRecordResponse({ value, fee, memo }: sendMsgDeleteRevenueRecordResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgDeleteRevenueRecordResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDeleteRevenueRecordResponse({ value: MsgDeleteRevenueRecordResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeleteRevenueRecordResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgUpdateRevenueRecord: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -838,115 +712,101 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendQueryGetRevenueRecordResponse({ value, fee, memo }: sendQueryGetRevenueRecordResponseParams): Promise<DeliverTxResponse> {
+		async sendQueryAllRevenueRecordRequest({ value, fee, memo }: sendQueryAllRevenueRecordRequestParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendQueryGetRevenueRecordResponse: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendQueryAllRevenueRecordRequest: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryGetRevenueRecordResponse({ value: QueryGetRevenueRecordResponse.fromPartial(value) })
+				let msg = this.queryAllRevenueRecordRequest({ value: QueryAllRevenueRecordRequest.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendQueryGetRevenueRecordResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendQueryAllRevenueRecordRequest: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendPlatformMetric({ value, fee, memo }: sendPlatformMetricParams): Promise<DeliverTxResponse> {
+		async sendMsgDeleteUserActivity({ value, fee, memo }: sendMsgDeleteUserActivityParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendPlatformMetric: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgDeleteUserActivity: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.platformMetric({ value: PlatformMetric.fromPartial(value) })
+				let msg = this.msgDeleteUserActivity({ value: MsgDeleteUserActivity.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendPlatformMetric: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgDeleteUserActivity: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendMsgUpdatePlatformMetric({ value, fee, memo }: sendMsgUpdatePlatformMetricParams): Promise<DeliverTxResponse> {
+		async sendQueryGetPlatformMetricRequest({ value, fee, memo }: sendQueryGetPlatformMetricRequestParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdatePlatformMetric: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendQueryGetPlatformMetricRequest: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdatePlatformMetric({ value: MsgUpdatePlatformMetric.fromPartial(value) })
+				let msg = this.queryGetPlatformMetricRequest({ value: QueryGetPlatformMetricRequest.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdatePlatformMetric: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendQueryGetPlatformMetricRequest: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendMsgDeleteUserActivityResponse({ value, fee, memo }: sendMsgDeleteUserActivityResponseParams): Promise<DeliverTxResponse> {
+		async sendMsgCreatePlatformMetricResponse({ value, fee, memo }: sendMsgCreatePlatformMetricResponseParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgDeleteUserActivityResponse: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgCreatePlatformMetricResponse: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDeleteUserActivityResponse({ value: MsgDeleteUserActivityResponse.fromPartial(value) })
+				let msg = this.msgCreatePlatformMetricResponse({ value: MsgCreatePlatformMetricResponse.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeleteUserActivityResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgCreatePlatformMetricResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendMsgCreateRevenueRecordResponse({ value, fee, memo }: sendMsgCreateRevenueRecordResponseParams): Promise<DeliverTxResponse> {
+		async sendMsgDeletePlatformMetricResponse({ value, fee, memo }: sendMsgDeletePlatformMetricResponseParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgCreateRevenueRecordResponse: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgDeletePlatformMetricResponse: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgCreateRevenueRecordResponse({ value: MsgCreateRevenueRecordResponse.fromPartial(value) })
+				let msg = this.msgDeletePlatformMetricResponse({ value: MsgDeletePlatformMetricResponse.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreateRevenueRecordResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgDeletePlatformMetricResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendMsgDeleteRevenueRecord({ value, fee, memo }: sendMsgDeleteRevenueRecordParams): Promise<DeliverTxResponse> {
+		async sendQueryParamsRequest({ value, fee, memo }: sendQueryParamsRequestParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgDeleteRevenueRecord: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendQueryParamsRequest: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDeleteRevenueRecord({ value: MsgDeleteRevenueRecord.fromPartial(value) })
+				let msg = this.queryParamsRequest({ value: QueryParamsRequest.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeleteRevenueRecord: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendQueryParamsRequest: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendQueryAllPlatformMetricRequest({ value, fee, memo }: sendQueryAllPlatformMetricRequestParams): Promise<DeliverTxResponse> {
+		async sendQueryAllPlatformMetricResponse({ value, fee, memo }: sendQueryAllPlatformMetricResponseParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendQueryAllPlatformMetricRequest: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendQueryAllPlatformMetricResponse: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryAllPlatformMetricRequest({ value: QueryAllPlatformMetricRequest.fromPartial(value) })
+				let msg = this.queryAllPlatformMetricResponse({ value: QueryAllPlatformMetricResponse.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendQueryAllPlatformMetricRequest: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryGetUserActivityRequest({ value, fee, memo }: sendQueryGetUserActivityRequestParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryGetUserActivityRequest: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryGetUserActivityRequest({ value: QueryGetUserActivityRequest.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryGetUserActivityRequest: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendQueryAllPlatformMetricResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -964,6 +824,174 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
+		async sendMsgCreateRevenueRecordResponse({ value, fee, memo }: sendMsgCreateRevenueRecordResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgCreateRevenueRecordResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgCreateRevenueRecordResponse({ value: MsgCreateRevenueRecordResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgCreateRevenueRecordResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryParamsResponse({ value, fee, memo }: sendQueryParamsResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryParamsResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryParamsResponse({ value: QueryParamsResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryParamsResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryAllPlatformMetricRequest({ value, fee, memo }: sendQueryAllPlatformMetricRequestParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryAllPlatformMetricRequest: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryAllPlatformMetricRequest({ value: QueryAllPlatformMetricRequest.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryAllPlatformMetricRequest: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryGetRevenueRecordResponse({ value, fee, memo }: sendQueryGetRevenueRecordResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryGetRevenueRecordResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryGetRevenueRecordResponse({ value: QueryGetRevenueRecordResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryGetRevenueRecordResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendParams({ value, fee, memo }: sendParamsParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendParams: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.params({ value: Params.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendParams: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateParams({ value, fee, memo }: sendMsgUpdateParamsParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateParams: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdateParams({ value: MsgUpdateParams.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateParams: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgCreatePlatformMetric({ value, fee, memo }: sendMsgCreatePlatformMetricParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgCreatePlatformMetric: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgCreatePlatformMetric({ value: MsgCreatePlatformMetric.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgCreatePlatformMetric: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateRevenueRecordResponse({ value, fee, memo }: sendMsgUpdateRevenueRecordResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateRevenueRecordResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdateRevenueRecordResponse({ value: MsgUpdateRevenueRecordResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateRevenueRecordResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendUserActivity({ value, fee, memo }: sendUserActivityParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendUserActivity: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.userActivity({ value: UserActivity.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendUserActivity: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgDeleteRevenueRecord({ value, fee, memo }: sendMsgDeleteRevenueRecordParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgDeleteRevenueRecord: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgDeleteRevenueRecord({ value: MsgDeleteRevenueRecord.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgDeleteRevenueRecord: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdatePlatformMetricResponse({ value, fee, memo }: sendMsgUpdatePlatformMetricResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdatePlatformMetricResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdatePlatformMetricResponse({ value: MsgUpdatePlatformMetricResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdatePlatformMetricResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateUserActivity({ value, fee, memo }: sendMsgUpdateUserActivityParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateUserActivity: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdateUserActivity({ value: MsgUpdateUserActivity.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateUserActivity: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
 		async sendMsgUpdateUserActivityResponse({ value, fee, memo }: sendMsgUpdateUserActivityResponseParams): Promise<DeliverTxResponse> {
 			if (!signer) {
 					throw new Error('TxClient:sendMsgUpdateUserActivityResponse: Unable to sign Tx. Signer is not present.')
@@ -978,62 +1006,26 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendQueryAllUserActivityRequest({ value, fee, memo }: sendQueryAllUserActivityRequestParams): Promise<DeliverTxResponse> {
+		async sendMsgDeleteRevenueRecordResponse({ value, fee, memo }: sendMsgDeleteRevenueRecordResponseParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendQueryAllUserActivityRequest: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgDeleteRevenueRecordResponse: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryAllUserActivityRequest({ value: QueryAllUserActivityRequest.fromPartial(value) })
+				let msg = this.msgDeleteRevenueRecordResponse({ value: MsgDeleteRevenueRecordResponse.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendQueryAllUserActivityRequest: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryAllUserActivityResponse({ value, fee, memo }: sendQueryAllUserActivityResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryAllUserActivityResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryAllUserActivityResponse({ value: QueryAllUserActivityResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryAllUserActivityResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryAllRevenueRecordRequest({ value, fee, memo }: sendQueryAllRevenueRecordRequestParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryAllRevenueRecordRequest: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryAllRevenueRecordRequest({ value: QueryAllRevenueRecordRequest.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryAllRevenueRecordRequest: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgDeleteRevenueRecordResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
 		
-		queryParamsRequest({ value }: queryParamsRequestParams): EncodeObject {
+		msgCreateRevenueRecord({ value }: msgCreateRevenueRecordParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.analytics.QueryParamsRequest", value: QueryParamsRequest.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.analytics.MsgCreateRevenueRecord", value: MsgCreateRevenueRecord.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:QueryParamsRequest: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryParamsResponse({ value }: queryParamsResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.analytics.QueryParamsResponse", value: QueryParamsResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryParamsResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgCreateRevenueRecord: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -1045,11 +1037,11 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		queryAllPlatformMetricResponse({ value }: queryAllPlatformMetricResponseParams): EncodeObject {
+		queryAllUserActivityRequest({ value }: queryAllUserActivityRequestParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.analytics.QueryAllPlatformMetricResponse", value: QueryAllPlatformMetricResponse.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.analytics.QueryAllUserActivityRequest", value: QueryAllUserActivityRequest.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:QueryAllPlatformMetricResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:QueryAllUserActivityRequest: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -1069,43 +1061,35 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		msgCreatePlatformMetric({ value }: msgCreatePlatformMetricParams): EncodeObject {
+		queryAllUserActivityResponse({ value }: queryAllUserActivityResponseParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.analytics.MsgCreatePlatformMetric", value: MsgCreatePlatformMetric.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.analytics.QueryAllUserActivityResponse", value: QueryAllUserActivityResponse.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgCreatePlatformMetric: Could not create message: ' + e.message)
+				throw new Error('TxClient:QueryAllUserActivityResponse: Could not create message: ' + e.message)
 			}
 		},
 		
-		msgDeletePlatformMetricResponse({ value }: msgDeletePlatformMetricResponseParams): EncodeObject {
+		revenueRecord({ value }: revenueRecordParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.analytics.MsgDeletePlatformMetricResponse", value: MsgDeletePlatformMetricResponse.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.analytics.RevenueRecord", value: RevenueRecord.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgDeletePlatformMetricResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:RevenueRecord: Could not create message: ' + e.message)
 			}
 		},
 		
-		msgCreateRevenueRecord({ value }: msgCreateRevenueRecordParams): EncodeObject {
+		msgUpdatePlatformMetric({ value }: msgUpdatePlatformMetricParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.analytics.MsgCreateRevenueRecord", value: MsgCreateRevenueRecord.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.analytics.MsgUpdatePlatformMetric", value: MsgUpdatePlatformMetric.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgCreateRevenueRecord: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgUpdatePlatformMetric: Could not create message: ' + e.message)
 			}
 		},
 		
-		queryGetPlatformMetricRequest({ value }: queryGetPlatformMetricRequestParams): EncodeObject {
+		msgCreateUserActivity({ value }: msgCreateUserActivityParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.analytics.QueryGetPlatformMetricRequest", value: QueryGetPlatformMetricRequest.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.analytics.MsgCreateUserActivity", value: MsgCreateUserActivity.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:QueryGetPlatformMetricRequest: Could not create message: ' + e.message)
-			}
-		},
-		
-		userActivity({ value }: userActivityParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.analytics.UserActivity", value: UserActivity.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:UserActivity: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgCreateUserActivity: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -1117,51 +1101,19 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		msgDeleteUserActivity({ value }: msgDeleteUserActivityParams): EncodeObject {
+		platformMetric({ value }: platformMetricParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.analytics.MsgDeleteUserActivity", value: MsgDeleteUserActivity.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.analytics.PlatformMetric", value: PlatformMetric.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgDeleteUserActivity: Could not create message: ' + e.message)
+				throw new Error('TxClient:PlatformMetric: Could not create message: ' + e.message)
 			}
 		},
 		
-		msgUpdatePlatformMetricResponse({ value }: msgUpdatePlatformMetricResponseParams): EncodeObject {
+		queryGetUserActivityRequest({ value }: queryGetUserActivityRequestParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.analytics.MsgUpdatePlatformMetricResponse", value: MsgUpdatePlatformMetricResponse.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.analytics.QueryGetUserActivityRequest", value: QueryGetUserActivityRequest.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdatePlatformMetricResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgUpdateRevenueRecord({ value }: msgUpdateRevenueRecordParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.analytics.MsgUpdateRevenueRecord", value: MsgUpdateRevenueRecord.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateRevenueRecord: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgUpdateParams({ value }: msgUpdateParamsParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.analytics.MsgUpdateParams", value: MsgUpdateParams.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateParams: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgCreatePlatformMetricResponse({ value }: msgCreatePlatformMetricResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.analytics.MsgCreatePlatformMetricResponse", value: MsgCreatePlatformMetricResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgCreatePlatformMetricResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgCreateUserActivity({ value }: msgCreateUserActivityParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.analytics.MsgCreateUserActivity", value: MsgCreateUserActivity.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgCreateUserActivity: Could not create message: ' + e.message)
+				throw new Error('TxClient:QueryGetUserActivityRequest: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -1181,43 +1133,19 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		msgUpdateRevenueRecordResponse({ value }: msgUpdateRevenueRecordResponseParams): EncodeObject {
+		msgDeleteUserActivityResponse({ value }: msgDeleteUserActivityResponseParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.analytics.MsgUpdateRevenueRecordResponse", value: MsgUpdateRevenueRecordResponse.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.analytics.MsgDeleteUserActivityResponse", value: MsgDeleteUserActivityResponse.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateRevenueRecordResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgDeleteUserActivityResponse: Could not create message: ' + e.message)
 			}
 		},
 		
-		revenueRecord({ value }: revenueRecordParams): EncodeObject {
+		msgUpdateRevenueRecord({ value }: msgUpdateRevenueRecordParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.analytics.RevenueRecord", value: RevenueRecord.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.analytics.MsgUpdateRevenueRecord", value: MsgUpdateRevenueRecord.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:RevenueRecord: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgUpdateUserActivity({ value }: msgUpdateUserActivityParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.analytics.MsgUpdateUserActivity", value: MsgUpdateUserActivity.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateUserActivity: Could not create message: ' + e.message)
-			}
-		},
-		
-		params({ value }: paramsParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.analytics.Params", value: Params.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:Params: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgDeleteRevenueRecordResponse({ value }: msgDeleteRevenueRecordResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.analytics.MsgDeleteRevenueRecordResponse", value: MsgDeleteRevenueRecordResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgDeleteRevenueRecordResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgUpdateRevenueRecord: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -1229,67 +1157,59 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		queryGetRevenueRecordResponse({ value }: queryGetRevenueRecordResponseParams): EncodeObject {
+		queryAllRevenueRecordRequest({ value }: queryAllRevenueRecordRequestParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.analytics.QueryGetRevenueRecordResponse", value: QueryGetRevenueRecordResponse.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.analytics.QueryAllRevenueRecordRequest", value: QueryAllRevenueRecordRequest.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:QueryGetRevenueRecordResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:QueryAllRevenueRecordRequest: Could not create message: ' + e.message)
 			}
 		},
 		
-		platformMetric({ value }: platformMetricParams): EncodeObject {
+		msgDeleteUserActivity({ value }: msgDeleteUserActivityParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.analytics.PlatformMetric", value: PlatformMetric.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.analytics.MsgDeleteUserActivity", value: MsgDeleteUserActivity.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:PlatformMetric: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgDeleteUserActivity: Could not create message: ' + e.message)
 			}
 		},
 		
-		msgUpdatePlatformMetric({ value }: msgUpdatePlatformMetricParams): EncodeObject {
+		queryGetPlatformMetricRequest({ value }: queryGetPlatformMetricRequestParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.analytics.MsgUpdatePlatformMetric", value: MsgUpdatePlatformMetric.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.analytics.QueryGetPlatformMetricRequest", value: QueryGetPlatformMetricRequest.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdatePlatformMetric: Could not create message: ' + e.message)
+				throw new Error('TxClient:QueryGetPlatformMetricRequest: Could not create message: ' + e.message)
 			}
 		},
 		
-		msgDeleteUserActivityResponse({ value }: msgDeleteUserActivityResponseParams): EncodeObject {
+		msgCreatePlatformMetricResponse({ value }: msgCreatePlatformMetricResponseParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.analytics.MsgDeleteUserActivityResponse", value: MsgDeleteUserActivityResponse.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.analytics.MsgCreatePlatformMetricResponse", value: MsgCreatePlatformMetricResponse.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgDeleteUserActivityResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgCreatePlatformMetricResponse: Could not create message: ' + e.message)
 			}
 		},
 		
-		msgCreateRevenueRecordResponse({ value }: msgCreateRevenueRecordResponseParams): EncodeObject {
+		msgDeletePlatformMetricResponse({ value }: msgDeletePlatformMetricResponseParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.analytics.MsgCreateRevenueRecordResponse", value: MsgCreateRevenueRecordResponse.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.analytics.MsgDeletePlatformMetricResponse", value: MsgDeletePlatformMetricResponse.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgCreateRevenueRecordResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgDeletePlatformMetricResponse: Could not create message: ' + e.message)
 			}
 		},
 		
-		msgDeleteRevenueRecord({ value }: msgDeleteRevenueRecordParams): EncodeObject {
+		queryParamsRequest({ value }: queryParamsRequestParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.analytics.MsgDeleteRevenueRecord", value: MsgDeleteRevenueRecord.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.analytics.QueryParamsRequest", value: QueryParamsRequest.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgDeleteRevenueRecord: Could not create message: ' + e.message)
+				throw new Error('TxClient:QueryParamsRequest: Could not create message: ' + e.message)
 			}
 		},
 		
-		queryAllPlatformMetricRequest({ value }: queryAllPlatformMetricRequestParams): EncodeObject {
+		queryAllPlatformMetricResponse({ value }: queryAllPlatformMetricResponseParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.analytics.QueryAllPlatformMetricRequest", value: QueryAllPlatformMetricRequest.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.analytics.QueryAllPlatformMetricResponse", value: QueryAllPlatformMetricResponse.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:QueryAllPlatformMetricRequest: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryGetUserActivityRequest({ value }: queryGetUserActivityRequestParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.analytics.QueryGetUserActivityRequest", value: QueryGetUserActivityRequest.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryGetUserActivityRequest: Could not create message: ' + e.message)
+				throw new Error('TxClient:QueryAllPlatformMetricResponse: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -1301,6 +1221,102 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
+		msgCreateRevenueRecordResponse({ value }: msgCreateRevenueRecordResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.analytics.MsgCreateRevenueRecordResponse", value: MsgCreateRevenueRecordResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgCreateRevenueRecordResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryParamsResponse({ value }: queryParamsResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.analytics.QueryParamsResponse", value: QueryParamsResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryParamsResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryAllPlatformMetricRequest({ value }: queryAllPlatformMetricRequestParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.analytics.QueryAllPlatformMetricRequest", value: QueryAllPlatformMetricRequest.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryAllPlatformMetricRequest: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryGetRevenueRecordResponse({ value }: queryGetRevenueRecordResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.analytics.QueryGetRevenueRecordResponse", value: QueryGetRevenueRecordResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryGetRevenueRecordResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		params({ value }: paramsParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.analytics.Params", value: Params.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:Params: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdateParams({ value }: msgUpdateParamsParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.analytics.MsgUpdateParams", value: MsgUpdateParams.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdateParams: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgCreatePlatformMetric({ value }: msgCreatePlatformMetricParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.analytics.MsgCreatePlatformMetric", value: MsgCreatePlatformMetric.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgCreatePlatformMetric: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdateRevenueRecordResponse({ value }: msgUpdateRevenueRecordResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.analytics.MsgUpdateRevenueRecordResponse", value: MsgUpdateRevenueRecordResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdateRevenueRecordResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		userActivity({ value }: userActivityParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.analytics.UserActivity", value: UserActivity.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:UserActivity: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgDeleteRevenueRecord({ value }: msgDeleteRevenueRecordParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.analytics.MsgDeleteRevenueRecord", value: MsgDeleteRevenueRecord.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgDeleteRevenueRecord: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdatePlatformMetricResponse({ value }: msgUpdatePlatformMetricResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.analytics.MsgUpdatePlatformMetricResponse", value: MsgUpdatePlatformMetricResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdatePlatformMetricResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdateUserActivity({ value }: msgUpdateUserActivityParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.analytics.MsgUpdateUserActivity", value: MsgUpdateUserActivity.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdateUserActivity: Could not create message: ' + e.message)
+			}
+		},
+		
 		msgUpdateUserActivityResponse({ value }: msgUpdateUserActivityResponseParams): EncodeObject {
 			try {
 				return { typeUrl: "/skillchain.analytics.MsgUpdateUserActivityResponse", value: MsgUpdateUserActivityResponse.fromPartial( value ) }  
@@ -1309,27 +1325,11 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		queryAllUserActivityRequest({ value }: queryAllUserActivityRequestParams): EncodeObject {
+		msgDeleteRevenueRecordResponse({ value }: msgDeleteRevenueRecordResponseParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.analytics.QueryAllUserActivityRequest", value: QueryAllUserActivityRequest.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.analytics.MsgDeleteRevenueRecordResponse", value: MsgDeleteRevenueRecordResponse.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:QueryAllUserActivityRequest: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryAllUserActivityResponse({ value }: queryAllUserActivityResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.analytics.QueryAllUserActivityResponse", value: QueryAllUserActivityResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryAllUserActivityResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryAllRevenueRecordRequest({ value }: queryAllRevenueRecordRequestParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.analytics.QueryAllRevenueRecordRequest", value: QueryAllRevenueRecordRequest.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryAllRevenueRecordRequest: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgDeleteRevenueRecordResponse: Could not create message: ' + e.message)
 			}
 		},
 		

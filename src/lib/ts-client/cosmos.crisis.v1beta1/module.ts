@@ -6,14 +6,20 @@ import { msgTypes } from './registry';
 import { IgniteClient } from "../client"
 import { MissingWalletError } from "../helpers"
 import { Api } from "./rest";
+import { MsgVerifyInvariantResponse } from "./types/cosmos/crisis/v1beta1/tx";
 import { MsgUpdateParams } from "./types/cosmos/crisis/v1beta1/tx";
 import { MsgUpdateParamsResponse } from "./types/cosmos/crisis/v1beta1/tx";
 import { GenesisState } from "./types/cosmos/crisis/v1beta1/genesis";
 import { MsgVerifyInvariant } from "./types/cosmos/crisis/v1beta1/tx";
-import { MsgVerifyInvariantResponse } from "./types/cosmos/crisis/v1beta1/tx";
 
 
-export { MsgUpdateParams, MsgUpdateParamsResponse, GenesisState, MsgVerifyInvariant, MsgVerifyInvariantResponse };
+export { MsgVerifyInvariantResponse, MsgUpdateParams, MsgUpdateParamsResponse, GenesisState, MsgVerifyInvariant };
+
+type sendMsgVerifyInvariantResponseParams = {
+  value: MsgVerifyInvariantResponse,
+  fee?: StdFee,
+  memo?: string
+};
 
 type sendMsgUpdateParamsParams = {
   value: MsgUpdateParams,
@@ -39,12 +45,10 @@ type sendMsgVerifyInvariantParams = {
   memo?: string
 };
 
-type sendMsgVerifyInvariantResponseParams = {
-  value: MsgVerifyInvariantResponse,
-  fee?: StdFee,
-  memo?: string
-};
 
+type msgVerifyInvariantResponseParams = {
+  value: MsgVerifyInvariantResponse,
+};
 
 type msgUpdateParamsParams = {
   value: MsgUpdateParams,
@@ -60,10 +64,6 @@ type genesisStateParams = {
 
 type msgVerifyInvariantParams = {
   value: MsgVerifyInvariant,
-};
-
-type msgVerifyInvariantResponseParams = {
-  value: MsgVerifyInvariantResponse,
 };
 
 
@@ -95,6 +95,20 @@ interface TxClientOptions {
 export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "http://localhost:26657", prefix: "cosmos" }) => {
 
   return {
+		
+		async sendMsgVerifyInvariantResponse({ value, fee, memo }: sendMsgVerifyInvariantResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgVerifyInvariantResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgVerifyInvariantResponse({ value: MsgVerifyInvariantResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgVerifyInvariantResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
 		
 		async sendMsgUpdateParams({ value, fee, memo }: sendMsgUpdateParamsParams): Promise<DeliverTxResponse> {
 			if (!signer) {
@@ -152,20 +166,14 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendMsgVerifyInvariantResponse({ value, fee, memo }: sendMsgVerifyInvariantResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgVerifyInvariantResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgVerifyInvariantResponse({ value: MsgVerifyInvariantResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+		
+		msgVerifyInvariantResponse({ value }: msgVerifyInvariantResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariantResponse", value: MsgVerifyInvariantResponse.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgVerifyInvariantResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:MsgVerifyInvariantResponse: Could not create message: ' + e.message)
 			}
 		},
-		
 		
 		msgUpdateParams({ value }: msgUpdateParamsParams): EncodeObject {
 			try {
@@ -196,14 +204,6 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 				return { typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariant", value: MsgVerifyInvariant.fromPartial( value ) }  
 			} catch (e: any) {
 				throw new Error('TxClient:MsgVerifyInvariant: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgVerifyInvariantResponse({ value }: msgVerifyInvariantResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariantResponse", value: MsgVerifyInvariantResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgVerifyInvariantResponse: Could not create message: ' + e.message)
 			}
 		},
 		

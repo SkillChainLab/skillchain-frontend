@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Footer from '@/components/Footer'
 import { useWallet } from '@/contexts/WalletContext'
 import { profileApi } from '@/lib/api'
+import { ProfileImageUpload } from '@/lib/profileImageUpload'
 
 interface UserProfile {
   id: string
@@ -65,6 +66,8 @@ export default function ProfilePage() {
   const [showSkillForm, setShowSkillForm] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [profileIndex, setProfileIndex] = useState<string>('')
+  const [isUploadingImage, setIsUploadingImage] = useState(false)
+  const [uploadError, setUploadError] = useState<string | null>(null)
   const { walletInfo } = useWallet()
 
   // Profile form state
@@ -77,6 +80,10 @@ export default function ProfilePage() {
     linkedin: '',
     twitter: ''
   })
+
+  // Avatar upload state for profile creation
+  const [profileAvatarFile, setProfileAvatarFile] = useState<File | null>(null)
+  const [profileAvatarPreview, setProfileAvatarPreview] = useState<string | null>(null)
 
   // Skill form state
   const [skillForm, setSkillForm] = useState({
@@ -92,6 +99,14 @@ export default function ProfilePage() {
     }
   }, [walletInfo])
 
+  // Debug avatar values
+  useEffect(() => {
+    if (user?.avatar) {
+      console.log('🖼️ Avatar raw value:', user.avatar)
+      console.log('🌐 Avatar processed URL:', getAvatarUrl(user.avatar))
+    }
+  }, [user?.avatar])
+
   const loadUserProfile = async () => {
     if (!walletInfo) return
     
@@ -100,17 +115,9 @@ export default function ProfilePage() {
       
       console.log('Querying blockchain for profile data...')
       
-      // Import required CosmJS modules
-      const { QueryClient, setupBankExtension } = await import('@cosmjs/stargate')
-      const { Tendermint34Client } = await import('@cosmjs/tendermint-rpc')
-      
-      // Connect to blockchain
-      const tmClient = await Tendermint34Client.connect('http://localhost:26657')
-      const queryClient = QueryClient.withExtensions(tmClient, setupBankExtension)
-      
       // Query profile from blockchain using gRPC-web or REST API
       try {
-        const response = await fetch(`http://localhost:1317/skillchain/v1/profiles/${walletInfo.address}`)
+        const response = await fetch(`/api/skillchain/skillchain/v1/profiles/${walletInfo.address}`)
         
         if (response.ok) {
           const profileData = await response.json()
@@ -127,7 +134,7 @@ export default function ProfilePage() {
             let userSkills: string[] = []
             let userSkillsDetailed: any[] = []
             try {
-              const skillsResponse = await fetch(`http://localhost:1317/skillchain/v1/profiles/${walletInfo.address}/skills`)
+              const skillsResponse = await fetch(`/api/skillchain/skillchain/v1/profiles/${walletInfo.address}/skills`)
               if (skillsResponse.ok) {
                 const skillsData = await skillsResponse.json()
                 console.log('Skills data from blockchain:', skillsData)
@@ -151,6 +158,7 @@ export default function ProfilePage() {
               address: profile.creator || walletInfo.address,
               name: profile.displayName || profile.name || profile.display_name || 'Unknown User',
               title: profile.bio || profile.description || 'SkillChain User',
+              avatar: profile.avatar || undefined,
               location: profile.location || '',
               joinedDate: profile.created_at || new Date().toISOString(),
               type: 'freelancer',
@@ -208,13 +216,58 @@ export default function ProfilePage() {
       const isUpdate = user && profileIndex
       console.log(isUpdate ? 'Updating profile with blockchain transaction...' : 'Creating profile with blockchain transaction...')
       
-      // Get signer from Keplr
+      // 1. If avatar file selected, upload to IPFS first
+      let avatarUrl = ''
+      if (profileAvatarFile && !isUpdate) {
+        console.log('📤 Uploading avatar to IPFS first...')
+        
+        try {
+          const ipfsHash = await ProfileImageUpload.uploadToIPFS(profileAvatarFile)
+          avatarUrl = `https://ipfs.io/ipfs/${ipfsHash}`
+          console.log('✅ Avatar uploaded to IPFS:', avatarUrl)
+          
+          // Also create file record for avatar
+          const fileRecordData = {
+            creator: walletInfo.address,
+            filename: `profile-${walletInfo.address}-${Date.now()}.${profileAvatarFile.type.split('/')[1]}`,
+            content_type: profileAvatarFile.type,
+            file_size: profileAvatarFile.size,
+            ipfs_hash: ipfsHash,
+            is_public: true,
+            metadata: JSON.stringify({
+              type: 'profile_photo',
+              purpose: 'profile_avatar',
+              originalName: profileAvatarFile.name,
+              uploadedAt: new Date().toISOString()
+            })
+          }
+
+          const fileResponse = await fetch('/api/skillchain/skillchain/v1/files', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(fileRecordData)
+          })
+
+          if (fileResponse.ok) {
+            console.log('✅ File record created for avatar')
+          } else {
+            console.warn('⚠️ File record creation failed, but continuing...')
+          }
+        } catch (avatarError) {
+          console.warn('⚠️ Avatar upload failed, creating profile without avatar:', avatarError)
+          avatarUrl = '' // Continue without avatar
+        }
+      }
+      
+      // 2. Get signer from Keplr
       const offlineSigner = (window as any).keplr?.getOfflineSigner('skillchain')
       if (!offlineSigner) {
         throw new Error('Keplr signer not available. Please make sure Keplr is connected.')
       }
       
-      // Import required CosmJS modules and generated proto types
+      // 3. Import required CosmJS modules and generated proto types
       const { SigningStargateClient } = await import('@cosmjs/stargate')
       const { Registry } = await import('@cosmjs/proto-signing')
       const { defaultRegistryTypes } = await import('@cosmjs/stargate')
@@ -260,6 +313,7 @@ export default function ProfilePage() {
           github: profileForm.github,
           linkedin: profileForm.linkedin,
           twitter: profileForm.twitter,
+          avatar: user?.avatar || '', // Keep existing avatar or empty
           reputationScore: user?.rating ? Math.floor(user.rating * 100) : 100, // Keep existing reputation
           createdAt: user?.joinedDate ? Math.floor(new Date(user.joinedDate).getTime() / 1000) : currentTimestamp,
           updatedAt: currentTimestamp
@@ -285,6 +339,7 @@ export default function ProfilePage() {
           github: profileForm.github,
           linkedin: profileForm.linkedin,
           twitter: profileForm.twitter,
+          avatar: avatarUrl, // Use uploaded avatar URL or empty string
           reputationScore: 100, // Starting reputation score
           createdAt: currentTimestamp,
           updatedAt: currentTimestamp
@@ -319,6 +374,7 @@ export default function ProfilePage() {
 🔗 Transaction Hash: ${result.transactionHash}
 👤 Display Name: ${profileForm.displayName}
 📍 Location: ${profileForm.location}
+${avatarUrl ? '🖼️ Avatar: Uploaded to IPFS' : ''}
 ⛽ Gas Used: ${result.gasUsed}
 
 Your profile is now on the blockchain!`)
@@ -329,6 +385,7 @@ Your profile is now on the blockchain!`)
           address: walletInfo.address,
           name: profileForm.displayName || 'SkillChain User',
           title: profileForm.bio || 'SkillChain Professional',
+          avatar: avatarUrl || prev?.avatar, // Use new avatar or keep existing
           location: profileForm.location || '',
           joinedDate: prev?.joinedDate || new Date().toISOString(),
           type: 'freelancer',
@@ -364,6 +421,9 @@ Your profile is now on the blockchain!`)
           linkedin: '',
           twitter: ''
         })
+        // Reset avatar states
+        setProfileAvatarFile(null)
+        setProfileAvatarPreview(null)
         
         // Also try to load from blockchain in background (for future updates)
         setTimeout(() => {
@@ -540,6 +600,95 @@ Your skill is now on the blockchain!`)
     }) : null)
   }
 
+  // Profile image upload handler
+  const handleImageUpload = async (file: File) => {
+    if (!walletInfo) {
+      setUploadError('Please connect your Keplr wallet first')
+      return
+    }
+
+    setIsUploadingImage(true)
+    setUploadError('')
+    
+    try {
+      console.log('🔄 Starting profile image upload...')
+      
+      // Check if Keplr is available
+      if (!(window as any).keplr) {
+        throw new Error('Keplr wallet not found. Please install and setup Keplr wallet.')
+      }
+
+      // Request account access
+      await (window as any).keplr.enable('skillchain')
+      
+      const result = await ProfileImageUpload.uploadProfileImage(file, walletInfo.address)
+      
+      if (result.success) {
+        if (result.ipfsHash) {
+          const newAvatarUrl = ProfileImageUpload.getIPFSUrl(result.ipfsHash)
+          setUser(prev => prev ? {
+            ...prev,
+            avatar: newAvatarUrl
+          } : null)
+          console.log('✅ Profile image uploaded successfully!')
+          
+          // Show success message
+          alert('Profile image uploaded successfully to blockchain!')
+          
+          // Refresh profile data
+          await loadUserProfile()
+        }
+      } else {
+        setUploadError(result.error || 'Upload failed')
+        console.error('❌ Upload failed:', result.error)
+      }
+    } catch (error: any) {
+      console.error('❌ Profile image upload error:', error)
+      
+      let errorMessage = 'Profile image upload failed. '
+      if (error.message?.includes('User rejected')) {
+        errorMessage += 'Transaction was rejected in Keplr wallet.'
+      } else if (error.message?.includes('not found')) {
+        errorMessage += 'Please install and setup Keplr wallet.'
+      } else if (error.message?.includes('enable')) {
+        errorMessage += 'Please allow access to SkillChain in Keplr wallet.'
+      } else if (error.message?.includes('network') || error.message?.includes('fetch')) {
+        errorMessage += 'Network error. Please check your connection and try again.'
+      } else if (error.message?.includes('API')) {
+        errorMessage += 'API error. Please ensure SkillChain API is running.'
+      } else {
+        errorMessage += `Error: ${error.message || 'Unknown error'}`
+      }
+      
+      setUploadError(errorMessage)
+    } finally {
+      setIsUploadingImage(false)
+    }
+  }
+
+  // Avatar display URL helper
+  const getAvatarUrl = (avatar?: string): string | null => {
+    if (!avatar) return null
+    
+    // If already a full URL, return as is
+    if (avatar.startsWith('http')) {
+      return avatar
+    }
+    
+    // If IPFS protocol URL, convert to gateway URL
+    if (avatar.startsWith('ipfs://')) {
+      return ProfileImageUpload.getIPFSUrl(avatar.replace('ipfs://', ''))
+    }
+    
+    // If just IPFS hash (Qm... format), convert to gateway URL
+    if (avatar.startsWith('Qm') || avatar.startsWith('bafy')) {
+      return ProfileImageUpload.getIPFSUrl(avatar)
+    }
+    
+    // Otherwise return as is (might be relative URL or other format)
+    return avatar
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden flex flex-col">
       {/* Animated background elements */}
@@ -608,6 +757,85 @@ Your skill is now on the blockchain!`)
                 {user?.name ? 'Edit Profile' : 'Create Your Profile'}
               </h3>
               <form onSubmit={handleCreateProfile} className="space-y-6">
+                {/* Avatar Upload Section - Only for new profiles */}
+                {!user && (
+                  <div className="mb-6">
+                    <label className="block text-gray-300 mb-3">Profile Avatar (Optional)</label>
+                    <div className="flex items-center gap-4">
+                      <div className="relative">
+                        <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-xl font-bold overflow-hidden">
+                          {profileAvatarPreview ? (
+                            <img 
+                              src={profileAvatarPreview} 
+                              alt="Avatar preview"
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            profileForm.displayName?.[0] || '?'
+                          )}
+                        </div>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0]
+                            if (file) {
+                              // Validate file
+                              const validation = ProfileImageUpload.validateImageFile(file)
+                              if (!validation.valid) {
+                                alert(validation.error)
+                                return
+                              }
+                              
+                              setProfileAvatarFile(file)
+                              
+                              // Create preview
+                              const reader = new FileReader()
+                              reader.onload = (event) => {
+                                if (event.target?.result) {
+                                  setProfileAvatarPreview(event.target.result as string)
+                                }
+                              }
+                              reader.readAsDataURL(file)
+                            }
+                          }}
+                          style={{ display: 'none' }}
+                          id="profile-avatar-upload"
+                        />
+                        <label
+                          htmlFor="profile-avatar-upload"
+                          className="absolute bottom-0 right-0 bg-blue-500 hover:bg-blue-600 p-2 rounded-full transition-colors cursor-pointer"
+                        >
+                          <Camera className="w-3 h-3 text-white" />
+                        </label>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm text-gray-400 mb-2">
+                          Upload a profile photo (optional). You can also add one later.
+                        </p>
+                        <p className="text-xs text-gray-500">
+                          Supported: JPEG, PNG, GIF, WebP. Max size: 5MB
+                        </p>
+                        {profileAvatarFile && (
+                          <div className="mt-2 flex items-center gap-2">
+                            <span className="text-sm text-green-400">✓ {profileAvatarFile.name}</span>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setProfileAvatarFile(null)
+                                setProfileAvatarPreview(null)
+                              }}
+                              className="text-red-400 hover:text-red-300 text-sm underline"
+                            >
+                              Remove
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-gray-300 mb-2">Display Name</label>
@@ -779,26 +1007,97 @@ Your skill is now on the blockchain!`)
             </div>
           )}
 
+          {/* Upload Error Message */}
+          {uploadError && (
+            <div className="bg-red-500/20 border border-red-500/30 text-red-400 px-4 py-3 rounded-2xl mb-6">
+              <p className="text-sm">⚠️ Image upload failed: {uploadError}</p>
+              <button 
+                onClick={() => setUploadError(null)}
+                className="text-red-300 hover:text-red-100 text-xs mt-1 underline"
+              >
+                Dismiss
+              </button>
+            </div>
+          )}
+
+          {/* Upload Loading Message */}
+          {isUploadingImage && (
+            <div className="bg-blue-500/20 border border-blue-500/30 text-blue-400 px-4 py-3 rounded-2xl mb-6">
+              <p className="text-sm">📤 Uploading profile image to IPFS...</p>
+            </div>
+          )}
+
           {/* Profile Header */}
           {user && (
             <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 text-white mb-8">
               <div className="flex flex-col lg:flex-row gap-8">
                 {/* Left Side - Avatar & Basic Info */}
                 <div className="flex flex-col items-center lg:items-start">
-                  <div className="relative mb-6">
-                    <div className="w-32 h-32 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-4xl font-bold">
+                  {/* Profile Image */}
+                  <div className="relative">
+                    <div className="w-24 h-24 lg:w-32 lg:h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl lg:text-3xl font-bold">
                       {user?.avatar ? (
-                        <img src={user.avatar} alt={user.name} className="w-full h-full rounded-full object-cover" />
+                        <>
+                          <img 
+                            src={getAvatarUrl(user.avatar) || undefined} 
+                            alt={user.name}
+                            className="w-full h-full rounded-full object-cover"
+                            onLoad={() => console.log('✅ Avatar loaded:', getAvatarUrl(user.avatar))}
+                            onError={(e) => {
+                              console.log('❌ Avatar image failed to load:', getAvatarUrl(user.avatar))
+                              const target = e.currentTarget as HTMLImageElement
+                              target.style.display = 'none'
+                              const fallback = target.parentElement?.querySelector('.fallback-avatar') as HTMLElement
+                              if (fallback) {
+                                fallback.style.display = 'flex'
+                              }
+                            }}
+                          />
+                          <div className="fallback-avatar" style={{ display: 'none' }}>
+                            {user.name[0]}
+                          </div>
+                        </>
                       ) : (
                         user?.name[0]
                       )}
                     </div>
                     {user?.isOwnProfile && (
-                      <button className="absolute bottom-0 right-0 bg-blue-500 hover:bg-blue-600 p-2 rounded-full transition-colors">
-                        <Camera className="w-4 h-4 text-white" />
-                      </button>
+                      <>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => {
+                            if (e.target.files && e.target.files.length > 0) {
+                              handleImageUpload(e.target.files[0])
+                            }
+                          }}
+                          style={{ display: 'none' }}
+                          id="profile-image-upload"
+                          disabled={isUploadingImage}
+                        />
+                        <label
+                          htmlFor="profile-image-upload"
+                          className={`absolute bottom-0 right-0 bg-blue-500 hover:bg-blue-600 p-2 rounded-full transition-colors cursor-pointer ${
+                            isUploadingImage ? 'opacity-50 cursor-not-allowed' : ''
+                          }`}
+                        >
+                          <Camera className="w-4 h-4 text-white" />
+                        </label>
+                        {isUploadingImage && (
+                          <div className="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center">
+                            <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                          </div>
+                        )}
+                      </>
                     )}
                   </div>
+
+                  {/* Upload Error Display */}
+                  {uploadError && (
+                    <div className="w-full max-w-md bg-red-500/20 border border-red-500/50 rounded-xl p-4 text-red-400 text-sm">
+                      {uploadError}
+                    </div>
+                  )}
 
                   {/* Stats */}
                   <div className="grid grid-cols-3 gap-6 text-center lg:text-left">

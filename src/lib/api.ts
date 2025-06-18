@@ -1,5 +1,5 @@
-// SkillChain API Configuration
-const API_BASE_URL = 'http://localhost:1317/skillchain/v1'
+// SkillChain API Configuration - Use proxy to avoid CORS
+const API_BASE_URL = '/api/skillchain/skillchain/v1'
 
 // Response interface matching documentation
 interface ApiResponse<T = any> {
@@ -357,6 +357,58 @@ export const marketplaceApi = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     })
+    return response.json()
+  }
+}
+
+// ============================================================================
+// FILE STORAGE MODULE
+// ============================================================================
+
+export const fileStorageApi = {
+  // Upload file to IPFS
+  uploadFile: async (data: {
+    creator: string
+    file_name: string
+    file_size: number
+    file_type: string
+    ipfs_hash: string
+    description?: string
+  }): Promise<ApiResponse> => {
+    const response = await fetch(`${API_BASE_URL}/files`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    return response.json()
+  },
+
+  // List files
+  listFiles: async (owner?: string): Promise<ApiResponse> => {
+    const params = new URLSearchParams()
+    if (owner) params.append('owner', owner)
+    
+    const response = await fetch(`${API_BASE_URL}/files?${params}`)
+    return response.json()
+  },
+
+  // Get file details
+  getFile: async (fileId: string): Promise<ApiResponse> => {
+    const response = await fetch(`${API_BASE_URL}/files/${fileId}`)
+    return response.json()
+  },
+
+  // Pin IPFS hash
+  pinToIPFS: async (hash: string): Promise<ApiResponse> => {
+    const response = await fetch(`${API_BASE_URL}/ipfs/pin/${hash}`, {
+      method: 'POST'
+    })
+    return response.json()
+  },
+
+  // Check IPFS status
+  getIPFSStatus: async (hash: string): Promise<ApiResponse> => {
+    const response = await fetch(`${API_BASE_URL}/ipfs/status/${hash}`)
     return response.json()
   }
 }

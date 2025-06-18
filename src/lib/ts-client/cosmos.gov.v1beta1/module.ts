@@ -6,40 +6,40 @@ import { msgTypes } from './registry';
 import { IgniteClient } from "../client"
 import { MissingWalletError } from "../helpers"
 import { Api } from "./rest";
-import { GenesisState } from "./types/cosmos/gov/v1beta1/genesis";
-import { MsgSubmitProposalResponse } from "./types/cosmos/gov/v1beta1/tx";
-import { QueryProposalsResponse } from "./types/cosmos/gov/v1beta1/query";
-import { MsgVoteWeightedResponse } from "./types/cosmos/gov/v1beta1/tx";
-import { Vote } from "./types/cosmos/gov/v1beta1/gov";
-import { QueryProposalRequest } from "./types/cosmos/gov/v1beta1/query";
-import { MsgVoteWeighted } from "./types/cosmos/gov/v1beta1/tx";
-import { VotingParams } from "./types/cosmos/gov/v1beta1/gov";
-import { WeightedVoteOption } from "./types/cosmos/gov/v1beta1/gov";
-import { Proposal } from "./types/cosmos/gov/v1beta1/gov";
-import { QueryProposalResponse } from "./types/cosmos/gov/v1beta1/query";
+import { QueryProposalsRequest } from "./types/cosmos/gov/v1beta1/query";
 import { QueryVoteRequest } from "./types/cosmos/gov/v1beta1/query";
-import { QueryVotesRequest } from "./types/cosmos/gov/v1beta1/query";
-import { MsgSubmitProposal } from "./types/cosmos/gov/v1beta1/tx";
-import { TallyParams } from "./types/cosmos/gov/v1beta1/gov";
+import { Proposal } from "./types/cosmos/gov/v1beta1/gov";
+import { MsgVote } from "./types/cosmos/gov/v1beta1/tx";
 import { TallyResult } from "./types/cosmos/gov/v1beta1/gov";
-import { MsgDeposit } from "./types/cosmos/gov/v1beta1/tx";
-import { Deposit } from "./types/cosmos/gov/v1beta1/gov";
+import { TallyParams } from "./types/cosmos/gov/v1beta1/gov";
+import { QueryProposalRequest } from "./types/cosmos/gov/v1beta1/query";
+import { QueryVotesRequest } from "./types/cosmos/gov/v1beta1/query";
 import { QueryParamsRequest } from "./types/cosmos/gov/v1beta1/query";
-import { QueryDepositRequest } from "./types/cosmos/gov/v1beta1/query";
-import { QueryTallyResultRequest } from "./types/cosmos/gov/v1beta1/query";
-import { MsgDepositResponse } from "./types/cosmos/gov/v1beta1/tx";
-import { TextProposal } from "./types/cosmos/gov/v1beta1/gov";
-import { QueryVoteResponse } from "./types/cosmos/gov/v1beta1/query";
 import { QueryDepositResponse } from "./types/cosmos/gov/v1beta1/query";
 import { QueryDepositsResponse } from "./types/cosmos/gov/v1beta1/query";
-import { DepositParams } from "./types/cosmos/gov/v1beta1/gov";
-import { MsgVote } from "./types/cosmos/gov/v1beta1/tx";
-import { MsgVoteResponse } from "./types/cosmos/gov/v1beta1/tx";
-import { QueryProposalsRequest } from "./types/cosmos/gov/v1beta1/query";
-import { QueryParamsResponse } from "./types/cosmos/gov/v1beta1/query";
-import { QueryDepositsRequest } from "./types/cosmos/gov/v1beta1/query";
-import { QueryTallyResultResponse } from "./types/cosmos/gov/v1beta1/query";
+import { QueryTallyResultRequest } from "./types/cosmos/gov/v1beta1/query";
+import { VotingParams } from "./types/cosmos/gov/v1beta1/gov";
+import { GenesisState } from "./types/cosmos/gov/v1beta1/genesis";
+import { TextProposal } from "./types/cosmos/gov/v1beta1/gov";
+import { WeightedVoteOption } from "./types/cosmos/gov/v1beta1/gov";
+import { QueryVoteResponse } from "./types/cosmos/gov/v1beta1/query";
 import { QueryVotesResponse } from "./types/cosmos/gov/v1beta1/query";
+import { MsgSubmitProposal } from "./types/cosmos/gov/v1beta1/tx";
+import { MsgVoteResponse } from "./types/cosmos/gov/v1beta1/tx";
+import { MsgVoteWeighted } from "./types/cosmos/gov/v1beta1/tx";
+import { MsgVoteWeightedResponse } from "./types/cosmos/gov/v1beta1/tx";
+import { MsgDepositResponse } from "./types/cosmos/gov/v1beta1/tx";
+import { QueryParamsResponse } from "./types/cosmos/gov/v1beta1/query";
+import { QueryTallyResultResponse } from "./types/cosmos/gov/v1beta1/query";
+import { QueryProposalResponse } from "./types/cosmos/gov/v1beta1/query";
+import { QueryProposalsResponse } from "./types/cosmos/gov/v1beta1/query";
+import { QueryDepositRequest } from "./types/cosmos/gov/v1beta1/query";
+import { Deposit } from "./types/cosmos/gov/v1beta1/gov";
+import { DepositParams } from "./types/cosmos/gov/v1beta1/gov";
+import { QueryDepositsRequest } from "./types/cosmos/gov/v1beta1/query";
+import { MsgSubmitProposalResponse } from "./types/cosmos/gov/v1beta1/tx";
+import { MsgDeposit } from "./types/cosmos/gov/v1beta1/tx";
+import { Vote } from "./types/cosmos/gov/v1beta1/gov";
 
 import { WeightedVoteOption as typeWeightedVoteOption} from "./types"
 import { TextProposal as typeTextProposal} from "./types"
@@ -51,70 +51,10 @@ import { DepositParams as typeDepositParams} from "./types"
 import { VotingParams as typeVotingParams} from "./types"
 import { TallyParams as typeTallyParams} from "./types"
 
-export { GenesisState, MsgSubmitProposalResponse, QueryProposalsResponse, MsgVoteWeightedResponse, Vote, QueryProposalRequest, MsgVoteWeighted, VotingParams, WeightedVoteOption, Proposal, QueryProposalResponse, QueryVoteRequest, QueryVotesRequest, MsgSubmitProposal, TallyParams, TallyResult, MsgDeposit, Deposit, QueryParamsRequest, QueryDepositRequest, QueryTallyResultRequest, MsgDepositResponse, TextProposal, QueryVoteResponse, QueryDepositResponse, QueryDepositsResponse, DepositParams, MsgVote, MsgVoteResponse, QueryProposalsRequest, QueryParamsResponse, QueryDepositsRequest, QueryTallyResultResponse, QueryVotesResponse };
+export { QueryProposalsRequest, QueryVoteRequest, Proposal, MsgVote, TallyResult, TallyParams, QueryProposalRequest, QueryVotesRequest, QueryParamsRequest, QueryDepositResponse, QueryDepositsResponse, QueryTallyResultRequest, VotingParams, GenesisState, TextProposal, WeightedVoteOption, QueryVoteResponse, QueryVotesResponse, MsgSubmitProposal, MsgVoteResponse, MsgVoteWeighted, MsgVoteWeightedResponse, MsgDepositResponse, QueryParamsResponse, QueryTallyResultResponse, QueryProposalResponse, QueryProposalsResponse, QueryDepositRequest, Deposit, DepositParams, QueryDepositsRequest, MsgSubmitProposalResponse, MsgDeposit, Vote };
 
-type sendGenesisStateParams = {
-  value: GenesisState,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgSubmitProposalResponseParams = {
-  value: MsgSubmitProposalResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryProposalsResponseParams = {
-  value: QueryProposalsResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgVoteWeightedResponseParams = {
-  value: MsgVoteWeightedResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendVoteParams = {
-  value: Vote,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryProposalRequestParams = {
-  value: QueryProposalRequest,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgVoteWeightedParams = {
-  value: MsgVoteWeighted,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendVotingParamsParams = {
-  value: VotingParams,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendWeightedVoteOptionParams = {
-  value: WeightedVoteOption,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendProposalParams = {
-  value: Proposal,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryProposalResponseParams = {
-  value: QueryProposalResponse,
+type sendQueryProposalsRequestParams = {
+  value: QueryProposalsRequest,
   fee?: StdFee,
   memo?: string
 };
@@ -125,20 +65,14 @@ type sendQueryVoteRequestParams = {
   memo?: string
 };
 
-type sendQueryVotesRequestParams = {
-  value: QueryVotesRequest,
+type sendProposalParams = {
+  value: Proposal,
   fee?: StdFee,
   memo?: string
 };
 
-type sendMsgSubmitProposalParams = {
-  value: MsgSubmitProposal,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendTallyParamsParams = {
-  value: TallyParams,
+type sendMsgVoteParams = {
+  value: MsgVote,
   fee?: StdFee,
   memo?: string
 };
@@ -149,50 +83,26 @@ type sendTallyResultParams = {
   memo?: string
 };
 
-type sendMsgDepositParams = {
-  value: MsgDeposit,
+type sendTallyParamsParams = {
+  value: TallyParams,
   fee?: StdFee,
   memo?: string
 };
 
-type sendDepositParams = {
-  value: Deposit,
+type sendQueryProposalRequestParams = {
+  value: QueryProposalRequest,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryVotesRequestParams = {
+  value: QueryVotesRequest,
   fee?: StdFee,
   memo?: string
 };
 
 type sendQueryParamsRequestParams = {
   value: QueryParamsRequest,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryDepositRequestParams = {
-  value: QueryDepositRequest,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryTallyResultRequestParams = {
-  value: QueryTallyResultRequest,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgDepositResponseParams = {
-  value: MsgDepositResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendTextProposalParams = {
-  value: TextProposal,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryVoteResponseParams = {
-  value: QueryVoteResponse,
   fee?: StdFee,
   memo?: string
 };
@@ -209,44 +119,38 @@ type sendQueryDepositsResponseParams = {
   memo?: string
 };
 
-type sendDepositParamsParams = {
-  value: DepositParams,
+type sendQueryTallyResultRequestParams = {
+  value: QueryTallyResultRequest,
   fee?: StdFee,
   memo?: string
 };
 
-type sendMsgVoteParams = {
-  value: MsgVote,
+type sendVotingParamsParams = {
+  value: VotingParams,
   fee?: StdFee,
   memo?: string
 };
 
-type sendMsgVoteResponseParams = {
-  value: MsgVoteResponse,
+type sendGenesisStateParams = {
+  value: GenesisState,
   fee?: StdFee,
   memo?: string
 };
 
-type sendQueryProposalsRequestParams = {
-  value: QueryProposalsRequest,
+type sendTextProposalParams = {
+  value: TextProposal,
   fee?: StdFee,
   memo?: string
 };
 
-type sendQueryParamsResponseParams = {
-  value: QueryParamsResponse,
+type sendWeightedVoteOptionParams = {
+  value: WeightedVoteOption,
   fee?: StdFee,
   memo?: string
 };
 
-type sendQueryDepositsRequestParams = {
-  value: QueryDepositsRequest,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryTallyResultResponseParams = {
-  value: QueryTallyResultResponse,
+type sendQueryVoteResponseParams = {
+  value: QueryVoteResponse,
   fee?: StdFee,
   memo?: string
 };
@@ -257,101 +161,137 @@ type sendQueryVotesResponseParams = {
   memo?: string
 };
 
-
-type genesisStateParams = {
-  value: GenesisState,
+type sendMsgSubmitProposalParams = {
+  value: MsgSubmitProposal,
+  fee?: StdFee,
+  memo?: string
 };
 
-type msgSubmitProposalResponseParams = {
-  value: MsgSubmitProposalResponse,
+type sendMsgVoteResponseParams = {
+  value: MsgVoteResponse,
+  fee?: StdFee,
+  memo?: string
 };
 
-type queryProposalsResponseParams = {
-  value: QueryProposalsResponse,
-};
-
-type msgVoteWeightedResponseParams = {
-  value: MsgVoteWeightedResponse,
-};
-
-type voteParams = {
-  value: Vote,
-};
-
-type queryProposalRequestParams = {
-  value: QueryProposalRequest,
-};
-
-type msgVoteWeightedParams = {
+type sendMsgVoteWeightedParams = {
   value: MsgVoteWeighted,
+  fee?: StdFee,
+  memo?: string
 };
 
-type votingParamsParams = {
-  value: VotingParams,
+type sendMsgVoteWeightedResponseParams = {
+  value: MsgVoteWeightedResponse,
+  fee?: StdFee,
+  memo?: string
 };
 
-type weightedVoteOptionParams = {
-  value: WeightedVoteOption,
+type sendMsgDepositResponseParams = {
+  value: MsgDepositResponse,
+  fee?: StdFee,
+  memo?: string
 };
 
-type proposalParams = {
-  value: Proposal,
+type sendQueryParamsResponseParams = {
+  value: QueryParamsResponse,
+  fee?: StdFee,
+  memo?: string
 };
 
-type queryProposalResponseParams = {
+type sendQueryTallyResultResponseParams = {
+  value: QueryTallyResultResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryProposalResponseParams = {
   value: QueryProposalResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryProposalsResponseParams = {
+  value: QueryProposalsResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryDepositRequestParams = {
+  value: QueryDepositRequest,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendDepositParams = {
+  value: Deposit,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendDepositParamsParams = {
+  value: DepositParams,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryDepositsRequestParams = {
+  value: QueryDepositsRequest,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgSubmitProposalResponseParams = {
+  value: MsgSubmitProposalResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgDepositParams = {
+  value: MsgDeposit,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendVoteParams = {
+  value: Vote,
+  fee?: StdFee,
+  memo?: string
+};
+
+
+type queryProposalsRequestParams = {
+  value: QueryProposalsRequest,
 };
 
 type queryVoteRequestParams = {
   value: QueryVoteRequest,
 };
 
-type queryVotesRequestParams = {
-  value: QueryVotesRequest,
+type proposalParams = {
+  value: Proposal,
 };
 
-type msgSubmitProposalParams = {
-  value: MsgSubmitProposal,
-};
-
-type tallyParamsParams = {
-  value: TallyParams,
+type msgVoteParams = {
+  value: MsgVote,
 };
 
 type tallyResultParams = {
   value: TallyResult,
 };
 
-type msgDepositParams = {
-  value: MsgDeposit,
+type tallyParamsParams = {
+  value: TallyParams,
 };
 
-type depositParams = {
-  value: Deposit,
+type queryProposalRequestParams = {
+  value: QueryProposalRequest,
+};
+
+type queryVotesRequestParams = {
+  value: QueryVotesRequest,
 };
 
 type queryParamsRequestParams = {
   value: QueryParamsRequest,
-};
-
-type queryDepositRequestParams = {
-  value: QueryDepositRequest,
-};
-
-type queryTallyResultRequestParams = {
-  value: QueryTallyResultRequest,
-};
-
-type msgDepositResponseParams = {
-  value: MsgDepositResponse,
-};
-
-type textProposalParams = {
-  value: TextProposal,
-};
-
-type queryVoteResponseParams = {
-  value: QueryVoteResponse,
 };
 
 type queryDepositResponseParams = {
@@ -362,36 +302,96 @@ type queryDepositsResponseParams = {
   value: QueryDepositsResponse,
 };
 
-type depositParamsParams = {
-  value: DepositParams,
+type queryTallyResultRequestParams = {
+  value: QueryTallyResultRequest,
 };
 
-type msgVoteParams = {
-  value: MsgVote,
+type votingParamsParams = {
+  value: VotingParams,
+};
+
+type genesisStateParams = {
+  value: GenesisState,
+};
+
+type textProposalParams = {
+  value: TextProposal,
+};
+
+type weightedVoteOptionParams = {
+  value: WeightedVoteOption,
+};
+
+type queryVoteResponseParams = {
+  value: QueryVoteResponse,
+};
+
+type queryVotesResponseParams = {
+  value: QueryVotesResponse,
+};
+
+type msgSubmitProposalParams = {
+  value: MsgSubmitProposal,
 };
 
 type msgVoteResponseParams = {
   value: MsgVoteResponse,
 };
 
-type queryProposalsRequestParams = {
-  value: QueryProposalsRequest,
+type msgVoteWeightedParams = {
+  value: MsgVoteWeighted,
+};
+
+type msgVoteWeightedResponseParams = {
+  value: MsgVoteWeightedResponse,
+};
+
+type msgDepositResponseParams = {
+  value: MsgDepositResponse,
 };
 
 type queryParamsResponseParams = {
   value: QueryParamsResponse,
 };
 
-type queryDepositsRequestParams = {
-  value: QueryDepositsRequest,
-};
-
 type queryTallyResultResponseParams = {
   value: QueryTallyResultResponse,
 };
 
-type queryVotesResponseParams = {
-  value: QueryVotesResponse,
+type queryProposalResponseParams = {
+  value: QueryProposalResponse,
+};
+
+type queryProposalsResponseParams = {
+  value: QueryProposalsResponse,
+};
+
+type queryDepositRequestParams = {
+  value: QueryDepositRequest,
+};
+
+type depositParams = {
+  value: Deposit,
+};
+
+type depositParamsParams = {
+  value: DepositParams,
+};
+
+type queryDepositsRequestParams = {
+  value: QueryDepositsRequest,
+};
+
+type msgSubmitProposalResponseParams = {
+  value: MsgSubmitProposalResponse,
+};
+
+type msgDepositParams = {
+  value: MsgDeposit,
+};
+
+type voteParams = {
+  value: Vote,
 };
 
 
@@ -424,157 +424,17 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 
   return {
 		
-		async sendGenesisState({ value, fee, memo }: sendGenesisStateParams): Promise<DeliverTxResponse> {
+		async sendQueryProposalsRequest({ value, fee, memo }: sendQueryProposalsRequestParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendGenesisState: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendQueryProposalsRequest: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.genesisState({ value: GenesisState.fromPartial(value) })
+				let msg = this.queryProposalsRequest({ value: QueryProposalsRequest.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendGenesisState: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgSubmitProposalResponse({ value, fee, memo }: sendMsgSubmitProposalResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgSubmitProposalResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgSubmitProposalResponse({ value: MsgSubmitProposalResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgSubmitProposalResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryProposalsResponse({ value, fee, memo }: sendQueryProposalsResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryProposalsResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryProposalsResponse({ value: QueryProposalsResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryProposalsResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgVoteWeightedResponse({ value, fee, memo }: sendMsgVoteWeightedResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgVoteWeightedResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgVoteWeightedResponse({ value: MsgVoteWeightedResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgVoteWeightedResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendVote({ value, fee, memo }: sendVoteParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendVote: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.vote({ value: Vote.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendVote: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryProposalRequest({ value, fee, memo }: sendQueryProposalRequestParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryProposalRequest: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryProposalRequest({ value: QueryProposalRequest.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryProposalRequest: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgVoteWeighted({ value, fee, memo }: sendMsgVoteWeightedParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgVoteWeighted: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgVoteWeighted({ value: MsgVoteWeighted.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgVoteWeighted: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendVotingParams({ value, fee, memo }: sendVotingParamsParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendVotingParams: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.votingParams({ value: VotingParams.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendVotingParams: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendWeightedVoteOption({ value, fee, memo }: sendWeightedVoteOptionParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendWeightedVoteOption: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.weightedVoteOption({ value: WeightedVoteOption.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendWeightedVoteOption: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendProposal({ value, fee, memo }: sendProposalParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendProposal: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.proposal({ value: Proposal.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendProposal: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryProposalResponse({ value, fee, memo }: sendQueryProposalResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryProposalResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryProposalResponse({ value: QueryProposalResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryProposalResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendQueryProposalsRequest: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -592,45 +452,31 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendQueryVotesRequest({ value, fee, memo }: sendQueryVotesRequestParams): Promise<DeliverTxResponse> {
+		async sendProposal({ value, fee, memo }: sendProposalParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendQueryVotesRequest: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendProposal: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryVotesRequest({ value: QueryVotesRequest.fromPartial(value) })
+				let msg = this.proposal({ value: Proposal.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendQueryVotesRequest: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendProposal: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendMsgSubmitProposal({ value, fee, memo }: sendMsgSubmitProposalParams): Promise<DeliverTxResponse> {
+		async sendMsgVote({ value, fee, memo }: sendMsgVoteParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgSubmitProposal: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgVote: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgSubmitProposal({ value: MsgSubmitProposal.fromPartial(value) })
+				let msg = this.msgVote({ value: MsgVote.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgSubmitProposal: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendTallyParams({ value, fee, memo }: sendTallyParamsParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendTallyParams: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.tallyParams({ value: TallyParams.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendTallyParams: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgVote: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -648,31 +494,45 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendMsgDeposit({ value, fee, memo }: sendMsgDepositParams): Promise<DeliverTxResponse> {
+		async sendTallyParams({ value, fee, memo }: sendTallyParamsParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgDeposit: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendTallyParams: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDeposit({ value: MsgDeposit.fromPartial(value) })
+				let msg = this.tallyParams({ value: TallyParams.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeposit: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendTallyParams: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendDeposit({ value, fee, memo }: sendDepositParams): Promise<DeliverTxResponse> {
+		async sendQueryProposalRequest({ value, fee, memo }: sendQueryProposalRequestParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendDeposit: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendQueryProposalRequest: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.deposit({ value: Deposit.fromPartial(value) })
+				let msg = this.queryProposalRequest({ value: QueryProposalRequest.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendDeposit: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendQueryProposalRequest: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryVotesRequest({ value, fee, memo }: sendQueryVotesRequestParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryVotesRequest: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryVotesRequest({ value: QueryVotesRequest.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryVotesRequest: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -687,76 +547,6 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
 				throw new Error('TxClient:sendQueryParamsRequest: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryDepositRequest({ value, fee, memo }: sendQueryDepositRequestParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryDepositRequest: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryDepositRequest({ value: QueryDepositRequest.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryDepositRequest: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryTallyResultRequest({ value, fee, memo }: sendQueryTallyResultRequestParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryTallyResultRequest: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryTallyResultRequest({ value: QueryTallyResultRequest.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryTallyResultRequest: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgDepositResponse({ value, fee, memo }: sendMsgDepositResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgDepositResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDepositResponse({ value: MsgDepositResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDepositResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendTextProposal({ value, fee, memo }: sendTextProposalParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendTextProposal: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.textProposal({ value: TextProposal.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendTextProposal: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryVoteResponse({ value, fee, memo }: sendQueryVoteResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryVoteResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryVoteResponse({ value: QueryVoteResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryVoteResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -788,101 +578,87 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendDepositParams({ value, fee, memo }: sendDepositParamsParams): Promise<DeliverTxResponse> {
+		async sendQueryTallyResultRequest({ value, fee, memo }: sendQueryTallyResultRequestParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendDepositParams: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendQueryTallyResultRequest: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.depositParams({ value: DepositParams.fromPartial(value) })
+				let msg = this.queryTallyResultRequest({ value: QueryTallyResultRequest.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendDepositParams: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendQueryTallyResultRequest: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendMsgVote({ value, fee, memo }: sendMsgVoteParams): Promise<DeliverTxResponse> {
+		async sendVotingParams({ value, fee, memo }: sendVotingParamsParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgVote: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendVotingParams: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgVote({ value: MsgVote.fromPartial(value) })
+				let msg = this.votingParams({ value: VotingParams.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgVote: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendVotingParams: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendMsgVoteResponse({ value, fee, memo }: sendMsgVoteResponseParams): Promise<DeliverTxResponse> {
+		async sendGenesisState({ value, fee, memo }: sendGenesisStateParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgVoteResponse: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendGenesisState: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgVoteResponse({ value: MsgVoteResponse.fromPartial(value) })
+				let msg = this.genesisState({ value: GenesisState.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgVoteResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendGenesisState: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendQueryProposalsRequest({ value, fee, memo }: sendQueryProposalsRequestParams): Promise<DeliverTxResponse> {
+		async sendTextProposal({ value, fee, memo }: sendTextProposalParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendQueryProposalsRequest: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendTextProposal: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryProposalsRequest({ value: QueryProposalsRequest.fromPartial(value) })
+				let msg = this.textProposal({ value: TextProposal.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendQueryProposalsRequest: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendTextProposal: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendQueryParamsResponse({ value, fee, memo }: sendQueryParamsResponseParams): Promise<DeliverTxResponse> {
+		async sendWeightedVoteOption({ value, fee, memo }: sendWeightedVoteOptionParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendQueryParamsResponse: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendWeightedVoteOption: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryParamsResponse({ value: QueryParamsResponse.fromPartial(value) })
+				let msg = this.weightedVoteOption({ value: WeightedVoteOption.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendQueryParamsResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendWeightedVoteOption: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendQueryDepositsRequest({ value, fee, memo }: sendQueryDepositsRequestParams): Promise<DeliverTxResponse> {
+		async sendQueryVoteResponse({ value, fee, memo }: sendQueryVoteResponseParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendQueryDepositsRequest: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendQueryVoteResponse: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryDepositsRequest({ value: QueryDepositsRequest.fromPartial(value) })
+				let msg = this.queryVoteResponse({ value: QueryVoteResponse.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendQueryDepositsRequest: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryTallyResultResponse({ value, fee, memo }: sendQueryTallyResultResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryTallyResultResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryTallyResultResponse({ value: QueryTallyResultResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryTallyResultResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendQueryVoteResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -900,92 +676,236 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		
-		genesisState({ value }: genesisStateParams): EncodeObject {
-			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.GenesisState", value: GenesisState.fromPartial( value ) }  
+		async sendMsgSubmitProposal({ value, fee, memo }: sendMsgSubmitProposalParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgSubmitProposal: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgSubmitProposal({ value: MsgSubmitProposal.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:GenesisState: Could not create message: ' + e.message)
+				throw new Error('TxClient:sendMsgSubmitProposal: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		msgSubmitProposalResponse({ value }: msgSubmitProposalResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.MsgSubmitProposalResponse", value: MsgSubmitProposalResponse.fromPartial( value ) }  
+		async sendMsgVoteResponse({ value, fee, memo }: sendMsgVoteResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgVoteResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgVoteResponse({ value: MsgVoteResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:MsgSubmitProposalResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:sendMsgVoteResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		queryProposalsResponse({ value }: queryProposalsResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.QueryProposalsResponse", value: QueryProposalsResponse.fromPartial( value ) }  
+		async sendMsgVoteWeighted({ value, fee, memo }: sendMsgVoteWeightedParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgVoteWeighted: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgVoteWeighted({ value: MsgVoteWeighted.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:QueryProposalsResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:sendMsgVoteWeighted: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		msgVoteWeightedResponse({ value }: msgVoteWeightedResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.MsgVoteWeightedResponse", value: MsgVoteWeightedResponse.fromPartial( value ) }  
+		async sendMsgVoteWeightedResponse({ value, fee, memo }: sendMsgVoteWeightedResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgVoteWeightedResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgVoteWeightedResponse({ value: MsgVoteWeightedResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:MsgVoteWeightedResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:sendMsgVoteWeightedResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		vote({ value }: voteParams): EncodeObject {
-			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.Vote", value: Vote.fromPartial( value ) }  
+		async sendMsgDepositResponse({ value, fee, memo }: sendMsgDepositResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgDepositResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgDepositResponse({ value: MsgDepositResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:Vote: Could not create message: ' + e.message)
+				throw new Error('TxClient:sendMsgDepositResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		queryProposalRequest({ value }: queryProposalRequestParams): EncodeObject {
-			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.QueryProposalRequest", value: QueryProposalRequest.fromPartial( value ) }  
+		async sendQueryParamsResponse({ value, fee, memo }: sendQueryParamsResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryParamsResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryParamsResponse({ value: QueryParamsResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:QueryProposalRequest: Could not create message: ' + e.message)
+				throw new Error('TxClient:sendQueryParamsResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		msgVoteWeighted({ value }: msgVoteWeightedParams): EncodeObject {
-			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.MsgVoteWeighted", value: MsgVoteWeighted.fromPartial( value ) }  
+		async sendQueryTallyResultResponse({ value, fee, memo }: sendQueryTallyResultResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryTallyResultResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryTallyResultResponse({ value: QueryTallyResultResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:MsgVoteWeighted: Could not create message: ' + e.message)
+				throw new Error('TxClient:sendQueryTallyResultResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		votingParams({ value }: votingParamsParams): EncodeObject {
-			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.VotingParams", value: VotingParams.fromPartial( value ) }  
+		async sendQueryProposalResponse({ value, fee, memo }: sendQueryProposalResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryProposalResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryProposalResponse({ value: QueryProposalResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:VotingParams: Could not create message: ' + e.message)
+				throw new Error('TxClient:sendQueryProposalResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		weightedVoteOption({ value }: weightedVoteOptionParams): EncodeObject {
-			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.WeightedVoteOption", value: WeightedVoteOption.fromPartial( value ) }  
+		async sendQueryProposalsResponse({ value, fee, memo }: sendQueryProposalsResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryProposalsResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryProposalsResponse({ value: QueryProposalsResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:WeightedVoteOption: Could not create message: ' + e.message)
+				throw new Error('TxClient:sendQueryProposalsResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		proposal({ value }: proposalParams): EncodeObject {
-			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.Proposal", value: Proposal.fromPartial( value ) }  
+		async sendQueryDepositRequest({ value, fee, memo }: sendQueryDepositRequestParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryDepositRequest: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryDepositRequest({ value: QueryDepositRequest.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:Proposal: Could not create message: ' + e.message)
+				throw new Error('TxClient:sendQueryDepositRequest: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		queryProposalResponse({ value }: queryProposalResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.QueryProposalResponse", value: QueryProposalResponse.fromPartial( value ) }  
+		async sendDeposit({ value, fee, memo }: sendDepositParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendDeposit: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.deposit({ value: Deposit.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:QueryProposalResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:sendDeposit: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendDepositParams({ value, fee, memo }: sendDepositParamsParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendDepositParams: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.depositParams({ value: DepositParams.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendDepositParams: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryDepositsRequest({ value, fee, memo }: sendQueryDepositsRequestParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryDepositsRequest: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryDepositsRequest({ value: QueryDepositsRequest.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryDepositsRequest: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgSubmitProposalResponse({ value, fee, memo }: sendMsgSubmitProposalResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgSubmitProposalResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgSubmitProposalResponse({ value: MsgSubmitProposalResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgSubmitProposalResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgDeposit({ value, fee, memo }: sendMsgDepositParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgDeposit: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgDeposit({ value: MsgDeposit.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgDeposit: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendVote({ value, fee, memo }: sendVoteParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendVote: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.vote({ value: Vote.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendVote: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		
+		queryProposalsRequest({ value }: queryProposalsRequestParams): EncodeObject {
+			try {
+				return { typeUrl: "/cosmos.gov.v1beta1.QueryProposalsRequest", value: QueryProposalsRequest.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryProposalsRequest: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -997,27 +917,19 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		queryVotesRequest({ value }: queryVotesRequestParams): EncodeObject {
+		proposal({ value }: proposalParams): EncodeObject {
 			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.QueryVotesRequest", value: QueryVotesRequest.fromPartial( value ) }  
+				return { typeUrl: "/cosmos.gov.v1beta1.Proposal", value: Proposal.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:QueryVotesRequest: Could not create message: ' + e.message)
+				throw new Error('TxClient:Proposal: Could not create message: ' + e.message)
 			}
 		},
 		
-		msgSubmitProposal({ value }: msgSubmitProposalParams): EncodeObject {
+		msgVote({ value }: msgVoteParams): EncodeObject {
 			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.MsgSubmitProposal", value: MsgSubmitProposal.fromPartial( value ) }  
+				return { typeUrl: "/cosmos.gov.v1beta1.MsgVote", value: MsgVote.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgSubmitProposal: Could not create message: ' + e.message)
-			}
-		},
-		
-		tallyParams({ value }: tallyParamsParams): EncodeObject {
-			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.TallyParams", value: TallyParams.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:TallyParams: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgVote: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -1029,19 +941,27 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		msgDeposit({ value }: msgDepositParams): EncodeObject {
+		tallyParams({ value }: tallyParamsParams): EncodeObject {
 			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.MsgDeposit", value: MsgDeposit.fromPartial( value ) }  
+				return { typeUrl: "/cosmos.gov.v1beta1.TallyParams", value: TallyParams.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgDeposit: Could not create message: ' + e.message)
+				throw new Error('TxClient:TallyParams: Could not create message: ' + e.message)
 			}
 		},
 		
-		deposit({ value }: depositParams): EncodeObject {
+		queryProposalRequest({ value }: queryProposalRequestParams): EncodeObject {
 			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.Deposit", value: Deposit.fromPartial( value ) }  
+				return { typeUrl: "/cosmos.gov.v1beta1.QueryProposalRequest", value: QueryProposalRequest.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:Deposit: Could not create message: ' + e.message)
+				throw new Error('TxClient:QueryProposalRequest: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryVotesRequest({ value }: queryVotesRequestParams): EncodeObject {
+			try {
+				return { typeUrl: "/cosmos.gov.v1beta1.QueryVotesRequest", value: QueryVotesRequest.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryVotesRequest: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -1050,46 +970,6 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 				return { typeUrl: "/cosmos.gov.v1beta1.QueryParamsRequest", value: QueryParamsRequest.fromPartial( value ) }  
 			} catch (e: any) {
 				throw new Error('TxClient:QueryParamsRequest: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryDepositRequest({ value }: queryDepositRequestParams): EncodeObject {
-			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.QueryDepositRequest", value: QueryDepositRequest.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryDepositRequest: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryTallyResultRequest({ value }: queryTallyResultRequestParams): EncodeObject {
-			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.QueryTallyResultRequest", value: QueryTallyResultRequest.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryTallyResultRequest: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgDepositResponse({ value }: msgDepositResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.MsgDepositResponse", value: MsgDepositResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgDepositResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		textProposal({ value }: textProposalParams): EncodeObject {
-			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.TextProposal", value: TextProposal.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:TextProposal: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryVoteResponse({ value }: queryVoteResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.QueryVoteResponse", value: QueryVoteResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryVoteResponse: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -1109,19 +989,67 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		depositParams({ value }: depositParamsParams): EncodeObject {
+		queryTallyResultRequest({ value }: queryTallyResultRequestParams): EncodeObject {
 			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.DepositParams", value: DepositParams.fromPartial( value ) }  
+				return { typeUrl: "/cosmos.gov.v1beta1.QueryTallyResultRequest", value: QueryTallyResultRequest.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:DepositParams: Could not create message: ' + e.message)
+				throw new Error('TxClient:QueryTallyResultRequest: Could not create message: ' + e.message)
 			}
 		},
 		
-		msgVote({ value }: msgVoteParams): EncodeObject {
+		votingParams({ value }: votingParamsParams): EncodeObject {
 			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.MsgVote", value: MsgVote.fromPartial( value ) }  
+				return { typeUrl: "/cosmos.gov.v1beta1.VotingParams", value: VotingParams.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgVote: Could not create message: ' + e.message)
+				throw new Error('TxClient:VotingParams: Could not create message: ' + e.message)
+			}
+		},
+		
+		genesisState({ value }: genesisStateParams): EncodeObject {
+			try {
+				return { typeUrl: "/cosmos.gov.v1beta1.GenesisState", value: GenesisState.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:GenesisState: Could not create message: ' + e.message)
+			}
+		},
+		
+		textProposal({ value }: textProposalParams): EncodeObject {
+			try {
+				return { typeUrl: "/cosmos.gov.v1beta1.TextProposal", value: TextProposal.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:TextProposal: Could not create message: ' + e.message)
+			}
+		},
+		
+		weightedVoteOption({ value }: weightedVoteOptionParams): EncodeObject {
+			try {
+				return { typeUrl: "/cosmos.gov.v1beta1.WeightedVoteOption", value: WeightedVoteOption.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:WeightedVoteOption: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryVoteResponse({ value }: queryVoteResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/cosmos.gov.v1beta1.QueryVoteResponse", value: QueryVoteResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryVoteResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryVotesResponse({ value }: queryVotesResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/cosmos.gov.v1beta1.QueryVotesResponse", value: QueryVotesResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryVotesResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgSubmitProposal({ value }: msgSubmitProposalParams): EncodeObject {
+			try {
+				return { typeUrl: "/cosmos.gov.v1beta1.MsgSubmitProposal", value: MsgSubmitProposal.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgSubmitProposal: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -1133,11 +1061,27 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		queryProposalsRequest({ value }: queryProposalsRequestParams): EncodeObject {
+		msgVoteWeighted({ value }: msgVoteWeightedParams): EncodeObject {
 			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.QueryProposalsRequest", value: QueryProposalsRequest.fromPartial( value ) }  
+				return { typeUrl: "/cosmos.gov.v1beta1.MsgVoteWeighted", value: MsgVoteWeighted.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:QueryProposalsRequest: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgVoteWeighted: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgVoteWeightedResponse({ value }: msgVoteWeightedResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/cosmos.gov.v1beta1.MsgVoteWeightedResponse", value: MsgVoteWeightedResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgVoteWeightedResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgDepositResponse({ value }: msgDepositResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/cosmos.gov.v1beta1.MsgDepositResponse", value: MsgDepositResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgDepositResponse: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -1149,14 +1093,6 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		queryDepositsRequest({ value }: queryDepositsRequestParams): EncodeObject {
-			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.QueryDepositsRequest", value: QueryDepositsRequest.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryDepositsRequest: Could not create message: ' + e.message)
-			}
-		},
-		
 		queryTallyResultResponse({ value }: queryTallyResultResponseParams): EncodeObject {
 			try {
 				return { typeUrl: "/cosmos.gov.v1beta1.QueryTallyResultResponse", value: QueryTallyResultResponse.fromPartial( value ) }  
@@ -1165,11 +1101,75 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		queryVotesResponse({ value }: queryVotesResponseParams): EncodeObject {
+		queryProposalResponse({ value }: queryProposalResponseParams): EncodeObject {
 			try {
-				return { typeUrl: "/cosmos.gov.v1beta1.QueryVotesResponse", value: QueryVotesResponse.fromPartial( value ) }  
+				return { typeUrl: "/cosmos.gov.v1beta1.QueryProposalResponse", value: QueryProposalResponse.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:QueryVotesResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:QueryProposalResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryProposalsResponse({ value }: queryProposalsResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/cosmos.gov.v1beta1.QueryProposalsResponse", value: QueryProposalsResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryProposalsResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryDepositRequest({ value }: queryDepositRequestParams): EncodeObject {
+			try {
+				return { typeUrl: "/cosmos.gov.v1beta1.QueryDepositRequest", value: QueryDepositRequest.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryDepositRequest: Could not create message: ' + e.message)
+			}
+		},
+		
+		deposit({ value }: depositParams): EncodeObject {
+			try {
+				return { typeUrl: "/cosmos.gov.v1beta1.Deposit", value: Deposit.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:Deposit: Could not create message: ' + e.message)
+			}
+		},
+		
+		depositParams({ value }: depositParamsParams): EncodeObject {
+			try {
+				return { typeUrl: "/cosmos.gov.v1beta1.DepositParams", value: DepositParams.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:DepositParams: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryDepositsRequest({ value }: queryDepositsRequestParams): EncodeObject {
+			try {
+				return { typeUrl: "/cosmos.gov.v1beta1.QueryDepositsRequest", value: QueryDepositsRequest.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryDepositsRequest: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgSubmitProposalResponse({ value }: msgSubmitProposalResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/cosmos.gov.v1beta1.MsgSubmitProposalResponse", value: MsgSubmitProposalResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgSubmitProposalResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgDeposit({ value }: msgDepositParams): EncodeObject {
+			try {
+				return { typeUrl: "/cosmos.gov.v1beta1.MsgDeposit", value: MsgDeposit.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgDeposit: Could not create message: ' + e.message)
+			}
+		},
+		
+		vote({ value }: voteParams): EncodeObject {
+			try {
+				return { typeUrl: "/cosmos.gov.v1beta1.Vote", value: Vote.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:Vote: Could not create message: ' + e.message)
 			}
 		},
 		

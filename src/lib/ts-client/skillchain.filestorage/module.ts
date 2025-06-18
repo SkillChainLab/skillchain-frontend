@@ -6,97 +6,43 @@ import { msgTypes } from './registry';
 import { IgniteClient } from "../client"
 import { MissingWalletError } from "../helpers"
 import { Api } from "./rest";
-import { MsgUpdateFileRecordResponse } from "./types/skillchain/filestorage/tx";
-import { MsgDeleteFilePermissionResponse } from "./types/skillchain/filestorage/tx";
-import { GenesisState } from "./types/skillchain/filestorage/genesis";
-import { MsgUpdateParamsResponse } from "./types/skillchain/filestorage/tx";
-import { MsgCreateFilePermissionResponse } from "./types/skillchain/filestorage/tx";
 import { QueryGetFileRecordResponse } from "./types/skillchain/filestorage/query";
-import { QueryAllFileRecordRequest } from "./types/skillchain/filestorage/query";
-import { QueryGetFilePermissionRequest } from "./types/skillchain/filestorage/query";
-import { QueryAllFilePermissionResponse } from "./types/skillchain/filestorage/query";
-import { FilePermission } from "./types/skillchain/filestorage/file_permission";
 import { QueryAllFilePermissionRequest } from "./types/skillchain/filestorage/query";
-import { MsgDeleteFileRecord } from "./types/skillchain/filestorage/tx";
-import { MsgCreateFilePermission } from "./types/skillchain/filestorage/tx";
-import { Params } from "./types/skillchain/filestorage/params";
-import { QueryAllFileRecordResponse } from "./types/skillchain/filestorage/query";
-import { MsgUpdateParams } from "./types/skillchain/filestorage/tx";
-import { MsgDeleteFilePermission } from "./types/skillchain/filestorage/tx";
-import { FileRecord } from "./types/skillchain/filestorage/file_record";
-import { QueryParamsResponse } from "./types/skillchain/filestorage/query";
+import { QueryGetFilePermissionRequest } from "./types/skillchain/filestorage/query";
 import { MsgUpdateFileRecord } from "./types/skillchain/filestorage/tx";
-import { MsgDeleteFileRecordResponse } from "./types/skillchain/filestorage/tx";
-import { MsgUpdateFilePermissionResponse } from "./types/skillchain/filestorage/tx";
-import { QueryParamsRequest } from "./types/skillchain/filestorage/query";
-import { QueryGetFilePermissionResponse } from "./types/skillchain/filestorage/query";
-import { MsgUpdateFilePermission } from "./types/skillchain/filestorage/tx";
+import { FileRecord } from "./types/skillchain/filestorage/file_record";
 import { QueryGetFileRecordRequest } from "./types/skillchain/filestorage/query";
+import { FilePermission } from "./types/skillchain/filestorage/file_permission";
+import { Params } from "./types/skillchain/filestorage/params";
+import { QueryAllFileRecordRequest } from "./types/skillchain/filestorage/query";
+import { QueryGetFilePermissionResponse } from "./types/skillchain/filestorage/query";
+import { MsgCreateFilePermissionResponse } from "./types/skillchain/filestorage/tx";
+import { MsgUpdateFilePermissionResponse } from "./types/skillchain/filestorage/tx";
+import { QueryParamsResponse } from "./types/skillchain/filestorage/query";
 import { MsgCreateFileRecord } from "./types/skillchain/filestorage/tx";
+import { MsgDeleteFileRecord } from "./types/skillchain/filestorage/tx";
+import { MsgUpdateFilePermission } from "./types/skillchain/filestorage/tx";
+import { MsgUpdateParams } from "./types/skillchain/filestorage/tx";
+import { MsgUpdateParamsResponse } from "./types/skillchain/filestorage/tx";
+import { MsgUpdateFileRecordResponse } from "./types/skillchain/filestorage/tx";
+import { QueryAllFilePermissionResponse } from "./types/skillchain/filestorage/query";
+import { MsgCreateFilePermission } from "./types/skillchain/filestorage/tx";
+import { MsgDeleteFilePermission } from "./types/skillchain/filestorage/tx";
 import { MsgCreateFileRecordResponse } from "./types/skillchain/filestorage/tx";
+import { MsgDeleteFileRecordResponse } from "./types/skillchain/filestorage/tx";
+import { MsgDeleteFilePermissionResponse } from "./types/skillchain/filestorage/tx";
+import { QueryParamsRequest } from "./types/skillchain/filestorage/query";
+import { QueryAllFileRecordResponse } from "./types/skillchain/filestorage/query";
+import { GenesisState } from "./types/skillchain/filestorage/genesis";
 
 import { FilePermission as typeFilePermission} from "./types"
 import { FileRecord as typeFileRecord} from "./types"
 import { Params as typeParams} from "./types"
 
-export { MsgUpdateFileRecordResponse, MsgDeleteFilePermissionResponse, GenesisState, MsgUpdateParamsResponse, MsgCreateFilePermissionResponse, QueryGetFileRecordResponse, QueryAllFileRecordRequest, QueryGetFilePermissionRequest, QueryAllFilePermissionResponse, FilePermission, QueryAllFilePermissionRequest, MsgDeleteFileRecord, MsgCreateFilePermission, Params, QueryAllFileRecordResponse, MsgUpdateParams, MsgDeleteFilePermission, FileRecord, QueryParamsResponse, MsgUpdateFileRecord, MsgDeleteFileRecordResponse, MsgUpdateFilePermissionResponse, QueryParamsRequest, QueryGetFilePermissionResponse, MsgUpdateFilePermission, QueryGetFileRecordRequest, MsgCreateFileRecord, MsgCreateFileRecordResponse };
-
-type sendMsgUpdateFileRecordResponseParams = {
-  value: MsgUpdateFileRecordResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgDeleteFilePermissionResponseParams = {
-  value: MsgDeleteFilePermissionResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendGenesisStateParams = {
-  value: GenesisState,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgUpdateParamsResponseParams = {
-  value: MsgUpdateParamsResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgCreateFilePermissionResponseParams = {
-  value: MsgCreateFilePermissionResponse,
-  fee?: StdFee,
-  memo?: string
-};
+export { QueryGetFileRecordResponse, QueryAllFilePermissionRequest, QueryGetFilePermissionRequest, MsgUpdateFileRecord, FileRecord, QueryGetFileRecordRequest, FilePermission, Params, QueryAllFileRecordRequest, QueryGetFilePermissionResponse, MsgCreateFilePermissionResponse, MsgUpdateFilePermissionResponse, QueryParamsResponse, MsgCreateFileRecord, MsgDeleteFileRecord, MsgUpdateFilePermission, MsgUpdateParams, MsgUpdateParamsResponse, MsgUpdateFileRecordResponse, QueryAllFilePermissionResponse, MsgCreateFilePermission, MsgDeleteFilePermission, MsgCreateFileRecordResponse, MsgDeleteFileRecordResponse, MsgDeleteFilePermissionResponse, QueryParamsRequest, QueryAllFileRecordResponse, GenesisState };
 
 type sendQueryGetFileRecordResponseParams = {
   value: QueryGetFileRecordResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryAllFileRecordRequestParams = {
-  value: QueryAllFileRecordRequest,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryGetFilePermissionRequestParams = {
-  value: QueryGetFilePermissionRequest,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryAllFilePermissionResponseParams = {
-  value: QueryAllFilePermissionResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendFilePermissionParams = {
-  value: FilePermission,
   fee?: StdFee,
   memo?: string
 };
@@ -107,50 +53,8 @@ type sendQueryAllFilePermissionRequestParams = {
   memo?: string
 };
 
-type sendMsgDeleteFileRecordParams = {
-  value: MsgDeleteFileRecord,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgCreateFilePermissionParams = {
-  value: MsgCreateFilePermission,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendParamsParams = {
-  value: Params,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryAllFileRecordResponseParams = {
-  value: QueryAllFileRecordResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgUpdateParamsParams = {
-  value: MsgUpdateParams,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgDeleteFilePermissionParams = {
-  value: MsgDeleteFilePermission,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendFileRecordParams = {
-  value: FileRecord,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryParamsResponseParams = {
-  value: QueryParamsResponse,
+type sendQueryGetFilePermissionRequestParams = {
+  value: QueryGetFilePermissionRequest,
   fee?: StdFee,
   memo?: string
 };
@@ -161,32 +65,8 @@ type sendMsgUpdateFileRecordParams = {
   memo?: string
 };
 
-type sendMsgDeleteFileRecordResponseParams = {
-  value: MsgDeleteFileRecordResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgUpdateFilePermissionResponseParams = {
-  value: MsgUpdateFilePermissionResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryParamsRequestParams = {
-  value: QueryParamsRequest,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryGetFilePermissionResponseParams = {
-  value: QueryGetFilePermissionResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgUpdateFilePermissionParams = {
-  value: MsgUpdateFilePermission,
+type sendFileRecordParams = {
+  value: FileRecord,
   fee?: StdFee,
   memo?: string
 };
@@ -197,8 +77,98 @@ type sendQueryGetFileRecordRequestParams = {
   memo?: string
 };
 
+type sendFilePermissionParams = {
+  value: FilePermission,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendParamsParams = {
+  value: Params,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryAllFileRecordRequestParams = {
+  value: QueryAllFileRecordRequest,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryGetFilePermissionResponseParams = {
+  value: QueryGetFilePermissionResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgCreateFilePermissionResponseParams = {
+  value: MsgCreateFilePermissionResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateFilePermissionResponseParams = {
+  value: MsgUpdateFilePermissionResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryParamsResponseParams = {
+  value: QueryParamsResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
 type sendMsgCreateFileRecordParams = {
   value: MsgCreateFileRecord,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgDeleteFileRecordParams = {
+  value: MsgDeleteFileRecord,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateFilePermissionParams = {
+  value: MsgUpdateFilePermission,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateParamsParams = {
+  value: MsgUpdateParams,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateParamsResponseParams = {
+  value: MsgUpdateParamsResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateFileRecordResponseParams = {
+  value: MsgUpdateFileRecordResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryAllFilePermissionResponseParams = {
+  value: QueryAllFilePermissionResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgCreateFilePermissionParams = {
+  value: MsgCreateFilePermission,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgDeleteFilePermissionParams = {
+  value: MsgDeleteFilePermission,
   fee?: StdFee,
   memo?: string
 };
@@ -209,117 +179,147 @@ type sendMsgCreateFileRecordResponseParams = {
   memo?: string
 };
 
-
-type msgUpdateFileRecordResponseParams = {
-  value: MsgUpdateFileRecordResponse,
+type sendMsgDeleteFileRecordResponseParams = {
+  value: MsgDeleteFileRecordResponse,
+  fee?: StdFee,
+  memo?: string
 };
 
-type msgDeleteFilePermissionResponseParams = {
+type sendMsgDeleteFilePermissionResponseParams = {
   value: MsgDeleteFilePermissionResponse,
+  fee?: StdFee,
+  memo?: string
 };
 
-type genesisStateParams = {
+type sendQueryParamsRequestParams = {
+  value: QueryParamsRequest,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryAllFileRecordResponseParams = {
+  value: QueryAllFileRecordResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendGenesisStateParams = {
   value: GenesisState,
+  fee?: StdFee,
+  memo?: string
 };
 
-type msgUpdateParamsResponseParams = {
-  value: MsgUpdateParamsResponse,
-};
-
-type msgCreateFilePermissionResponseParams = {
-  value: MsgCreateFilePermissionResponse,
-};
 
 type queryGetFileRecordResponseParams = {
   value: QueryGetFileRecordResponse,
-};
-
-type queryAllFileRecordRequestParams = {
-  value: QueryAllFileRecordRequest,
-};
-
-type queryGetFilePermissionRequestParams = {
-  value: QueryGetFilePermissionRequest,
-};
-
-type queryAllFilePermissionResponseParams = {
-  value: QueryAllFilePermissionResponse,
-};
-
-type filePermissionParams = {
-  value: FilePermission,
 };
 
 type queryAllFilePermissionRequestParams = {
   value: QueryAllFilePermissionRequest,
 };
 
-type msgDeleteFileRecordParams = {
-  value: MsgDeleteFileRecord,
-};
-
-type msgCreateFilePermissionParams = {
-  value: MsgCreateFilePermission,
-};
-
-type paramsParams = {
-  value: Params,
-};
-
-type queryAllFileRecordResponseParams = {
-  value: QueryAllFileRecordResponse,
-};
-
-type msgUpdateParamsParams = {
-  value: MsgUpdateParams,
-};
-
-type msgDeleteFilePermissionParams = {
-  value: MsgDeleteFilePermission,
-};
-
-type fileRecordParams = {
-  value: FileRecord,
-};
-
-type queryParamsResponseParams = {
-  value: QueryParamsResponse,
+type queryGetFilePermissionRequestParams = {
+  value: QueryGetFilePermissionRequest,
 };
 
 type msgUpdateFileRecordParams = {
   value: MsgUpdateFileRecord,
 };
 
-type msgDeleteFileRecordResponseParams = {
-  value: MsgDeleteFileRecordResponse,
-};
-
-type msgUpdateFilePermissionResponseParams = {
-  value: MsgUpdateFilePermissionResponse,
-};
-
-type queryParamsRequestParams = {
-  value: QueryParamsRequest,
-};
-
-type queryGetFilePermissionResponseParams = {
-  value: QueryGetFilePermissionResponse,
-};
-
-type msgUpdateFilePermissionParams = {
-  value: MsgUpdateFilePermission,
+type fileRecordParams = {
+  value: FileRecord,
 };
 
 type queryGetFileRecordRequestParams = {
   value: QueryGetFileRecordRequest,
 };
 
+type filePermissionParams = {
+  value: FilePermission,
+};
+
+type paramsParams = {
+  value: Params,
+};
+
+type queryAllFileRecordRequestParams = {
+  value: QueryAllFileRecordRequest,
+};
+
+type queryGetFilePermissionResponseParams = {
+  value: QueryGetFilePermissionResponse,
+};
+
+type msgCreateFilePermissionResponseParams = {
+  value: MsgCreateFilePermissionResponse,
+};
+
+type msgUpdateFilePermissionResponseParams = {
+  value: MsgUpdateFilePermissionResponse,
+};
+
+type queryParamsResponseParams = {
+  value: QueryParamsResponse,
+};
+
 type msgCreateFileRecordParams = {
   value: MsgCreateFileRecord,
 };
 
+type msgDeleteFileRecordParams = {
+  value: MsgDeleteFileRecord,
+};
+
+type msgUpdateFilePermissionParams = {
+  value: MsgUpdateFilePermission,
+};
+
+type msgUpdateParamsParams = {
+  value: MsgUpdateParams,
+};
+
+type msgUpdateParamsResponseParams = {
+  value: MsgUpdateParamsResponse,
+};
+
+type msgUpdateFileRecordResponseParams = {
+  value: MsgUpdateFileRecordResponse,
+};
+
+type queryAllFilePermissionResponseParams = {
+  value: QueryAllFilePermissionResponse,
+};
+
+type msgCreateFilePermissionParams = {
+  value: MsgCreateFilePermission,
+};
+
+type msgDeleteFilePermissionParams = {
+  value: MsgDeleteFilePermission,
+};
+
 type msgCreateFileRecordResponseParams = {
   value: MsgCreateFileRecordResponse,
+};
+
+type msgDeleteFileRecordResponseParams = {
+  value: MsgDeleteFileRecordResponse,
+};
+
+type msgDeleteFilePermissionResponseParams = {
+  value: MsgDeleteFilePermissionResponse,
+};
+
+type queryParamsRequestParams = {
+  value: QueryParamsRequest,
+};
+
+type queryAllFileRecordResponseParams = {
+  value: QueryAllFileRecordResponse,
+};
+
+type genesisStateParams = {
+  value: GenesisState,
 };
 
 
@@ -352,76 +352,6 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 
   return {
 		
-		async sendMsgUpdateFileRecordResponse({ value, fee, memo }: sendMsgUpdateFileRecordResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateFileRecordResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateFileRecordResponse({ value: MsgUpdateFileRecordResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateFileRecordResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgDeleteFilePermissionResponse({ value, fee, memo }: sendMsgDeleteFilePermissionResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgDeleteFilePermissionResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDeleteFilePermissionResponse({ value: MsgDeleteFilePermissionResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeleteFilePermissionResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendGenesisState({ value, fee, memo }: sendGenesisStateParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendGenesisState: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.genesisState({ value: GenesisState.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendGenesisState: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgUpdateParamsResponse({ value, fee, memo }: sendMsgUpdateParamsResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateParamsResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateParamsResponse({ value: MsgUpdateParamsResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateParamsResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgCreateFilePermissionResponse({ value, fee, memo }: sendMsgCreateFilePermissionResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgCreateFilePermissionResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgCreateFilePermissionResponse({ value: MsgCreateFilePermissionResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreateFilePermissionResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
 		async sendQueryGetFileRecordResponse({ value, fee, memo }: sendQueryGetFileRecordResponseParams): Promise<DeliverTxResponse> {
 			if (!signer) {
 					throw new Error('TxClient:sendQueryGetFileRecordResponse: Unable to sign Tx. Signer is not present.')
@@ -433,62 +363,6 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
 				throw new Error('TxClient:sendQueryGetFileRecordResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryAllFileRecordRequest({ value, fee, memo }: sendQueryAllFileRecordRequestParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryAllFileRecordRequest: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryAllFileRecordRequest({ value: QueryAllFileRecordRequest.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryAllFileRecordRequest: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryGetFilePermissionRequest({ value, fee, memo }: sendQueryGetFilePermissionRequestParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryGetFilePermissionRequest: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryGetFilePermissionRequest({ value: QueryGetFilePermissionRequest.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryGetFilePermissionRequest: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryAllFilePermissionResponse({ value, fee, memo }: sendQueryAllFilePermissionResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryAllFilePermissionResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryAllFilePermissionResponse({ value: QueryAllFilePermissionResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryAllFilePermissionResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendFilePermission({ value, fee, memo }: sendFilePermissionParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendFilePermission: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.filePermission({ value: FilePermission.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendFilePermission: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -506,115 +380,17 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendMsgDeleteFileRecord({ value, fee, memo }: sendMsgDeleteFileRecordParams): Promise<DeliverTxResponse> {
+		async sendQueryGetFilePermissionRequest({ value, fee, memo }: sendQueryGetFilePermissionRequestParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgDeleteFileRecord: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendQueryGetFilePermissionRequest: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDeleteFileRecord({ value: MsgDeleteFileRecord.fromPartial(value) })
+				let msg = this.queryGetFilePermissionRequest({ value: QueryGetFilePermissionRequest.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeleteFileRecord: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgCreateFilePermission({ value, fee, memo }: sendMsgCreateFilePermissionParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgCreateFilePermission: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgCreateFilePermission({ value: MsgCreateFilePermission.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreateFilePermission: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendParams({ value, fee, memo }: sendParamsParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendParams: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.params({ value: Params.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendParams: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryAllFileRecordResponse({ value, fee, memo }: sendQueryAllFileRecordResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryAllFileRecordResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryAllFileRecordResponse({ value: QueryAllFileRecordResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryAllFileRecordResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgUpdateParams({ value, fee, memo }: sendMsgUpdateParamsParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateParams: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateParams({ value: MsgUpdateParams.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateParams: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgDeleteFilePermission({ value, fee, memo }: sendMsgDeleteFilePermissionParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgDeleteFilePermission: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDeleteFilePermission({ value: MsgDeleteFilePermission.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeleteFilePermission: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendFileRecord({ value, fee, memo }: sendFileRecordParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendFileRecord: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.fileRecord({ value: FileRecord.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendFileRecord: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryParamsResponse({ value, fee, memo }: sendQueryParamsResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryParamsResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryParamsResponse({ value: QueryParamsResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryParamsResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendQueryGetFilePermissionRequest: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -632,73 +408,17 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendMsgDeleteFileRecordResponse({ value, fee, memo }: sendMsgDeleteFileRecordResponseParams): Promise<DeliverTxResponse> {
+		async sendFileRecord({ value, fee, memo }: sendFileRecordParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgDeleteFileRecordResponse: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendFileRecord: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDeleteFileRecordResponse({ value: MsgDeleteFileRecordResponse.fromPartial(value) })
+				let msg = this.fileRecord({ value: FileRecord.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeleteFileRecordResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgUpdateFilePermissionResponse({ value, fee, memo }: sendMsgUpdateFilePermissionResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateFilePermissionResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateFilePermissionResponse({ value: MsgUpdateFilePermissionResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateFilePermissionResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryParamsRequest({ value, fee, memo }: sendQueryParamsRequestParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryParamsRequest: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryParamsRequest({ value: QueryParamsRequest.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryParamsRequest: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryGetFilePermissionResponse({ value, fee, memo }: sendQueryGetFilePermissionResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryGetFilePermissionResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryGetFilePermissionResponse({ value: QueryGetFilePermissionResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryGetFilePermissionResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgUpdateFilePermission({ value, fee, memo }: sendMsgUpdateFilePermissionParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateFilePermission: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateFilePermission({ value: MsgUpdateFilePermission.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateFilePermission: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendFileRecord: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -716,6 +436,104 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
+		async sendFilePermission({ value, fee, memo }: sendFilePermissionParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendFilePermission: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.filePermission({ value: FilePermission.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendFilePermission: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendParams({ value, fee, memo }: sendParamsParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendParams: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.params({ value: Params.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendParams: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryAllFileRecordRequest({ value, fee, memo }: sendQueryAllFileRecordRequestParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryAllFileRecordRequest: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryAllFileRecordRequest({ value: QueryAllFileRecordRequest.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryAllFileRecordRequest: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryGetFilePermissionResponse({ value, fee, memo }: sendQueryGetFilePermissionResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryGetFilePermissionResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryGetFilePermissionResponse({ value: QueryGetFilePermissionResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryGetFilePermissionResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgCreateFilePermissionResponse({ value, fee, memo }: sendMsgCreateFilePermissionResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgCreateFilePermissionResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgCreateFilePermissionResponse({ value: MsgCreateFilePermissionResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgCreateFilePermissionResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateFilePermissionResponse({ value, fee, memo }: sendMsgUpdateFilePermissionResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateFilePermissionResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdateFilePermissionResponse({ value: MsgUpdateFilePermissionResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateFilePermissionResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryParamsResponse({ value, fee, memo }: sendQueryParamsResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryParamsResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryParamsResponse({ value: QueryParamsResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryParamsResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
 		async sendMsgCreateFileRecord({ value, fee, memo }: sendMsgCreateFileRecordParams): Promise<DeliverTxResponse> {
 			if (!signer) {
 					throw new Error('TxClient:sendMsgCreateFileRecord: Unable to sign Tx. Signer is not present.')
@@ -727,6 +545,118 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
 				throw new Error('TxClient:sendMsgCreateFileRecord: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgDeleteFileRecord({ value, fee, memo }: sendMsgDeleteFileRecordParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgDeleteFileRecord: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgDeleteFileRecord({ value: MsgDeleteFileRecord.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgDeleteFileRecord: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateFilePermission({ value, fee, memo }: sendMsgUpdateFilePermissionParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateFilePermission: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdateFilePermission({ value: MsgUpdateFilePermission.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateFilePermission: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateParams({ value, fee, memo }: sendMsgUpdateParamsParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateParams: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdateParams({ value: MsgUpdateParams.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateParams: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateParamsResponse({ value, fee, memo }: sendMsgUpdateParamsResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateParamsResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdateParamsResponse({ value: MsgUpdateParamsResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateParamsResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateFileRecordResponse({ value, fee, memo }: sendMsgUpdateFileRecordResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateFileRecordResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdateFileRecordResponse({ value: MsgUpdateFileRecordResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateFileRecordResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryAllFilePermissionResponse({ value, fee, memo }: sendQueryAllFilePermissionResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryAllFilePermissionResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryAllFilePermissionResponse({ value: QueryAllFilePermissionResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryAllFilePermissionResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgCreateFilePermission({ value, fee, memo }: sendMsgCreateFilePermissionParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgCreateFilePermission: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgCreateFilePermission({ value: MsgCreateFilePermission.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgCreateFilePermission: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgDeleteFilePermission({ value, fee, memo }: sendMsgDeleteFilePermissionParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgDeleteFilePermission: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgDeleteFilePermission({ value: MsgDeleteFilePermission.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgDeleteFilePermission: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -744,84 +674,82 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		
-		msgUpdateFileRecordResponse({ value }: msgUpdateFileRecordResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.filestorage.MsgUpdateFileRecordResponse", value: MsgUpdateFileRecordResponse.fromPartial( value ) }  
+		async sendMsgDeleteFileRecordResponse({ value, fee, memo }: sendMsgDeleteFileRecordResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgDeleteFileRecordResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgDeleteFileRecordResponse({ value: MsgDeleteFileRecordResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateFileRecordResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:sendMsgDeleteFileRecordResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		msgDeleteFilePermissionResponse({ value }: msgDeleteFilePermissionResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.filestorage.MsgDeleteFilePermissionResponse", value: MsgDeleteFilePermissionResponse.fromPartial( value ) }  
+		async sendMsgDeleteFilePermissionResponse({ value, fee, memo }: sendMsgDeleteFilePermissionResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgDeleteFilePermissionResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgDeleteFilePermissionResponse({ value: MsgDeleteFilePermissionResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:MsgDeleteFilePermissionResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:sendMsgDeleteFilePermissionResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		genesisState({ value }: genesisStateParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.filestorage.GenesisState", value: GenesisState.fromPartial( value ) }  
+		async sendQueryParamsRequest({ value, fee, memo }: sendQueryParamsRequestParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryParamsRequest: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryParamsRequest({ value: QueryParamsRequest.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:GenesisState: Could not create message: ' + e.message)
+				throw new Error('TxClient:sendQueryParamsRequest: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		msgUpdateParamsResponse({ value }: msgUpdateParamsResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.filestorage.MsgUpdateParamsResponse", value: MsgUpdateParamsResponse.fromPartial( value ) }  
+		async sendQueryAllFileRecordResponse({ value, fee, memo }: sendQueryAllFileRecordResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryAllFileRecordResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryAllFileRecordResponse({ value: QueryAllFileRecordResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateParamsResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:sendQueryAllFileRecordResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		msgCreateFilePermissionResponse({ value }: msgCreateFilePermissionResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.filestorage.MsgCreateFilePermissionResponse", value: MsgCreateFilePermissionResponse.fromPartial( value ) }  
+		async sendGenesisState({ value, fee, memo }: sendGenesisStateParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendGenesisState: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.genesisState({ value: GenesisState.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:MsgCreateFilePermissionResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:sendGenesisState: Could not broadcast Tx: '+ e.message)
 			}
 		},
+		
 		
 		queryGetFileRecordResponse({ value }: queryGetFileRecordResponseParams): EncodeObject {
 			try {
 				return { typeUrl: "/skillchain.filestorage.QueryGetFileRecordResponse", value: QueryGetFileRecordResponse.fromPartial( value ) }  
 			} catch (e: any) {
 				throw new Error('TxClient:QueryGetFileRecordResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryAllFileRecordRequest({ value }: queryAllFileRecordRequestParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.filestorage.QueryAllFileRecordRequest", value: QueryAllFileRecordRequest.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryAllFileRecordRequest: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryGetFilePermissionRequest({ value }: queryGetFilePermissionRequestParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.filestorage.QueryGetFilePermissionRequest", value: QueryGetFilePermissionRequest.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryGetFilePermissionRequest: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryAllFilePermissionResponse({ value }: queryAllFilePermissionResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.filestorage.QueryAllFilePermissionResponse", value: QueryAllFilePermissionResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryAllFilePermissionResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		filePermission({ value }: filePermissionParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.filestorage.FilePermission", value: FilePermission.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:FilePermission: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -833,67 +761,11 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		msgDeleteFileRecord({ value }: msgDeleteFileRecordParams): EncodeObject {
+		queryGetFilePermissionRequest({ value }: queryGetFilePermissionRequestParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.filestorage.MsgDeleteFileRecord", value: MsgDeleteFileRecord.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.filestorage.QueryGetFilePermissionRequest", value: QueryGetFilePermissionRequest.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgDeleteFileRecord: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgCreateFilePermission({ value }: msgCreateFilePermissionParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.filestorage.MsgCreateFilePermission", value: MsgCreateFilePermission.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgCreateFilePermission: Could not create message: ' + e.message)
-			}
-		},
-		
-		params({ value }: paramsParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.filestorage.Params", value: Params.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:Params: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryAllFileRecordResponse({ value }: queryAllFileRecordResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.filestorage.QueryAllFileRecordResponse", value: QueryAllFileRecordResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryAllFileRecordResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgUpdateParams({ value }: msgUpdateParamsParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.filestorage.MsgUpdateParams", value: MsgUpdateParams.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateParams: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgDeleteFilePermission({ value }: msgDeleteFilePermissionParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.filestorage.MsgDeleteFilePermission", value: MsgDeleteFilePermission.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgDeleteFilePermission: Could not create message: ' + e.message)
-			}
-		},
-		
-		fileRecord({ value }: fileRecordParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.filestorage.FileRecord", value: FileRecord.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:FileRecord: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryParamsResponse({ value }: queryParamsResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.filestorage.QueryParamsResponse", value: QueryParamsResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryParamsResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:QueryGetFilePermissionRequest: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -905,43 +777,11 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		msgDeleteFileRecordResponse({ value }: msgDeleteFileRecordResponseParams): EncodeObject {
+		fileRecord({ value }: fileRecordParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.filestorage.MsgDeleteFileRecordResponse", value: MsgDeleteFileRecordResponse.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.filestorage.FileRecord", value: FileRecord.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgDeleteFileRecordResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgUpdateFilePermissionResponse({ value }: msgUpdateFilePermissionResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.filestorage.MsgUpdateFilePermissionResponse", value: MsgUpdateFilePermissionResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateFilePermissionResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryParamsRequest({ value }: queryParamsRequestParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.filestorage.QueryParamsRequest", value: QueryParamsRequest.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryParamsRequest: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryGetFilePermissionResponse({ value }: queryGetFilePermissionResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.filestorage.QueryGetFilePermissionResponse", value: QueryGetFilePermissionResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryGetFilePermissionResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgUpdateFilePermission({ value }: msgUpdateFilePermissionParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.filestorage.MsgUpdateFilePermission", value: MsgUpdateFilePermission.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateFilePermission: Could not create message: ' + e.message)
+				throw new Error('TxClient:FileRecord: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -953,6 +793,62 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
+		filePermission({ value }: filePermissionParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.filestorage.FilePermission", value: FilePermission.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:FilePermission: Could not create message: ' + e.message)
+			}
+		},
+		
+		params({ value }: paramsParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.filestorage.Params", value: Params.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:Params: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryAllFileRecordRequest({ value }: queryAllFileRecordRequestParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.filestorage.QueryAllFileRecordRequest", value: QueryAllFileRecordRequest.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryAllFileRecordRequest: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryGetFilePermissionResponse({ value }: queryGetFilePermissionResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.filestorage.QueryGetFilePermissionResponse", value: QueryGetFilePermissionResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryGetFilePermissionResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgCreateFilePermissionResponse({ value }: msgCreateFilePermissionResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.filestorage.MsgCreateFilePermissionResponse", value: MsgCreateFilePermissionResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgCreateFilePermissionResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdateFilePermissionResponse({ value }: msgUpdateFilePermissionResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.filestorage.MsgUpdateFilePermissionResponse", value: MsgUpdateFilePermissionResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdateFilePermissionResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryParamsResponse({ value }: queryParamsResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.filestorage.QueryParamsResponse", value: QueryParamsResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryParamsResponse: Could not create message: ' + e.message)
+			}
+		},
+		
 		msgCreateFileRecord({ value }: msgCreateFileRecordParams): EncodeObject {
 			try {
 				return { typeUrl: "/skillchain.filestorage.MsgCreateFileRecord", value: MsgCreateFileRecord.fromPartial( value ) }  
@@ -961,11 +857,115 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
+		msgDeleteFileRecord({ value }: msgDeleteFileRecordParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.filestorage.MsgDeleteFileRecord", value: MsgDeleteFileRecord.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgDeleteFileRecord: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdateFilePermission({ value }: msgUpdateFilePermissionParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.filestorage.MsgUpdateFilePermission", value: MsgUpdateFilePermission.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdateFilePermission: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdateParams({ value }: msgUpdateParamsParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.filestorage.MsgUpdateParams", value: MsgUpdateParams.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdateParams: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdateParamsResponse({ value }: msgUpdateParamsResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.filestorage.MsgUpdateParamsResponse", value: MsgUpdateParamsResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdateParamsResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdateFileRecordResponse({ value }: msgUpdateFileRecordResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.filestorage.MsgUpdateFileRecordResponse", value: MsgUpdateFileRecordResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdateFileRecordResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryAllFilePermissionResponse({ value }: queryAllFilePermissionResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.filestorage.QueryAllFilePermissionResponse", value: QueryAllFilePermissionResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryAllFilePermissionResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgCreateFilePermission({ value }: msgCreateFilePermissionParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.filestorage.MsgCreateFilePermission", value: MsgCreateFilePermission.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgCreateFilePermission: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgDeleteFilePermission({ value }: msgDeleteFilePermissionParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.filestorage.MsgDeleteFilePermission", value: MsgDeleteFilePermission.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgDeleteFilePermission: Could not create message: ' + e.message)
+			}
+		},
+		
 		msgCreateFileRecordResponse({ value }: msgCreateFileRecordResponseParams): EncodeObject {
 			try {
 				return { typeUrl: "/skillchain.filestorage.MsgCreateFileRecordResponse", value: MsgCreateFileRecordResponse.fromPartial( value ) }  
 			} catch (e: any) {
 				throw new Error('TxClient:MsgCreateFileRecordResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgDeleteFileRecordResponse({ value }: msgDeleteFileRecordResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.filestorage.MsgDeleteFileRecordResponse", value: MsgDeleteFileRecordResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgDeleteFileRecordResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgDeleteFilePermissionResponse({ value }: msgDeleteFilePermissionResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.filestorage.MsgDeleteFilePermissionResponse", value: MsgDeleteFilePermissionResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgDeleteFilePermissionResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryParamsRequest({ value }: queryParamsRequestParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.filestorage.QueryParamsRequest", value: QueryParamsRequest.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryParamsRequest: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryAllFileRecordResponse({ value }: queryAllFileRecordResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.filestorage.QueryAllFileRecordResponse", value: QueryAllFileRecordResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryAllFileRecordResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		genesisState({ value }: genesisStateParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.filestorage.GenesisState", value: GenesisState.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:GenesisState: Could not create message: ' + e.message)
 			}
 		},
 		

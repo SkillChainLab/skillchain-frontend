@@ -19,6 +19,7 @@ export interface UserProfile {
   github: string;
   linkedin: string;
   twitter: string;
+  avatar: string;
   reputationScore: number;
   createdAt: number;
   updatedAt: number;
@@ -36,6 +37,7 @@ function createBaseUserProfile(): UserProfile {
     github: "",
     linkedin: "",
     twitter: "",
+    avatar: "",
     reputationScore: 0,
     createdAt: 0,
     updatedAt: 0,
@@ -72,17 +74,20 @@ export const UserProfile: MessageFns<UserProfile> = {
     if (message.twitter !== "") {
       writer.uint32(74).string(message.twitter);
     }
+    if (message.avatar !== "") {
+      writer.uint32(82).string(message.avatar);
+    }
     if (message.reputationScore !== 0) {
-      writer.uint32(80).uint64(message.reputationScore);
+      writer.uint32(88).uint64(message.reputationScore);
     }
     if (message.createdAt !== 0) {
-      writer.uint32(88).uint64(message.createdAt);
+      writer.uint32(96).uint64(message.createdAt);
     }
     if (message.updatedAt !== 0) {
-      writer.uint32(96).uint64(message.updatedAt);
+      writer.uint32(104).uint64(message.updatedAt);
     }
     if (message.creator !== "") {
-      writer.uint32(106).string(message.creator);
+      writer.uint32(114).string(message.creator);
     }
     return writer;
   },
@@ -167,11 +172,11 @@ export const UserProfile: MessageFns<UserProfile> = {
           continue;
         }
         case 10: {
-          if (tag !== 80) {
+          if (tag !== 82) {
             break;
           }
 
-          message.reputationScore = longToNumber(reader.uint64());
+          message.avatar = reader.string();
           continue;
         }
         case 11: {
@@ -179,7 +184,7 @@ export const UserProfile: MessageFns<UserProfile> = {
             break;
           }
 
-          message.createdAt = longToNumber(reader.uint64());
+          message.reputationScore = longToNumber(reader.uint64());
           continue;
         }
         case 12: {
@@ -187,11 +192,19 @@ export const UserProfile: MessageFns<UserProfile> = {
             break;
           }
 
-          message.updatedAt = longToNumber(reader.uint64());
+          message.createdAt = longToNumber(reader.uint64());
           continue;
         }
         case 13: {
-          if (tag !== 106) {
+          if (tag !== 104) {
+            break;
+          }
+
+          message.updatedAt = longToNumber(reader.uint64());
+          continue;
+        }
+        case 14: {
+          if (tag !== 114) {
             break;
           }
 
@@ -218,6 +231,7 @@ export const UserProfile: MessageFns<UserProfile> = {
       github: isSet(object.github) ? globalThis.String(object.github) : "",
       linkedin: isSet(object.linkedin) ? globalThis.String(object.linkedin) : "",
       twitter: isSet(object.twitter) ? globalThis.String(object.twitter) : "",
+      avatar: isSet(object.avatar) ? globalThis.String(object.avatar) : "",
       reputationScore: isSet(object.reputationScore) ? globalThis.Number(object.reputationScore) : 0,
       createdAt: isSet(object.createdAt) ? globalThis.Number(object.createdAt) : 0,
       updatedAt: isSet(object.updatedAt) ? globalThis.Number(object.updatedAt) : 0,
@@ -254,6 +268,9 @@ export const UserProfile: MessageFns<UserProfile> = {
     if (message.twitter !== "") {
       obj.twitter = message.twitter;
     }
+    if (message.avatar !== "") {
+      obj.avatar = message.avatar;
+    }
     if (message.reputationScore !== 0) {
       obj.reputationScore = Math.round(message.reputationScore);
     }
@@ -283,6 +300,7 @@ export const UserProfile: MessageFns<UserProfile> = {
     message.github = object.github ?? "";
     message.linkedin = object.linkedin ?? "";
     message.twitter = object.twitter ?? "";
+    message.avatar = object.avatar ?? "";
     message.reputationScore = object.reputationScore ?? 0;
     message.createdAt = object.createdAt ?? 0;
     message.updatedAt = object.updatedAt ?? 0;

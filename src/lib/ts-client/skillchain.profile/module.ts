@@ -6,84 +6,60 @@ import { msgTypes } from './registry';
 import { IgniteClient } from "../client"
 import { MissingWalletError } from "../helpers"
 import { Api } from "./rest";
-import { MsgUpdateUserSkill } from "./types/skillchain/profile/tx";
-import { UserProfile } from "./types/skillchain/profile/user_profile";
-import { SkillEndorsement } from "./types/skillchain/profile/skill_endorsement";
-import { MsgUpdateParams } from "./types/skillchain/profile/tx";
 import { MsgUpdateParamsResponse } from "./types/skillchain/profile/tx";
-import { MsgCreateUserProfile } from "./types/skillchain/profile/tx";
-import { MsgWithdrawStakedTokens } from "./types/skillchain/profile/tx";
-import { Params } from "./types/skillchain/profile/params";
-import { MsgWithdrawStakedTokensResponse } from "./types/skillchain/profile/tx";
-import { UserSkill } from "./types/skillchain/profile/user_skill";
-import { QueryParamsRequest } from "./types/skillchain/profile/query";
-import { QueryGetSkillEndorsementRequest } from "./types/skillchain/profile/query";
-import { QueryAllSkillEndorsementResponse } from "./types/skillchain/profile/query";
-import { MsgCreateUserSkillResponse } from "./types/skillchain/profile/tx";
-import { MsgDeleteSkillEndorsementResponse } from "./types/skillchain/profile/tx";
+import { MsgCreateUserProfileResponse } from "./types/skillchain/profile/tx";
+import { MsgDeleteUserProfileResponse } from "./types/skillchain/profile/tx";
 import { MsgDisputeEndorsementResponse } from "./types/skillchain/profile/tx";
-import { QueryParamsResponse } from "./types/skillchain/profile/query";
-import { QueryGetUserProfileRequest } from "./types/skillchain/profile/query";
-import { QueryAllUserProfileRequest } from "./types/skillchain/profile/query";
-import { QueryGetUserSkillRequest } from "./types/skillchain/profile/query";
-import { MsgCreateSkillEndorsement } from "./types/skillchain/profile/tx";
-import { MsgUpdateSkillEndorsement } from "./types/skillchain/profile/tx";
-import { MsgDeleteUserSkillResponse } from "./types/skillchain/profile/tx";
-import { QueryAllUserProfileResponse } from "./types/skillchain/profile/query";
-import { QueryGetSkillEndorsementResponse } from "./types/skillchain/profile/query";
-import { MsgEndorseSkill } from "./types/skillchain/profile/tx";
-import { MsgCreateSkillEndorsementResponse } from "./types/skillchain/profile/tx";
-import { MsgCreateProfile } from "./types/skillchain/profile/tx";
-import { GenesisState } from "./types/skillchain/profile/genesis";
 import { MsgDeleteUserProfile } from "./types/skillchain/profile/tx";
+import { MsgDeleteSkillEndorsement } from "./types/skillchain/profile/tx";
+import { GenesisState } from "./types/skillchain/profile/genesis";
 import { QueryGetUserProfileResponse } from "./types/skillchain/profile/query";
 import { QueryAllUserSkillRequest } from "./types/skillchain/profile/query";
+import { MsgCreateSkillEndorsementResponse } from "./types/skillchain/profile/tx";
+import { MsgDisputeEndorsement } from "./types/skillchain/profile/tx";
+import { QueryGetUserSkillRequest } from "./types/skillchain/profile/query";
+import { QueryGetSkillEndorsementRequest } from "./types/skillchain/profile/query";
+import { QueryAllSkillEndorsementResponse } from "./types/skillchain/profile/query";
+import { MsgWithdrawStakedTokens } from "./types/skillchain/profile/tx";
+import { MsgWithdrawStakedTokensResponse } from "./types/skillchain/profile/tx";
+import { MsgUpdateUserProfileResponse } from "./types/skillchain/profile/tx";
+import { MsgUpdateUserSkillResponse } from "./types/skillchain/profile/tx";
+import { MsgUpdateSkillEndorsementResponse } from "./types/skillchain/profile/tx";
+import { SkillEndorsement } from "./types/skillchain/profile/skill_endorsement";
+import { QueryGetUserSkillResponse } from "./types/skillchain/profile/query";
+import { MsgCreateUserSkillResponse } from "./types/skillchain/profile/tx";
+import { MsgEndorseSkillResponse } from "./types/skillchain/profile/tx";
+import { MsgDeleteSkillEndorsementResponse } from "./types/skillchain/profile/tx";
+import { UserProfile } from "./types/skillchain/profile/user_profile";
+import { MsgUpdateSkillEndorsement } from "./types/skillchain/profile/tx";
+import { MsgUpdateUserSkill } from "./types/skillchain/profile/tx";
+import { QueryParamsRequest } from "./types/skillchain/profile/query";
+import { MsgCreateProfileResponse } from "./types/skillchain/profile/tx";
+import { MsgDeleteUserSkillResponse } from "./types/skillchain/profile/tx";
+import { MsgCreateUserSkill } from "./types/skillchain/profile/tx";
+import { QueryAllUserProfileResponse } from "./types/skillchain/profile/query";
 import { QueryAllUserSkillResponse } from "./types/skillchain/profile/query";
 import { QueryAllSkillEndorsementRequest } from "./types/skillchain/profile/query";
-import { MsgDeleteUserSkill } from "./types/skillchain/profile/tx";
-import { MsgDeleteSkillEndorsement } from "./types/skillchain/profile/tx";
-import { MsgUpdateUserProfileResponse } from "./types/skillchain/profile/tx";
-import { QueryGetUserSkillResponse } from "./types/skillchain/profile/query";
-import { MsgEndorseSkillResponse } from "./types/skillchain/profile/tx";
-import { MsgUpdateSkillEndorsementResponse } from "./types/skillchain/profile/tx";
-import { MsgCreateProfileResponse } from "./types/skillchain/profile/tx";
-import { MsgCreateUserProfileResponse } from "./types/skillchain/profile/tx";
+import { MsgUpdateParams } from "./types/skillchain/profile/tx";
+import { MsgCreateUserProfile } from "./types/skillchain/profile/tx";
 import { MsgUpdateUserProfile } from "./types/skillchain/profile/tx";
-import { MsgDeleteUserProfileResponse } from "./types/skillchain/profile/tx";
-import { MsgUpdateUserSkillResponse } from "./types/skillchain/profile/tx";
-import { MsgDisputeEndorsement } from "./types/skillchain/profile/tx";
-import { MsgCreateUserSkill } from "./types/skillchain/profile/tx";
+import { MsgCreateSkillEndorsement } from "./types/skillchain/profile/tx";
+import { MsgEndorseSkill } from "./types/skillchain/profile/tx";
+import { Params } from "./types/skillchain/profile/params";
+import { MsgCreateProfile } from "./types/skillchain/profile/tx";
+import { UserSkill } from "./types/skillchain/profile/user_skill";
+import { QueryParamsResponse } from "./types/skillchain/profile/query";
+import { MsgDeleteUserSkill } from "./types/skillchain/profile/tx";
+import { QueryGetUserProfileRequest } from "./types/skillchain/profile/query";
+import { QueryAllUserProfileRequest } from "./types/skillchain/profile/query";
+import { QueryGetSkillEndorsementResponse } from "./types/skillchain/profile/query";
 
 import { Params as typeParams} from "./types"
 import { SkillEndorsement as typeSkillEndorsement} from "./types"
 import { UserProfile as typeUserProfile} from "./types"
 import { UserSkill as typeUserSkill} from "./types"
 
-export { MsgUpdateUserSkill, UserProfile, SkillEndorsement, MsgUpdateParams, MsgUpdateParamsResponse, MsgCreateUserProfile, MsgWithdrawStakedTokens, Params, MsgWithdrawStakedTokensResponse, UserSkill, QueryParamsRequest, QueryGetSkillEndorsementRequest, QueryAllSkillEndorsementResponse, MsgCreateUserSkillResponse, MsgDeleteSkillEndorsementResponse, MsgDisputeEndorsementResponse, QueryParamsResponse, QueryGetUserProfileRequest, QueryAllUserProfileRequest, QueryGetUserSkillRequest, MsgCreateSkillEndorsement, MsgUpdateSkillEndorsement, MsgDeleteUserSkillResponse, QueryAllUserProfileResponse, QueryGetSkillEndorsementResponse, MsgEndorseSkill, MsgCreateSkillEndorsementResponse, MsgCreateProfile, GenesisState, MsgDeleteUserProfile, QueryGetUserProfileResponse, QueryAllUserSkillRequest, QueryAllUserSkillResponse, QueryAllSkillEndorsementRequest, MsgDeleteUserSkill, MsgDeleteSkillEndorsement, MsgUpdateUserProfileResponse, QueryGetUserSkillResponse, MsgEndorseSkillResponse, MsgUpdateSkillEndorsementResponse, MsgCreateProfileResponse, MsgCreateUserProfileResponse, MsgUpdateUserProfile, MsgDeleteUserProfileResponse, MsgUpdateUserSkillResponse, MsgDisputeEndorsement, MsgCreateUserSkill };
-
-type sendMsgUpdateUserSkillParams = {
-  value: MsgUpdateUserSkill,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendUserProfileParams = {
-  value: UserProfile,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendSkillEndorsementParams = {
-  value: SkillEndorsement,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgUpdateParamsParams = {
-  value: MsgUpdateParams,
-  fee?: StdFee,
-  memo?: string
-};
+export { MsgUpdateParamsResponse, MsgCreateUserProfileResponse, MsgDeleteUserProfileResponse, MsgDisputeEndorsementResponse, MsgDeleteUserProfile, MsgDeleteSkillEndorsement, GenesisState, QueryGetUserProfileResponse, QueryAllUserSkillRequest, MsgCreateSkillEndorsementResponse, MsgDisputeEndorsement, QueryGetUserSkillRequest, QueryGetSkillEndorsementRequest, QueryAllSkillEndorsementResponse, MsgWithdrawStakedTokens, MsgWithdrawStakedTokensResponse, MsgUpdateUserProfileResponse, MsgUpdateUserSkillResponse, MsgUpdateSkillEndorsementResponse, SkillEndorsement, QueryGetUserSkillResponse, MsgCreateUserSkillResponse, MsgEndorseSkillResponse, MsgDeleteSkillEndorsementResponse, UserProfile, MsgUpdateSkillEndorsement, MsgUpdateUserSkill, QueryParamsRequest, MsgCreateProfileResponse, MsgDeleteUserSkillResponse, MsgCreateUserSkill, QueryAllUserProfileResponse, QueryAllUserSkillResponse, QueryAllSkillEndorsementRequest, MsgUpdateParams, MsgCreateUserProfile, MsgUpdateUserProfile, MsgCreateSkillEndorsement, MsgEndorseSkill, Params, MsgCreateProfile, UserSkill, QueryParamsResponse, MsgDeleteUserSkill, QueryGetUserProfileRequest, QueryAllUserProfileRequest, QueryGetSkillEndorsementResponse };
 
 type sendMsgUpdateParamsResponseParams = {
   value: MsgUpdateParamsResponse,
@@ -91,62 +67,14 @@ type sendMsgUpdateParamsResponseParams = {
   memo?: string
 };
 
-type sendMsgCreateUserProfileParams = {
-  value: MsgCreateUserProfile,
+type sendMsgCreateUserProfileResponseParams = {
+  value: MsgCreateUserProfileResponse,
   fee?: StdFee,
   memo?: string
 };
 
-type sendMsgWithdrawStakedTokensParams = {
-  value: MsgWithdrawStakedTokens,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendParamsParams = {
-  value: Params,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgWithdrawStakedTokensResponseParams = {
-  value: MsgWithdrawStakedTokensResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendUserSkillParams = {
-  value: UserSkill,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryParamsRequestParams = {
-  value: QueryParamsRequest,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryGetSkillEndorsementRequestParams = {
-  value: QueryGetSkillEndorsementRequest,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryAllSkillEndorsementResponseParams = {
-  value: QueryAllSkillEndorsementResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgCreateUserSkillResponseParams = {
-  value: MsgCreateUserSkillResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgDeleteSkillEndorsementResponseParams = {
-  value: MsgDeleteSkillEndorsementResponse,
+type sendMsgDeleteUserProfileResponseParams = {
+  value: MsgDeleteUserProfileResponse,
   fee?: StdFee,
   memo?: string
 };
@@ -157,86 +85,20 @@ type sendMsgDisputeEndorsementResponseParams = {
   memo?: string
 };
 
-type sendQueryParamsResponseParams = {
-  value: QueryParamsResponse,
+type sendMsgDeleteUserProfileParams = {
+  value: MsgDeleteUserProfile,
   fee?: StdFee,
   memo?: string
 };
 
-type sendQueryGetUserProfileRequestParams = {
-  value: QueryGetUserProfileRequest,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryAllUserProfileRequestParams = {
-  value: QueryAllUserProfileRequest,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryGetUserSkillRequestParams = {
-  value: QueryGetUserSkillRequest,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgCreateSkillEndorsementParams = {
-  value: MsgCreateSkillEndorsement,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgUpdateSkillEndorsementParams = {
-  value: MsgUpdateSkillEndorsement,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgDeleteUserSkillResponseParams = {
-  value: MsgDeleteUserSkillResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryAllUserProfileResponseParams = {
-  value: QueryAllUserProfileResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryGetSkillEndorsementResponseParams = {
-  value: QueryGetSkillEndorsementResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgEndorseSkillParams = {
-  value: MsgEndorseSkill,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgCreateSkillEndorsementResponseParams = {
-  value: MsgCreateSkillEndorsementResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgCreateProfileParams = {
-  value: MsgCreateProfile,
+type sendMsgDeleteSkillEndorsementParams = {
+  value: MsgDeleteSkillEndorsement,
   fee?: StdFee,
   memo?: string
 };
 
 type sendGenesisStateParams = {
   value: GenesisState,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgDeleteUserProfileParams = {
-  value: MsgDeleteUserProfile,
   fee?: StdFee,
   memo?: string
 };
@@ -253,6 +115,144 @@ type sendQueryAllUserSkillRequestParams = {
   memo?: string
 };
 
+type sendMsgCreateSkillEndorsementResponseParams = {
+  value: MsgCreateSkillEndorsementResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgDisputeEndorsementParams = {
+  value: MsgDisputeEndorsement,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryGetUserSkillRequestParams = {
+  value: QueryGetUserSkillRequest,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryGetSkillEndorsementRequestParams = {
+  value: QueryGetSkillEndorsementRequest,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryAllSkillEndorsementResponseParams = {
+  value: QueryAllSkillEndorsementResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgWithdrawStakedTokensParams = {
+  value: MsgWithdrawStakedTokens,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgWithdrawStakedTokensResponseParams = {
+  value: MsgWithdrawStakedTokensResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateUserProfileResponseParams = {
+  value: MsgUpdateUserProfileResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateUserSkillResponseParams = {
+  value: MsgUpdateUserSkillResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateSkillEndorsementResponseParams = {
+  value: MsgUpdateSkillEndorsementResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendSkillEndorsementParams = {
+  value: SkillEndorsement,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryGetUserSkillResponseParams = {
+  value: QueryGetUserSkillResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgCreateUserSkillResponseParams = {
+  value: MsgCreateUserSkillResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgEndorseSkillResponseParams = {
+  value: MsgEndorseSkillResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgDeleteSkillEndorsementResponseParams = {
+  value: MsgDeleteSkillEndorsementResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendUserProfileParams = {
+  value: UserProfile,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateSkillEndorsementParams = {
+  value: MsgUpdateSkillEndorsement,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateUserSkillParams = {
+  value: MsgUpdateUserSkill,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryParamsRequestParams = {
+  value: QueryParamsRequest,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgCreateProfileResponseParams = {
+  value: MsgCreateProfileResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgDeleteUserSkillResponseParams = {
+  value: MsgDeleteUserSkillResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgCreateUserSkillParams = {
+  value: MsgCreateUserSkill,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryAllUserProfileResponseParams = {
+  value: QueryAllUserProfileResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
 type sendQueryAllUserSkillResponseParams = {
   value: QueryAllUserSkillResponse,
   fee?: StdFee,
@@ -265,50 +265,14 @@ type sendQueryAllSkillEndorsementRequestParams = {
   memo?: string
 };
 
-type sendMsgDeleteUserSkillParams = {
-  value: MsgDeleteUserSkill,
+type sendMsgUpdateParamsParams = {
+  value: MsgUpdateParams,
   fee?: StdFee,
   memo?: string
 };
 
-type sendMsgDeleteSkillEndorsementParams = {
-  value: MsgDeleteSkillEndorsement,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgUpdateUserProfileResponseParams = {
-  value: MsgUpdateUserProfileResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryGetUserSkillResponseParams = {
-  value: QueryGetUserSkillResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgEndorseSkillResponseParams = {
-  value: MsgEndorseSkillResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgUpdateSkillEndorsementResponseParams = {
-  value: MsgUpdateSkillEndorsementResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgCreateProfileResponseParams = {
-  value: MsgCreateProfileResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgCreateUserProfileResponseParams = {
-  value: MsgCreateUserProfileResponse,
+type sendMsgCreateUserProfileParams = {
+  value: MsgCreateUserProfile,
   fee?: StdFee,
   memo?: string
 };
@@ -319,149 +283,93 @@ type sendMsgUpdateUserProfileParams = {
   memo?: string
 };
 
-type sendMsgDeleteUserProfileResponseParams = {
-  value: MsgDeleteUserProfileResponse,
+type sendMsgCreateSkillEndorsementParams = {
+  value: MsgCreateSkillEndorsement,
   fee?: StdFee,
   memo?: string
 };
 
-type sendMsgUpdateUserSkillResponseParams = {
-  value: MsgUpdateUserSkillResponse,
+type sendMsgEndorseSkillParams = {
+  value: MsgEndorseSkill,
   fee?: StdFee,
   memo?: string
 };
 
-type sendMsgDisputeEndorsementParams = {
-  value: MsgDisputeEndorsement,
+type sendParamsParams = {
+  value: Params,
   fee?: StdFee,
   memo?: string
 };
 
-type sendMsgCreateUserSkillParams = {
-  value: MsgCreateUserSkill,
+type sendMsgCreateProfileParams = {
+  value: MsgCreateProfile,
   fee?: StdFee,
   memo?: string
 };
 
-
-type msgUpdateUserSkillParams = {
-  value: MsgUpdateUserSkill,
+type sendUserSkillParams = {
+  value: UserSkill,
+  fee?: StdFee,
+  memo?: string
 };
 
-type userProfileParams = {
-  value: UserProfile,
+type sendQueryParamsResponseParams = {
+  value: QueryParamsResponse,
+  fee?: StdFee,
+  memo?: string
 };
 
-type skillEndorsementParams = {
-  value: SkillEndorsement,
+type sendMsgDeleteUserSkillParams = {
+  value: MsgDeleteUserSkill,
+  fee?: StdFee,
+  memo?: string
 };
 
-type msgUpdateParamsParams = {
-  value: MsgUpdateParams,
+type sendQueryGetUserProfileRequestParams = {
+  value: QueryGetUserProfileRequest,
+  fee?: StdFee,
+  memo?: string
 };
+
+type sendQueryAllUserProfileRequestParams = {
+  value: QueryAllUserProfileRequest,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryGetSkillEndorsementResponseParams = {
+  value: QueryGetSkillEndorsementResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
 
 type msgUpdateParamsResponseParams = {
   value: MsgUpdateParamsResponse,
 };
 
-type msgCreateUserProfileParams = {
-  value: MsgCreateUserProfile,
+type msgCreateUserProfileResponseParams = {
+  value: MsgCreateUserProfileResponse,
 };
 
-type msgWithdrawStakedTokensParams = {
-  value: MsgWithdrawStakedTokens,
-};
-
-type paramsParams = {
-  value: Params,
-};
-
-type msgWithdrawStakedTokensResponseParams = {
-  value: MsgWithdrawStakedTokensResponse,
-};
-
-type userSkillParams = {
-  value: UserSkill,
-};
-
-type queryParamsRequestParams = {
-  value: QueryParamsRequest,
-};
-
-type queryGetSkillEndorsementRequestParams = {
-  value: QueryGetSkillEndorsementRequest,
-};
-
-type queryAllSkillEndorsementResponseParams = {
-  value: QueryAllSkillEndorsementResponse,
-};
-
-type msgCreateUserSkillResponseParams = {
-  value: MsgCreateUserSkillResponse,
-};
-
-type msgDeleteSkillEndorsementResponseParams = {
-  value: MsgDeleteSkillEndorsementResponse,
+type msgDeleteUserProfileResponseParams = {
+  value: MsgDeleteUserProfileResponse,
 };
 
 type msgDisputeEndorsementResponseParams = {
   value: MsgDisputeEndorsementResponse,
 };
 
-type queryParamsResponseParams = {
-  value: QueryParamsResponse,
+type msgDeleteUserProfileParams = {
+  value: MsgDeleteUserProfile,
 };
 
-type queryGetUserProfileRequestParams = {
-  value: QueryGetUserProfileRequest,
-};
-
-type queryAllUserProfileRequestParams = {
-  value: QueryAllUserProfileRequest,
-};
-
-type queryGetUserSkillRequestParams = {
-  value: QueryGetUserSkillRequest,
-};
-
-type msgCreateSkillEndorsementParams = {
-  value: MsgCreateSkillEndorsement,
-};
-
-type msgUpdateSkillEndorsementParams = {
-  value: MsgUpdateSkillEndorsement,
-};
-
-type msgDeleteUserSkillResponseParams = {
-  value: MsgDeleteUserSkillResponse,
-};
-
-type queryAllUserProfileResponseParams = {
-  value: QueryAllUserProfileResponse,
-};
-
-type queryGetSkillEndorsementResponseParams = {
-  value: QueryGetSkillEndorsementResponse,
-};
-
-type msgEndorseSkillParams = {
-  value: MsgEndorseSkill,
-};
-
-type msgCreateSkillEndorsementResponseParams = {
-  value: MsgCreateSkillEndorsementResponse,
-};
-
-type msgCreateProfileParams = {
-  value: MsgCreateProfile,
+type msgDeleteSkillEndorsementParams = {
+  value: MsgDeleteSkillEndorsement,
 };
 
 type genesisStateParams = {
   value: GenesisState,
-};
-
-type msgDeleteUserProfileParams = {
-  value: MsgDeleteUserProfile,
 };
 
 type queryGetUserProfileResponseParams = {
@@ -472,6 +380,98 @@ type queryAllUserSkillRequestParams = {
   value: QueryAllUserSkillRequest,
 };
 
+type msgCreateSkillEndorsementResponseParams = {
+  value: MsgCreateSkillEndorsementResponse,
+};
+
+type msgDisputeEndorsementParams = {
+  value: MsgDisputeEndorsement,
+};
+
+type queryGetUserSkillRequestParams = {
+  value: QueryGetUserSkillRequest,
+};
+
+type queryGetSkillEndorsementRequestParams = {
+  value: QueryGetSkillEndorsementRequest,
+};
+
+type queryAllSkillEndorsementResponseParams = {
+  value: QueryAllSkillEndorsementResponse,
+};
+
+type msgWithdrawStakedTokensParams = {
+  value: MsgWithdrawStakedTokens,
+};
+
+type msgWithdrawStakedTokensResponseParams = {
+  value: MsgWithdrawStakedTokensResponse,
+};
+
+type msgUpdateUserProfileResponseParams = {
+  value: MsgUpdateUserProfileResponse,
+};
+
+type msgUpdateUserSkillResponseParams = {
+  value: MsgUpdateUserSkillResponse,
+};
+
+type msgUpdateSkillEndorsementResponseParams = {
+  value: MsgUpdateSkillEndorsementResponse,
+};
+
+type skillEndorsementParams = {
+  value: SkillEndorsement,
+};
+
+type queryGetUserSkillResponseParams = {
+  value: QueryGetUserSkillResponse,
+};
+
+type msgCreateUserSkillResponseParams = {
+  value: MsgCreateUserSkillResponse,
+};
+
+type msgEndorseSkillResponseParams = {
+  value: MsgEndorseSkillResponse,
+};
+
+type msgDeleteSkillEndorsementResponseParams = {
+  value: MsgDeleteSkillEndorsementResponse,
+};
+
+type userProfileParams = {
+  value: UserProfile,
+};
+
+type msgUpdateSkillEndorsementParams = {
+  value: MsgUpdateSkillEndorsement,
+};
+
+type msgUpdateUserSkillParams = {
+  value: MsgUpdateUserSkill,
+};
+
+type queryParamsRequestParams = {
+  value: QueryParamsRequest,
+};
+
+type msgCreateProfileResponseParams = {
+  value: MsgCreateProfileResponse,
+};
+
+type msgDeleteUserSkillResponseParams = {
+  value: MsgDeleteUserSkillResponse,
+};
+
+type msgCreateUserSkillParams = {
+  value: MsgCreateUserSkill,
+};
+
+type queryAllUserProfileResponseParams = {
+  value: QueryAllUserProfileResponse,
+};
+
 type queryAllUserSkillResponseParams = {
   value: QueryAllUserSkillResponse,
 };
@@ -480,56 +480,56 @@ type queryAllSkillEndorsementRequestParams = {
   value: QueryAllSkillEndorsementRequest,
 };
 
-type msgDeleteUserSkillParams = {
-  value: MsgDeleteUserSkill,
+type msgUpdateParamsParams = {
+  value: MsgUpdateParams,
 };
 
-type msgDeleteSkillEndorsementParams = {
-  value: MsgDeleteSkillEndorsement,
-};
-
-type msgUpdateUserProfileResponseParams = {
-  value: MsgUpdateUserProfileResponse,
-};
-
-type queryGetUserSkillResponseParams = {
-  value: QueryGetUserSkillResponse,
-};
-
-type msgEndorseSkillResponseParams = {
-  value: MsgEndorseSkillResponse,
-};
-
-type msgUpdateSkillEndorsementResponseParams = {
-  value: MsgUpdateSkillEndorsementResponse,
-};
-
-type msgCreateProfileResponseParams = {
-  value: MsgCreateProfileResponse,
-};
-
-type msgCreateUserProfileResponseParams = {
-  value: MsgCreateUserProfileResponse,
+type msgCreateUserProfileParams = {
+  value: MsgCreateUserProfile,
 };
 
 type msgUpdateUserProfileParams = {
   value: MsgUpdateUserProfile,
 };
 
-type msgDeleteUserProfileResponseParams = {
-  value: MsgDeleteUserProfileResponse,
+type msgCreateSkillEndorsementParams = {
+  value: MsgCreateSkillEndorsement,
 };
 
-type msgUpdateUserSkillResponseParams = {
-  value: MsgUpdateUserSkillResponse,
+type msgEndorseSkillParams = {
+  value: MsgEndorseSkill,
 };
 
-type msgDisputeEndorsementParams = {
-  value: MsgDisputeEndorsement,
+type paramsParams = {
+  value: Params,
 };
 
-type msgCreateUserSkillParams = {
-  value: MsgCreateUserSkill,
+type msgCreateProfileParams = {
+  value: MsgCreateProfile,
+};
+
+type userSkillParams = {
+  value: UserSkill,
+};
+
+type queryParamsResponseParams = {
+  value: QueryParamsResponse,
+};
+
+type msgDeleteUserSkillParams = {
+  value: MsgDeleteUserSkill,
+};
+
+type queryGetUserProfileRequestParams = {
+  value: QueryGetUserProfileRequest,
+};
+
+type queryAllUserProfileRequestParams = {
+  value: QueryAllUserProfileRequest,
+};
+
+type queryGetSkillEndorsementResponseParams = {
+  value: QueryGetSkillEndorsementResponse,
 };
 
 
@@ -562,62 +562,6 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 
   return {
 		
-		async sendMsgUpdateUserSkill({ value, fee, memo }: sendMsgUpdateUserSkillParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateUserSkill: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateUserSkill({ value: MsgUpdateUserSkill.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateUserSkill: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendUserProfile({ value, fee, memo }: sendUserProfileParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendUserProfile: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.userProfile({ value: UserProfile.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendUserProfile: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendSkillEndorsement({ value, fee, memo }: sendSkillEndorsementParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendSkillEndorsement: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.skillEndorsement({ value: SkillEndorsement.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendSkillEndorsement: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgUpdateParams({ value, fee, memo }: sendMsgUpdateParamsParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateParams: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateParams({ value: MsgUpdateParams.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateParams: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
 		async sendMsgUpdateParamsResponse({ value, fee, memo }: sendMsgUpdateParamsResponseParams): Promise<DeliverTxResponse> {
 			if (!signer) {
 					throw new Error('TxClient:sendMsgUpdateParamsResponse: Unable to sign Tx. Signer is not present.')
@@ -632,143 +576,31 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendMsgCreateUserProfile({ value, fee, memo }: sendMsgCreateUserProfileParams): Promise<DeliverTxResponse> {
+		async sendMsgCreateUserProfileResponse({ value, fee, memo }: sendMsgCreateUserProfileResponseParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgCreateUserProfile: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgCreateUserProfileResponse: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgCreateUserProfile({ value: MsgCreateUserProfile.fromPartial(value) })
+				let msg = this.msgCreateUserProfileResponse({ value: MsgCreateUserProfileResponse.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreateUserProfile: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgCreateUserProfileResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendMsgWithdrawStakedTokens({ value, fee, memo }: sendMsgWithdrawStakedTokensParams): Promise<DeliverTxResponse> {
+		async sendMsgDeleteUserProfileResponse({ value, fee, memo }: sendMsgDeleteUserProfileResponseParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgWithdrawStakedTokens: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgDeleteUserProfileResponse: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgWithdrawStakedTokens({ value: MsgWithdrawStakedTokens.fromPartial(value) })
+				let msg = this.msgDeleteUserProfileResponse({ value: MsgDeleteUserProfileResponse.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgWithdrawStakedTokens: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendParams({ value, fee, memo }: sendParamsParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendParams: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.params({ value: Params.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendParams: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgWithdrawStakedTokensResponse({ value, fee, memo }: sendMsgWithdrawStakedTokensResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgWithdrawStakedTokensResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgWithdrawStakedTokensResponse({ value: MsgWithdrawStakedTokensResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgWithdrawStakedTokensResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendUserSkill({ value, fee, memo }: sendUserSkillParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendUserSkill: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.userSkill({ value: UserSkill.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendUserSkill: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryParamsRequest({ value, fee, memo }: sendQueryParamsRequestParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryParamsRequest: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryParamsRequest({ value: QueryParamsRequest.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryParamsRequest: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryGetSkillEndorsementRequest({ value, fee, memo }: sendQueryGetSkillEndorsementRequestParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryGetSkillEndorsementRequest: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryGetSkillEndorsementRequest({ value: QueryGetSkillEndorsementRequest.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryGetSkillEndorsementRequest: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryAllSkillEndorsementResponse({ value, fee, memo }: sendQueryAllSkillEndorsementResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryAllSkillEndorsementResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryAllSkillEndorsementResponse({ value: QueryAllSkillEndorsementResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryAllSkillEndorsementResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgCreateUserSkillResponse({ value, fee, memo }: sendMsgCreateUserSkillResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgCreateUserSkillResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgCreateUserSkillResponse({ value: MsgCreateUserSkillResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreateUserSkillResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgDeleteSkillEndorsementResponse({ value, fee, memo }: sendMsgDeleteSkillEndorsementResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgDeleteSkillEndorsementResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDeleteSkillEndorsementResponse({ value: MsgDeleteSkillEndorsementResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeleteSkillEndorsementResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgDeleteUserProfileResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -786,171 +618,31 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendQueryParamsResponse({ value, fee, memo }: sendQueryParamsResponseParams): Promise<DeliverTxResponse> {
+		async sendMsgDeleteUserProfile({ value, fee, memo }: sendMsgDeleteUserProfileParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendQueryParamsResponse: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgDeleteUserProfile: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryParamsResponse({ value: QueryParamsResponse.fromPartial(value) })
+				let msg = this.msgDeleteUserProfile({ value: MsgDeleteUserProfile.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendQueryParamsResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgDeleteUserProfile: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendQueryGetUserProfileRequest({ value, fee, memo }: sendQueryGetUserProfileRequestParams): Promise<DeliverTxResponse> {
+		async sendMsgDeleteSkillEndorsement({ value, fee, memo }: sendMsgDeleteSkillEndorsementParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendQueryGetUserProfileRequest: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgDeleteSkillEndorsement: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryGetUserProfileRequest({ value: QueryGetUserProfileRequest.fromPartial(value) })
+				let msg = this.msgDeleteSkillEndorsement({ value: MsgDeleteSkillEndorsement.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendQueryGetUserProfileRequest: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryAllUserProfileRequest({ value, fee, memo }: sendQueryAllUserProfileRequestParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryAllUserProfileRequest: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryAllUserProfileRequest({ value: QueryAllUserProfileRequest.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryAllUserProfileRequest: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryGetUserSkillRequest({ value, fee, memo }: sendQueryGetUserSkillRequestParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryGetUserSkillRequest: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryGetUserSkillRequest({ value: QueryGetUserSkillRequest.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryGetUserSkillRequest: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgCreateSkillEndorsement({ value, fee, memo }: sendMsgCreateSkillEndorsementParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgCreateSkillEndorsement: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgCreateSkillEndorsement({ value: MsgCreateSkillEndorsement.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreateSkillEndorsement: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgUpdateSkillEndorsement({ value, fee, memo }: sendMsgUpdateSkillEndorsementParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateSkillEndorsement: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateSkillEndorsement({ value: MsgUpdateSkillEndorsement.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateSkillEndorsement: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgDeleteUserSkillResponse({ value, fee, memo }: sendMsgDeleteUserSkillResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgDeleteUserSkillResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDeleteUserSkillResponse({ value: MsgDeleteUserSkillResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeleteUserSkillResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryAllUserProfileResponse({ value, fee, memo }: sendQueryAllUserProfileResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryAllUserProfileResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryAllUserProfileResponse({ value: QueryAllUserProfileResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryAllUserProfileResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryGetSkillEndorsementResponse({ value, fee, memo }: sendQueryGetSkillEndorsementResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryGetSkillEndorsementResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryGetSkillEndorsementResponse({ value: QueryGetSkillEndorsementResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryGetSkillEndorsementResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgEndorseSkill({ value, fee, memo }: sendMsgEndorseSkillParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgEndorseSkill: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgEndorseSkill({ value: MsgEndorseSkill.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgEndorseSkill: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgCreateSkillEndorsementResponse({ value, fee, memo }: sendMsgCreateSkillEndorsementResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgCreateSkillEndorsementResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgCreateSkillEndorsementResponse({ value: MsgCreateSkillEndorsementResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreateSkillEndorsementResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgCreateProfile({ value, fee, memo }: sendMsgCreateProfileParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgCreateProfile: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgCreateProfile({ value: MsgCreateProfile.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreateProfile: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgDeleteSkillEndorsement: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -965,20 +657,6 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
 				throw new Error('TxClient:sendGenesisState: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgDeleteUserProfile({ value, fee, memo }: sendMsgDeleteUserProfileParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgDeleteUserProfile: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDeleteUserProfile({ value: MsgDeleteUserProfile.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeleteUserProfile: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -1010,6 +688,328 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
+		async sendMsgCreateSkillEndorsementResponse({ value, fee, memo }: sendMsgCreateSkillEndorsementResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgCreateSkillEndorsementResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgCreateSkillEndorsementResponse({ value: MsgCreateSkillEndorsementResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgCreateSkillEndorsementResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgDisputeEndorsement({ value, fee, memo }: sendMsgDisputeEndorsementParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgDisputeEndorsement: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgDisputeEndorsement({ value: MsgDisputeEndorsement.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgDisputeEndorsement: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryGetUserSkillRequest({ value, fee, memo }: sendQueryGetUserSkillRequestParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryGetUserSkillRequest: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryGetUserSkillRequest({ value: QueryGetUserSkillRequest.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryGetUserSkillRequest: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryGetSkillEndorsementRequest({ value, fee, memo }: sendQueryGetSkillEndorsementRequestParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryGetSkillEndorsementRequest: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryGetSkillEndorsementRequest({ value: QueryGetSkillEndorsementRequest.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryGetSkillEndorsementRequest: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryAllSkillEndorsementResponse({ value, fee, memo }: sendQueryAllSkillEndorsementResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryAllSkillEndorsementResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryAllSkillEndorsementResponse({ value: QueryAllSkillEndorsementResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryAllSkillEndorsementResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgWithdrawStakedTokens({ value, fee, memo }: sendMsgWithdrawStakedTokensParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgWithdrawStakedTokens: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgWithdrawStakedTokens({ value: MsgWithdrawStakedTokens.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgWithdrawStakedTokens: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgWithdrawStakedTokensResponse({ value, fee, memo }: sendMsgWithdrawStakedTokensResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgWithdrawStakedTokensResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgWithdrawStakedTokensResponse({ value: MsgWithdrawStakedTokensResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgWithdrawStakedTokensResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateUserProfileResponse({ value, fee, memo }: sendMsgUpdateUserProfileResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateUserProfileResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdateUserProfileResponse({ value: MsgUpdateUserProfileResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateUserProfileResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateUserSkillResponse({ value, fee, memo }: sendMsgUpdateUserSkillResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateUserSkillResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdateUserSkillResponse({ value: MsgUpdateUserSkillResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateUserSkillResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateSkillEndorsementResponse({ value, fee, memo }: sendMsgUpdateSkillEndorsementResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateSkillEndorsementResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdateSkillEndorsementResponse({ value: MsgUpdateSkillEndorsementResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateSkillEndorsementResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendSkillEndorsement({ value, fee, memo }: sendSkillEndorsementParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendSkillEndorsement: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.skillEndorsement({ value: SkillEndorsement.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendSkillEndorsement: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryGetUserSkillResponse({ value, fee, memo }: sendQueryGetUserSkillResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryGetUserSkillResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryGetUserSkillResponse({ value: QueryGetUserSkillResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryGetUserSkillResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgCreateUserSkillResponse({ value, fee, memo }: sendMsgCreateUserSkillResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgCreateUserSkillResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgCreateUserSkillResponse({ value: MsgCreateUserSkillResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgCreateUserSkillResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgEndorseSkillResponse({ value, fee, memo }: sendMsgEndorseSkillResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgEndorseSkillResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgEndorseSkillResponse({ value: MsgEndorseSkillResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgEndorseSkillResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgDeleteSkillEndorsementResponse({ value, fee, memo }: sendMsgDeleteSkillEndorsementResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgDeleteSkillEndorsementResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgDeleteSkillEndorsementResponse({ value: MsgDeleteSkillEndorsementResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgDeleteSkillEndorsementResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendUserProfile({ value, fee, memo }: sendUserProfileParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendUserProfile: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.userProfile({ value: UserProfile.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendUserProfile: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateSkillEndorsement({ value, fee, memo }: sendMsgUpdateSkillEndorsementParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateSkillEndorsement: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdateSkillEndorsement({ value: MsgUpdateSkillEndorsement.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateSkillEndorsement: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateUserSkill({ value, fee, memo }: sendMsgUpdateUserSkillParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateUserSkill: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdateUserSkill({ value: MsgUpdateUserSkill.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateUserSkill: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryParamsRequest({ value, fee, memo }: sendQueryParamsRequestParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryParamsRequest: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryParamsRequest({ value: QueryParamsRequest.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryParamsRequest: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgCreateProfileResponse({ value, fee, memo }: sendMsgCreateProfileResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgCreateProfileResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgCreateProfileResponse({ value: MsgCreateProfileResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgCreateProfileResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgDeleteUserSkillResponse({ value, fee, memo }: sendMsgDeleteUserSkillResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgDeleteUserSkillResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgDeleteUserSkillResponse({ value: MsgDeleteUserSkillResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgDeleteUserSkillResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgCreateUserSkill({ value, fee, memo }: sendMsgCreateUserSkillParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgCreateUserSkill: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgCreateUserSkill({ value: MsgCreateUserSkill.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgCreateUserSkill: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryAllUserProfileResponse({ value, fee, memo }: sendQueryAllUserProfileResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryAllUserProfileResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryAllUserProfileResponse({ value: QueryAllUserProfileResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryAllUserProfileResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
 		async sendQueryAllUserSkillResponse({ value, fee, memo }: sendQueryAllUserSkillResponseParams): Promise<DeliverTxResponse> {
 			if (!signer) {
 					throw new Error('TxClient:sendQueryAllUserSkillResponse: Unable to sign Tx. Signer is not present.')
@@ -1038,115 +1038,31 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendMsgDeleteUserSkill({ value, fee, memo }: sendMsgDeleteUserSkillParams): Promise<DeliverTxResponse> {
+		async sendMsgUpdateParams({ value, fee, memo }: sendMsgUpdateParamsParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgDeleteUserSkill: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgUpdateParams: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDeleteUserSkill({ value: MsgDeleteUserSkill.fromPartial(value) })
+				let msg = this.msgUpdateParams({ value: MsgUpdateParams.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeleteUserSkill: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgUpdateParams: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendMsgDeleteSkillEndorsement({ value, fee, memo }: sendMsgDeleteSkillEndorsementParams): Promise<DeliverTxResponse> {
+		async sendMsgCreateUserProfile({ value, fee, memo }: sendMsgCreateUserProfileParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgDeleteSkillEndorsement: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgCreateUserProfile: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDeleteSkillEndorsement({ value: MsgDeleteSkillEndorsement.fromPartial(value) })
+				let msg = this.msgCreateUserProfile({ value: MsgCreateUserProfile.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeleteSkillEndorsement: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgUpdateUserProfileResponse({ value, fee, memo }: sendMsgUpdateUserProfileResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateUserProfileResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateUserProfileResponse({ value: MsgUpdateUserProfileResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateUserProfileResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryGetUserSkillResponse({ value, fee, memo }: sendQueryGetUserSkillResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryGetUserSkillResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryGetUserSkillResponse({ value: QueryGetUserSkillResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryGetUserSkillResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgEndorseSkillResponse({ value, fee, memo }: sendMsgEndorseSkillResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgEndorseSkillResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgEndorseSkillResponse({ value: MsgEndorseSkillResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgEndorseSkillResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgUpdateSkillEndorsementResponse({ value, fee, memo }: sendMsgUpdateSkillEndorsementResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateSkillEndorsementResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateSkillEndorsementResponse({ value: MsgUpdateSkillEndorsementResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateSkillEndorsementResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgCreateProfileResponse({ value, fee, memo }: sendMsgCreateProfileResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgCreateProfileResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgCreateProfileResponse({ value: MsgCreateProfileResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreateProfileResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgCreateUserProfileResponse({ value, fee, memo }: sendMsgCreateUserProfileResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgCreateUserProfileResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgCreateUserProfileResponse({ value: MsgCreateUserProfileResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreateUserProfileResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgCreateUserProfile: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -1164,94 +1080,146 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendMsgDeleteUserProfileResponse({ value, fee, memo }: sendMsgDeleteUserProfileResponseParams): Promise<DeliverTxResponse> {
+		async sendMsgCreateSkillEndorsement({ value, fee, memo }: sendMsgCreateSkillEndorsementParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgDeleteUserProfileResponse: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgCreateSkillEndorsement: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDeleteUserProfileResponse({ value: MsgDeleteUserProfileResponse.fromPartial(value) })
+				let msg = this.msgCreateSkillEndorsement({ value: MsgCreateSkillEndorsement.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeleteUserProfileResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgCreateSkillEndorsement: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendMsgUpdateUserSkillResponse({ value, fee, memo }: sendMsgUpdateUserSkillResponseParams): Promise<DeliverTxResponse> {
+		async sendMsgEndorseSkill({ value, fee, memo }: sendMsgEndorseSkillParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateUserSkillResponse: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgEndorseSkill: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateUserSkillResponse({ value: MsgUpdateUserSkillResponse.fromPartial(value) })
+				let msg = this.msgEndorseSkill({ value: MsgEndorseSkill.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateUserSkillResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgEndorseSkill: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendMsgDisputeEndorsement({ value, fee, memo }: sendMsgDisputeEndorsementParams): Promise<DeliverTxResponse> {
+		async sendParams({ value, fee, memo }: sendParamsParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgDisputeEndorsement: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendParams: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDisputeEndorsement({ value: MsgDisputeEndorsement.fromPartial(value) })
+				let msg = this.params({ value: Params.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDisputeEndorsement: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendParams: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendMsgCreateUserSkill({ value, fee, memo }: sendMsgCreateUserSkillParams): Promise<DeliverTxResponse> {
+		async sendMsgCreateProfile({ value, fee, memo }: sendMsgCreateProfileParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgCreateUserSkill: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgCreateProfile: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgCreateUserSkill({ value: MsgCreateUserSkill.fromPartial(value) })
+				let msg = this.msgCreateProfile({ value: MsgCreateProfile.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreateUserSkill: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgCreateProfile: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		
-		msgUpdateUserSkill({ value }: msgUpdateUserSkillParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.MsgUpdateUserSkill", value: MsgUpdateUserSkill.fromPartial( value ) }  
+		async sendUserSkill({ value, fee, memo }: sendUserSkillParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendUserSkill: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.userSkill({ value: UserSkill.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateUserSkill: Could not create message: ' + e.message)
+				throw new Error('TxClient:sendUserSkill: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		userProfile({ value }: userProfileParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.UserProfile", value: UserProfile.fromPartial( value ) }  
+		async sendQueryParamsResponse({ value, fee, memo }: sendQueryParamsResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryParamsResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryParamsResponse({ value: QueryParamsResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:UserProfile: Could not create message: ' + e.message)
+				throw new Error('TxClient:sendQueryParamsResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		skillEndorsement({ value }: skillEndorsementParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.SkillEndorsement", value: SkillEndorsement.fromPartial( value ) }  
+		async sendMsgDeleteUserSkill({ value, fee, memo }: sendMsgDeleteUserSkillParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgDeleteUserSkill: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgDeleteUserSkill({ value: MsgDeleteUserSkill.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:SkillEndorsement: Could not create message: ' + e.message)
+				throw new Error('TxClient:sendMsgDeleteUserSkill: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		msgUpdateParams({ value }: msgUpdateParamsParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.MsgUpdateParams", value: MsgUpdateParams.fromPartial( value ) }  
+		async sendQueryGetUserProfileRequest({ value, fee, memo }: sendQueryGetUserProfileRequestParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryGetUserProfileRequest: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryGetUserProfileRequest({ value: QueryGetUserProfileRequest.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateParams: Could not create message: ' + e.message)
+				throw new Error('TxClient:sendQueryGetUserProfileRequest: Could not broadcast Tx: '+ e.message)
 			}
 		},
+		
+		async sendQueryAllUserProfileRequest({ value, fee, memo }: sendQueryAllUserProfileRequestParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryAllUserProfileRequest: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryAllUserProfileRequest({ value: QueryAllUserProfileRequest.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryAllUserProfileRequest: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryGetSkillEndorsementResponse({ value, fee, memo }: sendQueryGetSkillEndorsementResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryGetSkillEndorsementResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryGetSkillEndorsementResponse({ value: QueryGetSkillEndorsementResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryGetSkillEndorsementResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
 		
 		msgUpdateParamsResponse({ value }: msgUpdateParamsResponseParams): EncodeObject {
 			try {
@@ -1261,83 +1229,19 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		msgCreateUserProfile({ value }: msgCreateUserProfileParams): EncodeObject {
+		msgCreateUserProfileResponse({ value }: msgCreateUserProfileResponseParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.profile.MsgCreateUserProfile", value: MsgCreateUserProfile.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.profile.MsgCreateUserProfileResponse", value: MsgCreateUserProfileResponse.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgCreateUserProfile: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgCreateUserProfileResponse: Could not create message: ' + e.message)
 			}
 		},
 		
-		msgWithdrawStakedTokens({ value }: msgWithdrawStakedTokensParams): EncodeObject {
+		msgDeleteUserProfileResponse({ value }: msgDeleteUserProfileResponseParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.profile.MsgWithdrawStakedTokens", value: MsgWithdrawStakedTokens.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.profile.MsgDeleteUserProfileResponse", value: MsgDeleteUserProfileResponse.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgWithdrawStakedTokens: Could not create message: ' + e.message)
-			}
-		},
-		
-		params({ value }: paramsParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.Params", value: Params.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:Params: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgWithdrawStakedTokensResponse({ value }: msgWithdrawStakedTokensResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.MsgWithdrawStakedTokensResponse", value: MsgWithdrawStakedTokensResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgWithdrawStakedTokensResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		userSkill({ value }: userSkillParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.UserSkill", value: UserSkill.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:UserSkill: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryParamsRequest({ value }: queryParamsRequestParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.QueryParamsRequest", value: QueryParamsRequest.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryParamsRequest: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryGetSkillEndorsementRequest({ value }: queryGetSkillEndorsementRequestParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.QueryGetSkillEndorsementRequest", value: QueryGetSkillEndorsementRequest.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryGetSkillEndorsementRequest: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryAllSkillEndorsementResponse({ value }: queryAllSkillEndorsementResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.QueryAllSkillEndorsementResponse", value: QueryAllSkillEndorsementResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryAllSkillEndorsementResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgCreateUserSkillResponse({ value }: msgCreateUserSkillResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.MsgCreateUserSkillResponse", value: MsgCreateUserSkillResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgCreateUserSkillResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgDeleteSkillEndorsementResponse({ value }: msgDeleteSkillEndorsementResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.MsgDeleteSkillEndorsementResponse", value: MsgDeleteSkillEndorsementResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgDeleteSkillEndorsementResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgDeleteUserProfileResponse: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -1349,99 +1253,19 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		queryParamsResponse({ value }: queryParamsResponseParams): EncodeObject {
+		msgDeleteUserProfile({ value }: msgDeleteUserProfileParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.profile.QueryParamsResponse", value: QueryParamsResponse.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.profile.MsgDeleteUserProfile", value: MsgDeleteUserProfile.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:QueryParamsResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgDeleteUserProfile: Could not create message: ' + e.message)
 			}
 		},
 		
-		queryGetUserProfileRequest({ value }: queryGetUserProfileRequestParams): EncodeObject {
+		msgDeleteSkillEndorsement({ value }: msgDeleteSkillEndorsementParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.profile.QueryGetUserProfileRequest", value: QueryGetUserProfileRequest.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.profile.MsgDeleteSkillEndorsement", value: MsgDeleteSkillEndorsement.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:QueryGetUserProfileRequest: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryAllUserProfileRequest({ value }: queryAllUserProfileRequestParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.QueryAllUserProfileRequest", value: QueryAllUserProfileRequest.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryAllUserProfileRequest: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryGetUserSkillRequest({ value }: queryGetUserSkillRequestParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.QueryGetUserSkillRequest", value: QueryGetUserSkillRequest.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryGetUserSkillRequest: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgCreateSkillEndorsement({ value }: msgCreateSkillEndorsementParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.MsgCreateSkillEndorsement", value: MsgCreateSkillEndorsement.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgCreateSkillEndorsement: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgUpdateSkillEndorsement({ value }: msgUpdateSkillEndorsementParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.MsgUpdateSkillEndorsement", value: MsgUpdateSkillEndorsement.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateSkillEndorsement: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgDeleteUserSkillResponse({ value }: msgDeleteUserSkillResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.MsgDeleteUserSkillResponse", value: MsgDeleteUserSkillResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgDeleteUserSkillResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryAllUserProfileResponse({ value }: queryAllUserProfileResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.QueryAllUserProfileResponse", value: QueryAllUserProfileResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryAllUserProfileResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryGetSkillEndorsementResponse({ value }: queryGetSkillEndorsementResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.QueryGetSkillEndorsementResponse", value: QueryGetSkillEndorsementResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryGetSkillEndorsementResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgEndorseSkill({ value }: msgEndorseSkillParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.MsgEndorseSkill", value: MsgEndorseSkill.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgEndorseSkill: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgCreateSkillEndorsementResponse({ value }: msgCreateSkillEndorsementResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.MsgCreateSkillEndorsementResponse", value: MsgCreateSkillEndorsementResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgCreateSkillEndorsementResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgCreateProfile({ value }: msgCreateProfileParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.MsgCreateProfile", value: MsgCreateProfile.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgCreateProfile: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgDeleteSkillEndorsement: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -1450,14 +1274,6 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 				return { typeUrl: "/skillchain.profile.GenesisState", value: GenesisState.fromPartial( value ) }  
 			} catch (e: any) {
 				throw new Error('TxClient:GenesisState: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgDeleteUserProfile({ value }: msgDeleteUserProfileParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.MsgDeleteUserProfile", value: MsgDeleteUserProfile.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgDeleteUserProfile: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -1477,6 +1293,190 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
+		msgCreateSkillEndorsementResponse({ value }: msgCreateSkillEndorsementResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.MsgCreateSkillEndorsementResponse", value: MsgCreateSkillEndorsementResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgCreateSkillEndorsementResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgDisputeEndorsement({ value }: msgDisputeEndorsementParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.MsgDisputeEndorsement", value: MsgDisputeEndorsement.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgDisputeEndorsement: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryGetUserSkillRequest({ value }: queryGetUserSkillRequestParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.QueryGetUserSkillRequest", value: QueryGetUserSkillRequest.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryGetUserSkillRequest: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryGetSkillEndorsementRequest({ value }: queryGetSkillEndorsementRequestParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.QueryGetSkillEndorsementRequest", value: QueryGetSkillEndorsementRequest.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryGetSkillEndorsementRequest: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryAllSkillEndorsementResponse({ value }: queryAllSkillEndorsementResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.QueryAllSkillEndorsementResponse", value: QueryAllSkillEndorsementResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryAllSkillEndorsementResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgWithdrawStakedTokens({ value }: msgWithdrawStakedTokensParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.MsgWithdrawStakedTokens", value: MsgWithdrawStakedTokens.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgWithdrawStakedTokens: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgWithdrawStakedTokensResponse({ value }: msgWithdrawStakedTokensResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.MsgWithdrawStakedTokensResponse", value: MsgWithdrawStakedTokensResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgWithdrawStakedTokensResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdateUserProfileResponse({ value }: msgUpdateUserProfileResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.MsgUpdateUserProfileResponse", value: MsgUpdateUserProfileResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdateUserProfileResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdateUserSkillResponse({ value }: msgUpdateUserSkillResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.MsgUpdateUserSkillResponse", value: MsgUpdateUserSkillResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdateUserSkillResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdateSkillEndorsementResponse({ value }: msgUpdateSkillEndorsementResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.MsgUpdateSkillEndorsementResponse", value: MsgUpdateSkillEndorsementResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdateSkillEndorsementResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		skillEndorsement({ value }: skillEndorsementParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.SkillEndorsement", value: SkillEndorsement.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:SkillEndorsement: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryGetUserSkillResponse({ value }: queryGetUserSkillResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.QueryGetUserSkillResponse", value: QueryGetUserSkillResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryGetUserSkillResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgCreateUserSkillResponse({ value }: msgCreateUserSkillResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.MsgCreateUserSkillResponse", value: MsgCreateUserSkillResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgCreateUserSkillResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgEndorseSkillResponse({ value }: msgEndorseSkillResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.MsgEndorseSkillResponse", value: MsgEndorseSkillResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgEndorseSkillResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgDeleteSkillEndorsementResponse({ value }: msgDeleteSkillEndorsementResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.MsgDeleteSkillEndorsementResponse", value: MsgDeleteSkillEndorsementResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgDeleteSkillEndorsementResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		userProfile({ value }: userProfileParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.UserProfile", value: UserProfile.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:UserProfile: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdateSkillEndorsement({ value }: msgUpdateSkillEndorsementParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.MsgUpdateSkillEndorsement", value: MsgUpdateSkillEndorsement.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdateSkillEndorsement: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdateUserSkill({ value }: msgUpdateUserSkillParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.MsgUpdateUserSkill", value: MsgUpdateUserSkill.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdateUserSkill: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryParamsRequest({ value }: queryParamsRequestParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.QueryParamsRequest", value: QueryParamsRequest.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryParamsRequest: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgCreateProfileResponse({ value }: msgCreateProfileResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.MsgCreateProfileResponse", value: MsgCreateProfileResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgCreateProfileResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgDeleteUserSkillResponse({ value }: msgDeleteUserSkillResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.MsgDeleteUserSkillResponse", value: MsgDeleteUserSkillResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgDeleteUserSkillResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgCreateUserSkill({ value }: msgCreateUserSkillParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.MsgCreateUserSkill", value: MsgCreateUserSkill.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgCreateUserSkill: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryAllUserProfileResponse({ value }: queryAllUserProfileResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.QueryAllUserProfileResponse", value: QueryAllUserProfileResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryAllUserProfileResponse: Could not create message: ' + e.message)
+			}
+		},
+		
 		queryAllUserSkillResponse({ value }: queryAllUserSkillResponseParams): EncodeObject {
 			try {
 				return { typeUrl: "/skillchain.profile.QueryAllUserSkillResponse", value: QueryAllUserSkillResponse.fromPartial( value ) }  
@@ -1493,67 +1493,19 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		msgDeleteUserSkill({ value }: msgDeleteUserSkillParams): EncodeObject {
+		msgUpdateParams({ value }: msgUpdateParamsParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.profile.MsgDeleteUserSkill", value: MsgDeleteUserSkill.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.profile.MsgUpdateParams", value: MsgUpdateParams.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgDeleteUserSkill: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgUpdateParams: Could not create message: ' + e.message)
 			}
 		},
 		
-		msgDeleteSkillEndorsement({ value }: msgDeleteSkillEndorsementParams): EncodeObject {
+		msgCreateUserProfile({ value }: msgCreateUserProfileParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.profile.MsgDeleteSkillEndorsement", value: MsgDeleteSkillEndorsement.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.profile.MsgCreateUserProfile", value: MsgCreateUserProfile.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgDeleteSkillEndorsement: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgUpdateUserProfileResponse({ value }: msgUpdateUserProfileResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.MsgUpdateUserProfileResponse", value: MsgUpdateUserProfileResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateUserProfileResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryGetUserSkillResponse({ value }: queryGetUserSkillResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.QueryGetUserSkillResponse", value: QueryGetUserSkillResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryGetUserSkillResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgEndorseSkillResponse({ value }: msgEndorseSkillResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.MsgEndorseSkillResponse", value: MsgEndorseSkillResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgEndorseSkillResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgUpdateSkillEndorsementResponse({ value }: msgUpdateSkillEndorsementResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.MsgUpdateSkillEndorsementResponse", value: MsgUpdateSkillEndorsementResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateSkillEndorsementResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgCreateProfileResponse({ value }: msgCreateProfileResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.MsgCreateProfileResponse", value: MsgCreateProfileResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgCreateProfileResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgCreateUserProfileResponse({ value }: msgCreateUserProfileResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.profile.MsgCreateUserProfileResponse", value: MsgCreateUserProfileResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgCreateUserProfileResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgCreateUserProfile: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -1565,35 +1517,83 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		msgDeleteUserProfileResponse({ value }: msgDeleteUserProfileResponseParams): EncodeObject {
+		msgCreateSkillEndorsement({ value }: msgCreateSkillEndorsementParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.profile.MsgDeleteUserProfileResponse", value: MsgDeleteUserProfileResponse.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.profile.MsgCreateSkillEndorsement", value: MsgCreateSkillEndorsement.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgDeleteUserProfileResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgCreateSkillEndorsement: Could not create message: ' + e.message)
 			}
 		},
 		
-		msgUpdateUserSkillResponse({ value }: msgUpdateUserSkillResponseParams): EncodeObject {
+		msgEndorseSkill({ value }: msgEndorseSkillParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.profile.MsgUpdateUserSkillResponse", value: MsgUpdateUserSkillResponse.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.profile.MsgEndorseSkill", value: MsgEndorseSkill.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateUserSkillResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgEndorseSkill: Could not create message: ' + e.message)
 			}
 		},
 		
-		msgDisputeEndorsement({ value }: msgDisputeEndorsementParams): EncodeObject {
+		params({ value }: paramsParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.profile.MsgDisputeEndorsement", value: MsgDisputeEndorsement.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.profile.Params", value: Params.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgDisputeEndorsement: Could not create message: ' + e.message)
+				throw new Error('TxClient:Params: Could not create message: ' + e.message)
 			}
 		},
 		
-		msgCreateUserSkill({ value }: msgCreateUserSkillParams): EncodeObject {
+		msgCreateProfile({ value }: msgCreateProfileParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.profile.MsgCreateUserSkill", value: MsgCreateUserSkill.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.profile.MsgCreateProfile", value: MsgCreateProfile.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgCreateUserSkill: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgCreateProfile: Could not create message: ' + e.message)
+			}
+		},
+		
+		userSkill({ value }: userSkillParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.UserSkill", value: UserSkill.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:UserSkill: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryParamsResponse({ value }: queryParamsResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.QueryParamsResponse", value: QueryParamsResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryParamsResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgDeleteUserSkill({ value }: msgDeleteUserSkillParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.MsgDeleteUserSkill", value: MsgDeleteUserSkill.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgDeleteUserSkill: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryGetUserProfileRequest({ value }: queryGetUserProfileRequestParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.QueryGetUserProfileRequest", value: QueryGetUserProfileRequest.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryGetUserProfileRequest: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryAllUserProfileRequest({ value }: queryAllUserProfileRequestParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.QueryAllUserProfileRequest", value: QueryAllUserProfileRequest.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryAllUserProfileRequest: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryGetSkillEndorsementResponse({ value }: queryGetSkillEndorsementResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.profile.QueryGetSkillEndorsementResponse", value: QueryGetSkillEndorsementResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryGetSkillEndorsementResponse: Could not create message: ' + e.message)
 			}
 		},
 		

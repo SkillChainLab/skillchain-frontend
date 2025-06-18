@@ -6,49 +6,49 @@ import { msgTypes } from './registry';
 import { IgniteClient } from "../client"
 import { MissingWalletError } from "../helpers"
 import { Api } from "./rest";
-import { MsgDeleteNotificationSettings } from "./types/skillchain/notifications/tx";
-import { MsgDeleteNotificationResponse } from "./types/skillchain/notifications/tx";
-import { MsgUpdateNotificationSettingsResponse } from "./types/skillchain/notifications/tx";
-import { MsgDeleteNotification } from "./types/skillchain/notifications/tx";
-import { Params } from "./types/skillchain/notifications/params";
-import { NotificationSettings } from "./types/skillchain/notifications/notification_settings";
-import { QueryAllNotificationResponse } from "./types/skillchain/notifications/query";
-import { MsgCreateNotificationSettingsResponse } from "./types/skillchain/notifications/tx";
-import { MsgCreateNotificationSettings } from "./types/skillchain/notifications/tx";
-import { QueryGetNotificationResponse } from "./types/skillchain/notifications/query";
 import { QueryGetNotificationSettingsResponse } from "./types/skillchain/notifications/query";
-import { GenesisState } from "./types/skillchain/notifications/genesis";
-import { MsgCreateNotificationResponse } from "./types/skillchain/notifications/tx";
+import { MsgUpdateNotificationResponse } from "./types/skillchain/notifications/tx";
+import { MsgUpdateNotificationSettingsResponse } from "./types/skillchain/notifications/tx";
 import { MsgDeleteNotificationSettingsResponse } from "./types/skillchain/notifications/tx";
-import { QueryAllNotificationSettingsRequest } from "./types/skillchain/notifications/query";
+import { MsgDeleteNotification } from "./types/skillchain/notifications/tx";
+import { MsgCreateNotificationSettingsResponse } from "./types/skillchain/notifications/tx";
 import { QueryAllNotificationSettingsResponse } from "./types/skillchain/notifications/query";
+import { MsgUpdateParamsResponse } from "./types/skillchain/notifications/tx";
+import { MsgUpdateNotification } from "./types/skillchain/notifications/tx";
+import { Params } from "./types/skillchain/notifications/params";
+import { Notification } from "./types/skillchain/notifications/notification";
+import { MsgUpdateNotificationSettings } from "./types/skillchain/notifications/tx";
+import { MsgUpdateParams } from "./types/skillchain/notifications/tx";
 import { QueryParamsRequest } from "./types/skillchain/notifications/query";
 import { QueryParamsResponse } from "./types/skillchain/notifications/query";
-import { QueryGetNotificationSettingsRequest } from "./types/skillchain/notifications/query";
-import { MsgCreateNotification } from "./types/skillchain/notifications/tx";
-import { MsgUpdateNotification } from "./types/skillchain/notifications/tx";
-import { MsgUpdateParams } from "./types/skillchain/notifications/tx";
-import { Notification } from "./types/skillchain/notifications/notification";
 import { QueryGetNotificationRequest } from "./types/skillchain/notifications/query";
+import { QueryAllNotificationSettingsRequest } from "./types/skillchain/notifications/query";
+import { MsgCreateNotificationResponse } from "./types/skillchain/notifications/tx";
+import { MsgDeleteNotificationResponse } from "./types/skillchain/notifications/tx";
+import { MsgCreateNotification } from "./types/skillchain/notifications/tx";
+import { GenesisState } from "./types/skillchain/notifications/genesis";
+import { MsgCreateNotificationSettings } from "./types/skillchain/notifications/tx";
+import { MsgDeleteNotificationSettings } from "./types/skillchain/notifications/tx";
 import { QueryAllNotificationRequest } from "./types/skillchain/notifications/query";
-import { MsgUpdateParamsResponse } from "./types/skillchain/notifications/tx";
-import { MsgUpdateNotificationSettings } from "./types/skillchain/notifications/tx";
-import { MsgUpdateNotificationResponse } from "./types/skillchain/notifications/tx";
+import { QueryAllNotificationResponse } from "./types/skillchain/notifications/query";
+import { NotificationSettings } from "./types/skillchain/notifications/notification_settings";
+import { QueryGetNotificationResponse } from "./types/skillchain/notifications/query";
+import { QueryGetNotificationSettingsRequest } from "./types/skillchain/notifications/query";
 
 import { Notification as typeNotification} from "./types"
 import { NotificationSettings as typeNotificationSettings} from "./types"
 import { Params as typeParams} from "./types"
 
-export { MsgDeleteNotificationSettings, MsgDeleteNotificationResponse, MsgUpdateNotificationSettingsResponse, MsgDeleteNotification, Params, NotificationSettings, QueryAllNotificationResponse, MsgCreateNotificationSettingsResponse, MsgCreateNotificationSettings, QueryGetNotificationResponse, QueryGetNotificationSettingsResponse, GenesisState, MsgCreateNotificationResponse, MsgDeleteNotificationSettingsResponse, QueryAllNotificationSettingsRequest, QueryAllNotificationSettingsResponse, QueryParamsRequest, QueryParamsResponse, QueryGetNotificationSettingsRequest, MsgCreateNotification, MsgUpdateNotification, MsgUpdateParams, Notification, QueryGetNotificationRequest, QueryAllNotificationRequest, MsgUpdateParamsResponse, MsgUpdateNotificationSettings, MsgUpdateNotificationResponse };
+export { QueryGetNotificationSettingsResponse, MsgUpdateNotificationResponse, MsgUpdateNotificationSettingsResponse, MsgDeleteNotificationSettingsResponse, MsgDeleteNotification, MsgCreateNotificationSettingsResponse, QueryAllNotificationSettingsResponse, MsgUpdateParamsResponse, MsgUpdateNotification, Params, Notification, MsgUpdateNotificationSettings, MsgUpdateParams, QueryParamsRequest, QueryParamsResponse, QueryGetNotificationRequest, QueryAllNotificationSettingsRequest, MsgCreateNotificationResponse, MsgDeleteNotificationResponse, MsgCreateNotification, GenesisState, MsgCreateNotificationSettings, MsgDeleteNotificationSettings, QueryAllNotificationRequest, QueryAllNotificationResponse, NotificationSettings, QueryGetNotificationResponse, QueryGetNotificationSettingsRequest };
 
-type sendMsgDeleteNotificationSettingsParams = {
-  value: MsgDeleteNotificationSettings,
+type sendQueryGetNotificationSettingsResponseParams = {
+  value: QueryGetNotificationSettingsResponse,
   fee?: StdFee,
   memo?: string
 };
 
-type sendMsgDeleteNotificationResponseParams = {
-  value: MsgDeleteNotificationResponse,
+type sendMsgUpdateNotificationResponseParams = {
+  value: MsgUpdateNotificationResponse,
   fee?: StdFee,
   memo?: string
 };
@@ -59,26 +59,14 @@ type sendMsgUpdateNotificationSettingsResponseParams = {
   memo?: string
 };
 
+type sendMsgDeleteNotificationSettingsResponseParams = {
+  value: MsgDeleteNotificationSettingsResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
 type sendMsgDeleteNotificationParams = {
   value: MsgDeleteNotification,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendParamsParams = {
-  value: Params,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendNotificationSettingsParams = {
-  value: NotificationSettings,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryAllNotificationResponseParams = {
-  value: QueryAllNotificationResponse,
   fee?: StdFee,
   memo?: string
 };
@@ -89,50 +77,44 @@ type sendMsgCreateNotificationSettingsResponseParams = {
   memo?: string
 };
 
-type sendMsgCreateNotificationSettingsParams = {
-  value: MsgCreateNotificationSettings,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryGetNotificationResponseParams = {
-  value: QueryGetNotificationResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryGetNotificationSettingsResponseParams = {
-  value: QueryGetNotificationSettingsResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendGenesisStateParams = {
-  value: GenesisState,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgCreateNotificationResponseParams = {
-  value: MsgCreateNotificationResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgDeleteNotificationSettingsResponseParams = {
-  value: MsgDeleteNotificationSettingsResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryAllNotificationSettingsRequestParams = {
-  value: QueryAllNotificationSettingsRequest,
-  fee?: StdFee,
-  memo?: string
-};
-
 type sendQueryAllNotificationSettingsResponseParams = {
   value: QueryAllNotificationSettingsResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateParamsResponseParams = {
+  value: MsgUpdateParamsResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateNotificationParams = {
+  value: MsgUpdateNotification,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendParamsParams = {
+  value: Params,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendNotificationParams = {
+  value: Notification,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateNotificationSettingsParams = {
+  value: MsgUpdateNotificationSettings,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateParamsParams = {
+  value: MsgUpdateParams,
   fee?: StdFee,
   memo?: string
 };
@@ -149,8 +131,26 @@ type sendQueryParamsResponseParams = {
   memo?: string
 };
 
-type sendQueryGetNotificationSettingsRequestParams = {
-  value: QueryGetNotificationSettingsRequest,
+type sendQueryGetNotificationRequestParams = {
+  value: QueryGetNotificationRequest,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryAllNotificationSettingsRequestParams = {
+  value: QueryAllNotificationSettingsRequest,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgCreateNotificationResponseParams = {
+  value: MsgCreateNotificationResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgDeleteNotificationResponseParams = {
+  value: MsgDeleteNotificationResponse,
   fee?: StdFee,
   memo?: string
 };
@@ -161,26 +161,20 @@ type sendMsgCreateNotificationParams = {
   memo?: string
 };
 
-type sendMsgUpdateNotificationParams = {
-  value: MsgUpdateNotification,
+type sendGenesisStateParams = {
+  value: GenesisState,
   fee?: StdFee,
   memo?: string
 };
 
-type sendMsgUpdateParamsParams = {
-  value: MsgUpdateParams,
+type sendMsgCreateNotificationSettingsParams = {
+  value: MsgCreateNotificationSettings,
   fee?: StdFee,
   memo?: string
 };
 
-type sendNotificationParams = {
-  value: Notification,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryGetNotificationRequestParams = {
-  value: QueryGetNotificationRequest,
+type sendMsgDeleteNotificationSettingsParams = {
+  value: MsgDeleteNotificationSettings,
   fee?: StdFee,
   memo?: string
 };
@@ -191,87 +185,81 @@ type sendQueryAllNotificationRequestParams = {
   memo?: string
 };
 
-type sendMsgUpdateParamsResponseParams = {
-  value: MsgUpdateParamsResponse,
+type sendQueryAllNotificationResponseParams = {
+  value: QueryAllNotificationResponse,
   fee?: StdFee,
   memo?: string
 };
 
-type sendMsgUpdateNotificationSettingsParams = {
-  value: MsgUpdateNotificationSettings,
+type sendNotificationSettingsParams = {
+  value: NotificationSettings,
   fee?: StdFee,
   memo?: string
 };
 
-type sendMsgUpdateNotificationResponseParams = {
+type sendQueryGetNotificationResponseParams = {
+  value: QueryGetNotificationResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryGetNotificationSettingsRequestParams = {
+  value: QueryGetNotificationSettingsRequest,
+  fee?: StdFee,
+  memo?: string
+};
+
+
+type queryGetNotificationSettingsResponseParams = {
+  value: QueryGetNotificationSettingsResponse,
+};
+
+type msgUpdateNotificationResponseParams = {
   value: MsgUpdateNotificationResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-
-type msgDeleteNotificationSettingsParams = {
-  value: MsgDeleteNotificationSettings,
-};
-
-type msgDeleteNotificationResponseParams = {
-  value: MsgDeleteNotificationResponse,
 };
 
 type msgUpdateNotificationSettingsResponseParams = {
   value: MsgUpdateNotificationSettingsResponse,
 };
 
+type msgDeleteNotificationSettingsResponseParams = {
+  value: MsgDeleteNotificationSettingsResponse,
+};
+
 type msgDeleteNotificationParams = {
   value: MsgDeleteNotification,
-};
-
-type paramsParams = {
-  value: Params,
-};
-
-type notificationSettingsParams = {
-  value: NotificationSettings,
-};
-
-type queryAllNotificationResponseParams = {
-  value: QueryAllNotificationResponse,
 };
 
 type msgCreateNotificationSettingsResponseParams = {
   value: MsgCreateNotificationSettingsResponse,
 };
 
-type msgCreateNotificationSettingsParams = {
-  value: MsgCreateNotificationSettings,
-};
-
-type queryGetNotificationResponseParams = {
-  value: QueryGetNotificationResponse,
-};
-
-type queryGetNotificationSettingsResponseParams = {
-  value: QueryGetNotificationSettingsResponse,
-};
-
-type genesisStateParams = {
-  value: GenesisState,
-};
-
-type msgCreateNotificationResponseParams = {
-  value: MsgCreateNotificationResponse,
-};
-
-type msgDeleteNotificationSettingsResponseParams = {
-  value: MsgDeleteNotificationSettingsResponse,
-};
-
-type queryAllNotificationSettingsRequestParams = {
-  value: QueryAllNotificationSettingsRequest,
-};
-
 type queryAllNotificationSettingsResponseParams = {
   value: QueryAllNotificationSettingsResponse,
+};
+
+type msgUpdateParamsResponseParams = {
+  value: MsgUpdateParamsResponse,
+};
+
+type msgUpdateNotificationParams = {
+  value: MsgUpdateNotification,
+};
+
+type paramsParams = {
+  value: Params,
+};
+
+type notificationParams = {
+  value: Notification,
+};
+
+type msgUpdateNotificationSettingsParams = {
+  value: MsgUpdateNotificationSettings,
+};
+
+type msgUpdateParamsParams = {
+  value: MsgUpdateParams,
 };
 
 type queryParamsRequestParams = {
@@ -282,44 +270,56 @@ type queryParamsResponseParams = {
   value: QueryParamsResponse,
 };
 
-type queryGetNotificationSettingsRequestParams = {
-  value: QueryGetNotificationSettingsRequest,
+type queryGetNotificationRequestParams = {
+  value: QueryGetNotificationRequest,
+};
+
+type queryAllNotificationSettingsRequestParams = {
+  value: QueryAllNotificationSettingsRequest,
+};
+
+type msgCreateNotificationResponseParams = {
+  value: MsgCreateNotificationResponse,
+};
+
+type msgDeleteNotificationResponseParams = {
+  value: MsgDeleteNotificationResponse,
 };
 
 type msgCreateNotificationParams = {
   value: MsgCreateNotification,
 };
 
-type msgUpdateNotificationParams = {
-  value: MsgUpdateNotification,
+type genesisStateParams = {
+  value: GenesisState,
 };
 
-type msgUpdateParamsParams = {
-  value: MsgUpdateParams,
+type msgCreateNotificationSettingsParams = {
+  value: MsgCreateNotificationSettings,
 };
 
-type notificationParams = {
-  value: Notification,
-};
-
-type queryGetNotificationRequestParams = {
-  value: QueryGetNotificationRequest,
+type msgDeleteNotificationSettingsParams = {
+  value: MsgDeleteNotificationSettings,
 };
 
 type queryAllNotificationRequestParams = {
   value: QueryAllNotificationRequest,
 };
 
-type msgUpdateParamsResponseParams = {
-  value: MsgUpdateParamsResponse,
+type queryAllNotificationResponseParams = {
+  value: QueryAllNotificationResponse,
 };
 
-type msgUpdateNotificationSettingsParams = {
-  value: MsgUpdateNotificationSettings,
+type notificationSettingsParams = {
+  value: NotificationSettings,
 };
 
-type msgUpdateNotificationResponseParams = {
-  value: MsgUpdateNotificationResponse,
+type queryGetNotificationResponseParams = {
+  value: QueryGetNotificationResponse,
+};
+
+type queryGetNotificationSettingsRequestParams = {
+  value: QueryGetNotificationSettingsRequest,
 };
 
 
@@ -352,31 +352,31 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 
   return {
 		
-		async sendMsgDeleteNotificationSettings({ value, fee, memo }: sendMsgDeleteNotificationSettingsParams): Promise<DeliverTxResponse> {
+		async sendQueryGetNotificationSettingsResponse({ value, fee, memo }: sendQueryGetNotificationSettingsResponseParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgDeleteNotificationSettings: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendQueryGetNotificationSettingsResponse: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDeleteNotificationSettings({ value: MsgDeleteNotificationSettings.fromPartial(value) })
+				let msg = this.queryGetNotificationSettingsResponse({ value: QueryGetNotificationSettingsResponse.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeleteNotificationSettings: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendQueryGetNotificationSettingsResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendMsgDeleteNotificationResponse({ value, fee, memo }: sendMsgDeleteNotificationResponseParams): Promise<DeliverTxResponse> {
+		async sendMsgUpdateNotificationResponse({ value, fee, memo }: sendMsgUpdateNotificationResponseParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgDeleteNotificationResponse: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgUpdateNotificationResponse: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDeleteNotificationResponse({ value: MsgDeleteNotificationResponse.fromPartial(value) })
+				let msg = this.msgUpdateNotificationResponse({ value: MsgUpdateNotificationResponse.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeleteNotificationResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgUpdateNotificationResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -394,6 +394,20 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
+		async sendMsgDeleteNotificationSettingsResponse({ value, fee, memo }: sendMsgDeleteNotificationSettingsResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgDeleteNotificationSettingsResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgDeleteNotificationSettingsResponse({ value: MsgDeleteNotificationSettingsResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgDeleteNotificationSettingsResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
 		async sendMsgDeleteNotification({ value, fee, memo }: sendMsgDeleteNotificationParams): Promise<DeliverTxResponse> {
 			if (!signer) {
 					throw new Error('TxClient:sendMsgDeleteNotification: Unable to sign Tx. Signer is not present.')
@@ -405,48 +419,6 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
 				throw new Error('TxClient:sendMsgDeleteNotification: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendParams({ value, fee, memo }: sendParamsParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendParams: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.params({ value: Params.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendParams: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendNotificationSettings({ value, fee, memo }: sendNotificationSettingsParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendNotificationSettings: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.notificationSettings({ value: NotificationSettings.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendNotificationSettings: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryAllNotificationResponse({ value, fee, memo }: sendQueryAllNotificationResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryAllNotificationResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryAllNotificationResponse({ value: QueryAllNotificationResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryAllNotificationResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -464,104 +436,6 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendMsgCreateNotificationSettings({ value, fee, memo }: sendMsgCreateNotificationSettingsParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgCreateNotificationSettings: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgCreateNotificationSettings({ value: MsgCreateNotificationSettings.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreateNotificationSettings: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryGetNotificationResponse({ value, fee, memo }: sendQueryGetNotificationResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryGetNotificationResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryGetNotificationResponse({ value: QueryGetNotificationResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryGetNotificationResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryGetNotificationSettingsResponse({ value, fee, memo }: sendQueryGetNotificationSettingsResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryGetNotificationSettingsResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryGetNotificationSettingsResponse({ value: QueryGetNotificationSettingsResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryGetNotificationSettingsResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendGenesisState({ value, fee, memo }: sendGenesisStateParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendGenesisState: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.genesisState({ value: GenesisState.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendGenesisState: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgCreateNotificationResponse({ value, fee, memo }: sendMsgCreateNotificationResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgCreateNotificationResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgCreateNotificationResponse({ value: MsgCreateNotificationResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreateNotificationResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgDeleteNotificationSettingsResponse({ value, fee, memo }: sendMsgDeleteNotificationSettingsResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgDeleteNotificationSettingsResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgDeleteNotificationSettingsResponse({ value: MsgDeleteNotificationSettingsResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgDeleteNotificationSettingsResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryAllNotificationSettingsRequest({ value, fee, memo }: sendQueryAllNotificationSettingsRequestParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryAllNotificationSettingsRequest: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryAllNotificationSettingsRequest({ value: QueryAllNotificationSettingsRequest.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryAllNotificationSettingsRequest: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
 		async sendQueryAllNotificationSettingsResponse({ value, fee, memo }: sendQueryAllNotificationSettingsResponseParams): Promise<DeliverTxResponse> {
 			if (!signer) {
 					throw new Error('TxClient:sendQueryAllNotificationSettingsResponse: Unable to sign Tx. Signer is not present.')
@@ -573,6 +447,90 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
 				throw new Error('TxClient:sendQueryAllNotificationSettingsResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateParamsResponse({ value, fee, memo }: sendMsgUpdateParamsResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateParamsResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdateParamsResponse({ value: MsgUpdateParamsResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateParamsResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateNotification({ value, fee, memo }: sendMsgUpdateNotificationParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateNotification: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdateNotification({ value: MsgUpdateNotification.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateNotification: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendParams({ value, fee, memo }: sendParamsParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendParams: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.params({ value: Params.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendParams: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendNotification({ value, fee, memo }: sendNotificationParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendNotification: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.notification({ value: Notification.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendNotification: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateNotificationSettings({ value, fee, memo }: sendMsgUpdateNotificationSettingsParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateNotificationSettings: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdateNotificationSettings({ value: MsgUpdateNotificationSettings.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateNotificationSettings: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateParams({ value, fee, memo }: sendMsgUpdateParamsParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateParams: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdateParams({ value: MsgUpdateParams.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateParams: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -604,17 +562,59 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendQueryGetNotificationSettingsRequest({ value, fee, memo }: sendQueryGetNotificationSettingsRequestParams): Promise<DeliverTxResponse> {
+		async sendQueryGetNotificationRequest({ value, fee, memo }: sendQueryGetNotificationRequestParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendQueryGetNotificationSettingsRequest: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendQueryGetNotificationRequest: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryGetNotificationSettingsRequest({ value: QueryGetNotificationSettingsRequest.fromPartial(value) })
+				let msg = this.queryGetNotificationRequest({ value: QueryGetNotificationRequest.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendQueryGetNotificationSettingsRequest: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendQueryGetNotificationRequest: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryAllNotificationSettingsRequest({ value, fee, memo }: sendQueryAllNotificationSettingsRequestParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryAllNotificationSettingsRequest: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryAllNotificationSettingsRequest({ value: QueryAllNotificationSettingsRequest.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryAllNotificationSettingsRequest: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgCreateNotificationResponse({ value, fee, memo }: sendMsgCreateNotificationResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgCreateNotificationResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgCreateNotificationResponse({ value: MsgCreateNotificationResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgCreateNotificationResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgDeleteNotificationResponse({ value, fee, memo }: sendMsgDeleteNotificationResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgDeleteNotificationResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgDeleteNotificationResponse({ value: MsgDeleteNotificationResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgDeleteNotificationResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -632,59 +632,45 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendMsgUpdateNotification({ value, fee, memo }: sendMsgUpdateNotificationParams): Promise<DeliverTxResponse> {
+		async sendGenesisState({ value, fee, memo }: sendGenesisStateParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateNotification: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendGenesisState: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateNotification({ value: MsgUpdateNotification.fromPartial(value) })
+				let msg = this.genesisState({ value: GenesisState.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateNotification: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendGenesisState: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendMsgUpdateParams({ value, fee, memo }: sendMsgUpdateParamsParams): Promise<DeliverTxResponse> {
+		async sendMsgCreateNotificationSettings({ value, fee, memo }: sendMsgCreateNotificationSettingsParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateParams: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgCreateNotificationSettings: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateParams({ value: MsgUpdateParams.fromPartial(value) })
+				let msg = this.msgCreateNotificationSettings({ value: MsgCreateNotificationSettings.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateParams: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgCreateNotificationSettings: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendNotification({ value, fee, memo }: sendNotificationParams): Promise<DeliverTxResponse> {
+		async sendMsgDeleteNotificationSettings({ value, fee, memo }: sendMsgDeleteNotificationSettingsParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendNotification: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendMsgDeleteNotificationSettings: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.notification({ value: Notification.fromPartial(value) })
+				let msg = this.msgDeleteNotificationSettings({ value: MsgDeleteNotificationSettings.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendNotification: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryGetNotificationRequest({ value, fee, memo }: sendQueryGetNotificationRequestParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryGetNotificationRequest: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryGetNotificationRequest({ value: QueryGetNotificationRequest.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryGetNotificationRequest: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendMsgDeleteNotificationSettings: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -702,62 +688,76 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendMsgUpdateParamsResponse({ value, fee, memo }: sendMsgUpdateParamsResponseParams): Promise<DeliverTxResponse> {
+		async sendQueryAllNotificationResponse({ value, fee, memo }: sendQueryAllNotificationResponseParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateParamsResponse: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendQueryAllNotificationResponse: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateParamsResponse({ value: MsgUpdateParamsResponse.fromPartial(value) })
+				let msg = this.queryAllNotificationResponse({ value: QueryAllNotificationResponse.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateParamsResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendQueryAllNotificationResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendMsgUpdateNotificationSettings({ value, fee, memo }: sendMsgUpdateNotificationSettingsParams): Promise<DeliverTxResponse> {
+		async sendNotificationSettings({ value, fee, memo }: sendNotificationSettingsParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateNotificationSettings: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendNotificationSettings: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateNotificationSettings({ value: MsgUpdateNotificationSettings.fromPartial(value) })
+				let msg = this.notificationSettings({ value: NotificationSettings.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateNotificationSettings: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendNotificationSettings: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
-		async sendMsgUpdateNotificationResponse({ value, fee, memo }: sendMsgUpdateNotificationResponseParams): Promise<DeliverTxResponse> {
+		async sendQueryGetNotificationResponse({ value, fee, memo }: sendQueryGetNotificationResponseParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateNotificationResponse: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendQueryGetNotificationResponse: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateNotificationResponse({ value: MsgUpdateNotificationResponse.fromPartial(value) })
+				let msg = this.queryGetNotificationResponse({ value: QueryGetNotificationResponse.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateNotificationResponse: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendQueryGetNotificationResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryGetNotificationSettingsRequest({ value, fee, memo }: sendQueryGetNotificationSettingsRequestParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryGetNotificationSettingsRequest: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryGetNotificationSettingsRequest({ value: QueryGetNotificationSettingsRequest.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryGetNotificationSettingsRequest: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
 		
-		msgDeleteNotificationSettings({ value }: msgDeleteNotificationSettingsParams): EncodeObject {
+		queryGetNotificationSettingsResponse({ value }: queryGetNotificationSettingsResponseParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.notifications.MsgDeleteNotificationSettings", value: MsgDeleteNotificationSettings.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.notifications.QueryGetNotificationSettingsResponse", value: QueryGetNotificationSettingsResponse.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgDeleteNotificationSettings: Could not create message: ' + e.message)
+				throw new Error('TxClient:QueryGetNotificationSettingsResponse: Could not create message: ' + e.message)
 			}
 		},
 		
-		msgDeleteNotificationResponse({ value }: msgDeleteNotificationResponseParams): EncodeObject {
+		msgUpdateNotificationResponse({ value }: msgUpdateNotificationResponseParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.notifications.MsgDeleteNotificationResponse", value: MsgDeleteNotificationResponse.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.notifications.MsgUpdateNotificationResponse", value: MsgUpdateNotificationResponse.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgDeleteNotificationResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgUpdateNotificationResponse: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -769,35 +769,19 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
+		msgDeleteNotificationSettingsResponse({ value }: msgDeleteNotificationSettingsResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.notifications.MsgDeleteNotificationSettingsResponse", value: MsgDeleteNotificationSettingsResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgDeleteNotificationSettingsResponse: Could not create message: ' + e.message)
+			}
+		},
+		
 		msgDeleteNotification({ value }: msgDeleteNotificationParams): EncodeObject {
 			try {
 				return { typeUrl: "/skillchain.notifications.MsgDeleteNotification", value: MsgDeleteNotification.fromPartial( value ) }  
 			} catch (e: any) {
 				throw new Error('TxClient:MsgDeleteNotification: Could not create message: ' + e.message)
-			}
-		},
-		
-		params({ value }: paramsParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.notifications.Params", value: Params.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:Params: Could not create message: ' + e.message)
-			}
-		},
-		
-		notificationSettings({ value }: notificationSettingsParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.notifications.NotificationSettings", value: NotificationSettings.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:NotificationSettings: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryAllNotificationResponse({ value }: queryAllNotificationResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.notifications.QueryAllNotificationResponse", value: QueryAllNotificationResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryAllNotificationResponse: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -809,67 +793,59 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		msgCreateNotificationSettings({ value }: msgCreateNotificationSettingsParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.notifications.MsgCreateNotificationSettings", value: MsgCreateNotificationSettings.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgCreateNotificationSettings: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryGetNotificationResponse({ value }: queryGetNotificationResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.notifications.QueryGetNotificationResponse", value: QueryGetNotificationResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryGetNotificationResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryGetNotificationSettingsResponse({ value }: queryGetNotificationSettingsResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.notifications.QueryGetNotificationSettingsResponse", value: QueryGetNotificationSettingsResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryGetNotificationSettingsResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		genesisState({ value }: genesisStateParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.notifications.GenesisState", value: GenesisState.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:GenesisState: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgCreateNotificationResponse({ value }: msgCreateNotificationResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.notifications.MsgCreateNotificationResponse", value: MsgCreateNotificationResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgCreateNotificationResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgDeleteNotificationSettingsResponse({ value }: msgDeleteNotificationSettingsResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.notifications.MsgDeleteNotificationSettingsResponse", value: MsgDeleteNotificationSettingsResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgDeleteNotificationSettingsResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryAllNotificationSettingsRequest({ value }: queryAllNotificationSettingsRequestParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.notifications.QueryAllNotificationSettingsRequest", value: QueryAllNotificationSettingsRequest.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryAllNotificationSettingsRequest: Could not create message: ' + e.message)
-			}
-		},
-		
 		queryAllNotificationSettingsResponse({ value }: queryAllNotificationSettingsResponseParams): EncodeObject {
 			try {
 				return { typeUrl: "/skillchain.notifications.QueryAllNotificationSettingsResponse", value: QueryAllNotificationSettingsResponse.fromPartial( value ) }  
 			} catch (e: any) {
 				throw new Error('TxClient:QueryAllNotificationSettingsResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdateParamsResponse({ value }: msgUpdateParamsResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.notifications.MsgUpdateParamsResponse", value: MsgUpdateParamsResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdateParamsResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdateNotification({ value }: msgUpdateNotificationParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.notifications.MsgUpdateNotification", value: MsgUpdateNotification.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdateNotification: Could not create message: ' + e.message)
+			}
+		},
+		
+		params({ value }: paramsParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.notifications.Params", value: Params.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:Params: Could not create message: ' + e.message)
+			}
+		},
+		
+		notification({ value }: notificationParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.notifications.Notification", value: Notification.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:Notification: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdateNotificationSettings({ value }: msgUpdateNotificationSettingsParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.notifications.MsgUpdateNotificationSettings", value: MsgUpdateNotificationSettings.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdateNotificationSettings: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdateParams({ value }: msgUpdateParamsParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.notifications.MsgUpdateParams", value: MsgUpdateParams.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdateParams: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -889,11 +865,35 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		queryGetNotificationSettingsRequest({ value }: queryGetNotificationSettingsRequestParams): EncodeObject {
+		queryGetNotificationRequest({ value }: queryGetNotificationRequestParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.notifications.QueryGetNotificationSettingsRequest", value: QueryGetNotificationSettingsRequest.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.notifications.QueryGetNotificationRequest", value: QueryGetNotificationRequest.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:QueryGetNotificationSettingsRequest: Could not create message: ' + e.message)
+				throw new Error('TxClient:QueryGetNotificationRequest: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryAllNotificationSettingsRequest({ value }: queryAllNotificationSettingsRequestParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.notifications.QueryAllNotificationSettingsRequest", value: QueryAllNotificationSettingsRequest.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryAllNotificationSettingsRequest: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgCreateNotificationResponse({ value }: msgCreateNotificationResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.notifications.MsgCreateNotificationResponse", value: MsgCreateNotificationResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgCreateNotificationResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgDeleteNotificationResponse({ value }: msgDeleteNotificationResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.notifications.MsgDeleteNotificationResponse", value: MsgDeleteNotificationResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgDeleteNotificationResponse: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -905,35 +905,27 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		msgUpdateNotification({ value }: msgUpdateNotificationParams): EncodeObject {
+		genesisState({ value }: genesisStateParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.notifications.MsgUpdateNotification", value: MsgUpdateNotification.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.notifications.GenesisState", value: GenesisState.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateNotification: Could not create message: ' + e.message)
+				throw new Error('TxClient:GenesisState: Could not create message: ' + e.message)
 			}
 		},
 		
-		msgUpdateParams({ value }: msgUpdateParamsParams): EncodeObject {
+		msgCreateNotificationSettings({ value }: msgCreateNotificationSettingsParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.notifications.MsgUpdateParams", value: MsgUpdateParams.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.notifications.MsgCreateNotificationSettings", value: MsgCreateNotificationSettings.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateParams: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgCreateNotificationSettings: Could not create message: ' + e.message)
 			}
 		},
 		
-		notification({ value }: notificationParams): EncodeObject {
+		msgDeleteNotificationSettings({ value }: msgDeleteNotificationSettingsParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.notifications.Notification", value: Notification.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.notifications.MsgDeleteNotificationSettings", value: MsgDeleteNotificationSettings.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:Notification: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryGetNotificationRequest({ value }: queryGetNotificationRequestParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.notifications.QueryGetNotificationRequest", value: QueryGetNotificationRequest.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryGetNotificationRequest: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgDeleteNotificationSettings: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -945,27 +937,35 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		msgUpdateParamsResponse({ value }: msgUpdateParamsResponseParams): EncodeObject {
+		queryAllNotificationResponse({ value }: queryAllNotificationResponseParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.notifications.MsgUpdateParamsResponse", value: MsgUpdateParamsResponse.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.notifications.QueryAllNotificationResponse", value: QueryAllNotificationResponse.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateParamsResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:QueryAllNotificationResponse: Could not create message: ' + e.message)
 			}
 		},
 		
-		msgUpdateNotificationSettings({ value }: msgUpdateNotificationSettingsParams): EncodeObject {
+		notificationSettings({ value }: notificationSettingsParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.notifications.MsgUpdateNotificationSettings", value: MsgUpdateNotificationSettings.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.notifications.NotificationSettings", value: NotificationSettings.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateNotificationSettings: Could not create message: ' + e.message)
+				throw new Error('TxClient:NotificationSettings: Could not create message: ' + e.message)
 			}
 		},
 		
-		msgUpdateNotificationResponse({ value }: msgUpdateNotificationResponseParams): EncodeObject {
+		queryGetNotificationResponse({ value }: queryGetNotificationResponseParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.notifications.MsgUpdateNotificationResponse", value: MsgUpdateNotificationResponse.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.notifications.QueryGetNotificationResponse", value: QueryGetNotificationResponse.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateNotificationResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:QueryGetNotificationResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryGetNotificationSettingsRequest({ value }: queryGetNotificationSettingsRequestParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.notifications.QueryGetNotificationSettingsRequest", value: QueryGetNotificationSettingsRequest.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryGetNotificationSettingsRequest: Could not create message: ' + e.message)
 			}
 		},
 		

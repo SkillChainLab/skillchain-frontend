@@ -7,74 +7,38 @@ import { IgniteClient } from "../client"
 import { MissingWalletError } from "../helpers"
 import { Api } from "./rest";
 import { MsgUpdateParams } from "./types/skillchain/skillchain/tx";
-import { MsgConvertSkillToVUSDResponse } from "./types/skillchain/skillchain/tx";
-import { MsgUpdateVUSDPriceResponse } from "./types/skillchain/skillchain/tx";
-import { Params } from "./types/skillchain/skillchain/params";
-import { QueryParamsResponse } from "./types/skillchain/skillchain/query";
-import { QueryTokenInfoResponse } from "./types/skillchain/skillchain/query";
-import { QueryVUSDTreasuryResponse } from "./types/skillchain/skillchain/query";
 import { MsgCreateProfile } from "./types/skillchain/skillchain/tx";
-import { MsgConvertVUSDToSkill } from "./types/skillchain/skillchain/tx";
-import { QueryParamsRequest } from "./types/skillchain/skillchain/query";
-import { QueryUserVUSDPositionResponse } from "./types/skillchain/skillchain/query";
-import { GenesisState } from "./types/skillchain/skillchain/genesis";
-import { MsgBurn } from "./types/skillchain/skillchain/tx";
-import { MsgConvertSkillToVUSD } from "./types/skillchain/skillchain/tx";
-import { MsgConvertVUSDToSkillResponse } from "./types/skillchain/skillchain/tx";
-import { MsgUpdateVUSDPrice } from "./types/skillchain/skillchain/tx";
+import { MsgConvertSkillToVUSDResponse } from "./types/skillchain/skillchain/tx";
+import { QueryParamsResponse } from "./types/skillchain/skillchain/query";
 import { QueryTokenInfoRequest } from "./types/skillchain/skillchain/query";
-import { QueryVUSDTreasuryRequest } from "./types/skillchain/skillchain/query";
-import { MsgUpdateParamsResponse } from "./types/skillchain/skillchain/tx";
-import { MsgBurnResponse } from "./types/skillchain/skillchain/tx";
-import { MsgCreateProfileResponse } from "./types/skillchain/skillchain/tx";
-import { QueryUserVUSDPositionRequest } from "./types/skillchain/skillchain/query";
+import { QueryUserVUSDPositionResponse } from "./types/skillchain/skillchain/query";
 import { VUSDTreasury } from "./types/skillchain/skillchain/vusd";
 import { UserVUSDPosition } from "./types/skillchain/skillchain/vusd";
+import { MsgCreateProfileResponse } from "./types/skillchain/skillchain/tx";
+import { MsgConvertVUSDToSkillResponse } from "./types/skillchain/skillchain/tx";
+import { MsgUpdateVUSDPriceResponse } from "./types/skillchain/skillchain/tx";
+import { Params } from "./types/skillchain/skillchain/params";
+import { QueryParamsRequest } from "./types/skillchain/skillchain/query";
+import { QueryTokenInfoResponse } from "./types/skillchain/skillchain/query";
+import { GenesisState } from "./types/skillchain/skillchain/genesis";
+import { MsgBurn } from "./types/skillchain/skillchain/tx";
+import { MsgUpdateParamsResponse } from "./types/skillchain/skillchain/tx";
+import { MsgConvertVUSDToSkill } from "./types/skillchain/skillchain/tx";
+import { MsgUpdateVUSDPrice } from "./types/skillchain/skillchain/tx";
+import { QueryVUSDTreasuryResponse } from "./types/skillchain/skillchain/query";
+import { MsgBurnResponse } from "./types/skillchain/skillchain/tx";
+import { MsgConvertSkillToVUSD } from "./types/skillchain/skillchain/tx";
+import { QueryVUSDTreasuryRequest } from "./types/skillchain/skillchain/query";
+import { QueryUserVUSDPositionRequest } from "./types/skillchain/skillchain/query";
 
 import { Params as typeParams} from "./types"
 import { VUSDTreasury as typeVUSDTreasury} from "./types"
 import { UserVUSDPosition as typeUserVUSDPosition} from "./types"
 
-export { MsgUpdateParams, MsgConvertSkillToVUSDResponse, MsgUpdateVUSDPriceResponse, Params, QueryParamsResponse, QueryTokenInfoResponse, QueryVUSDTreasuryResponse, MsgCreateProfile, MsgConvertVUSDToSkill, QueryParamsRequest, QueryUserVUSDPositionResponse, GenesisState, MsgBurn, MsgConvertSkillToVUSD, MsgConvertVUSDToSkillResponse, MsgUpdateVUSDPrice, QueryTokenInfoRequest, QueryVUSDTreasuryRequest, MsgUpdateParamsResponse, MsgBurnResponse, MsgCreateProfileResponse, QueryUserVUSDPositionRequest, VUSDTreasury, UserVUSDPosition };
+export { MsgUpdateParams, MsgCreateProfile, MsgConvertSkillToVUSDResponse, QueryParamsResponse, QueryTokenInfoRequest, QueryUserVUSDPositionResponse, VUSDTreasury, UserVUSDPosition, MsgCreateProfileResponse, MsgConvertVUSDToSkillResponse, MsgUpdateVUSDPriceResponse, Params, QueryParamsRequest, QueryTokenInfoResponse, GenesisState, MsgBurn, MsgUpdateParamsResponse, MsgConvertVUSDToSkill, MsgUpdateVUSDPrice, QueryVUSDTreasuryResponse, MsgBurnResponse, MsgConvertSkillToVUSD, QueryVUSDTreasuryRequest, QueryUserVUSDPositionRequest };
 
 type sendMsgUpdateParamsParams = {
   value: MsgUpdateParams,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgConvertSkillToVUSDResponseParams = {
-  value: MsgConvertSkillToVUSDResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgUpdateVUSDPriceResponseParams = {
-  value: MsgUpdateVUSDPriceResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendParamsParams = {
-  value: Params,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryParamsResponseParams = {
-  value: QueryParamsResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryTokenInfoResponseParams = {
-  value: QueryTokenInfoResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryVUSDTreasuryResponseParams = {
-  value: QueryVUSDTreasuryResponse,
   fee?: StdFee,
   memo?: string
 };
@@ -85,50 +49,14 @@ type sendMsgCreateProfileParams = {
   memo?: string
 };
 
-type sendMsgConvertVUSDToSkillParams = {
-  value: MsgConvertVUSDToSkill,
+type sendMsgConvertSkillToVUSDResponseParams = {
+  value: MsgConvertSkillToVUSDResponse,
   fee?: StdFee,
   memo?: string
 };
 
-type sendQueryParamsRequestParams = {
-  value: QueryParamsRequest,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryUserVUSDPositionResponseParams = {
-  value: QueryUserVUSDPositionResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendGenesisStateParams = {
-  value: GenesisState,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgBurnParams = {
-  value: MsgBurn,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgConvertSkillToVUSDParams = {
-  value: MsgConvertSkillToVUSD,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgConvertVUSDToSkillResponseParams = {
-  value: MsgConvertVUSDToSkillResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgUpdateVUSDPriceParams = {
-  value: MsgUpdateVUSDPrice,
+type sendQueryParamsResponseParams = {
+  value: QueryParamsResponse,
   fee?: StdFee,
   memo?: string
 };
@@ -139,32 +67,8 @@ type sendQueryTokenInfoRequestParams = {
   memo?: string
 };
 
-type sendQueryVUSDTreasuryRequestParams = {
-  value: QueryVUSDTreasuryRequest,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgUpdateParamsResponseParams = {
-  value: MsgUpdateParamsResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgBurnResponseParams = {
-  value: MsgBurnResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendMsgCreateProfileResponseParams = {
-  value: MsgCreateProfileResponse,
-  fee?: StdFee,
-  memo?: string
-};
-
-type sendQueryUserVUSDPositionRequestParams = {
-  value: QueryUserVUSDPositionRequest,
+type sendQueryUserVUSDPositionResponseParams = {
+  value: QueryUserVUSDPositionResponse,
   fee?: StdFee,
   memo?: string
 };
@@ -181,13 +85,141 @@ type sendUserVUSDPositionParams = {
   memo?: string
 };
 
+type sendMsgCreateProfileResponseParams = {
+  value: MsgCreateProfileResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgConvertVUSDToSkillResponseParams = {
+  value: MsgConvertVUSDToSkillResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateVUSDPriceResponseParams = {
+  value: MsgUpdateVUSDPriceResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendParamsParams = {
+  value: Params,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryParamsRequestParams = {
+  value: QueryParamsRequest,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryTokenInfoResponseParams = {
+  value: QueryTokenInfoResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendGenesisStateParams = {
+  value: GenesisState,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgBurnParams = {
+  value: MsgBurn,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateParamsResponseParams = {
+  value: MsgUpdateParamsResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgConvertVUSDToSkillParams = {
+  value: MsgConvertVUSDToSkill,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgUpdateVUSDPriceParams = {
+  value: MsgUpdateVUSDPrice,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryVUSDTreasuryResponseParams = {
+  value: QueryVUSDTreasuryResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgBurnResponseParams = {
+  value: MsgBurnResponse,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgConvertSkillToVUSDParams = {
+  value: MsgConvertSkillToVUSD,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryVUSDTreasuryRequestParams = {
+  value: QueryVUSDTreasuryRequest,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendQueryUserVUSDPositionRequestParams = {
+  value: QueryUserVUSDPositionRequest,
+  fee?: StdFee,
+  memo?: string
+};
+
 
 type msgUpdateParamsParams = {
   value: MsgUpdateParams,
 };
 
+type msgCreateProfileParams = {
+  value: MsgCreateProfile,
+};
+
 type msgConvertSkillToVusdresponseParams = {
   value: MsgConvertSkillToVUSDResponse,
+};
+
+type queryParamsResponseParams = {
+  value: QueryParamsResponse,
+};
+
+type queryTokenInfoRequestParams = {
+  value: QueryTokenInfoRequest,
+};
+
+type queryUserVusdpositionResponseParams = {
+  value: QueryUserVUSDPositionResponse,
+};
+
+type vusdtreasuryParams = {
+  value: VUSDTreasury,
+};
+
+type userVusdpositionParams = {
+  value: UserVUSDPosition,
+};
+
+type msgCreateProfileResponseParams = {
+  value: MsgCreateProfileResponse,
+};
+
+type msgConvertVusdtoSkillResponseParams = {
+  value: MsgConvertVUSDToSkillResponse,
 };
 
 type msgUpdateVusdpriceResponseParams = {
@@ -198,32 +230,12 @@ type paramsParams = {
   value: Params,
 };
 
-type queryParamsResponseParams = {
-  value: QueryParamsResponse,
-};
-
-type queryTokenInfoResponseParams = {
-  value: QueryTokenInfoResponse,
-};
-
-type queryVusdtreasuryResponseParams = {
-  value: QueryVUSDTreasuryResponse,
-};
-
-type msgCreateProfileParams = {
-  value: MsgCreateProfile,
-};
-
-type msgConvertVusdtoSkillParams = {
-  value: MsgConvertVUSDToSkill,
-};
-
 type queryParamsRequestParams = {
   value: QueryParamsRequest,
 };
 
-type queryUserVusdpositionResponseParams = {
-  value: QueryUserVUSDPositionResponse,
+type queryTokenInfoResponseParams = {
+  value: QueryTokenInfoResponse,
 };
 
 type genesisStateParams = {
@@ -234,48 +246,36 @@ type msgBurnParams = {
   value: MsgBurn,
 };
 
-type msgConvertSkillToVusdParams = {
-  value: MsgConvertSkillToVUSD,
+type msgUpdateParamsResponseParams = {
+  value: MsgUpdateParamsResponse,
 };
 
-type msgConvertVusdtoSkillResponseParams = {
-  value: MsgConvertVUSDToSkillResponse,
+type msgConvertVusdtoSkillParams = {
+  value: MsgConvertVUSDToSkill,
 };
 
 type msgUpdateVusdpriceParams = {
   value: MsgUpdateVUSDPrice,
 };
 
-type queryTokenInfoRequestParams = {
-  value: QueryTokenInfoRequest,
-};
-
-type queryVusdtreasuryRequestParams = {
-  value: QueryVUSDTreasuryRequest,
-};
-
-type msgUpdateParamsResponseParams = {
-  value: MsgUpdateParamsResponse,
+type queryVusdtreasuryResponseParams = {
+  value: QueryVUSDTreasuryResponse,
 };
 
 type msgBurnResponseParams = {
   value: MsgBurnResponse,
 };
 
-type msgCreateProfileResponseParams = {
-  value: MsgCreateProfileResponse,
+type msgConvertSkillToVusdParams = {
+  value: MsgConvertSkillToVUSD,
+};
+
+type queryVusdtreasuryRequestParams = {
+  value: QueryVUSDTreasuryRequest,
 };
 
 type queryUserVusdpositionRequestParams = {
   value: QueryUserVUSDPositionRequest,
-};
-
-type vusdtreasuryParams = {
-  value: VUSDTreasury,
-};
-
-type userVusdpositionParams = {
-  value: UserVUSDPosition,
 };
 
 
@@ -322,6 +322,20 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
+		async sendMsgCreateProfile({ value, fee, memo }: sendMsgCreateProfileParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgCreateProfile: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgCreateProfile({ value: MsgCreateProfile.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgCreateProfile: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
 		async sendMsgConvertSkillToVUSDResponse({ value, fee, memo }: sendMsgConvertSkillToVUSDResponseParams): Promise<DeliverTxResponse> {
 			if (!signer) {
 					throw new Error('TxClient:sendMsgConvertSkillToVUSDResponse: Unable to sign Tx. Signer is not present.')
@@ -333,34 +347,6 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
 				throw new Error('TxClient:sendMsgConvertSkillToVUSDResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgUpdateVUSDPriceResponse({ value, fee, memo }: sendMsgUpdateVUSDPriceResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateVUSDPriceResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateVusdpriceResponse({ value: MsgUpdateVUSDPriceResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateVUSDPriceResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendParams({ value, fee, memo }: sendParamsParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendParams: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.params({ value: Params.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendParams: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -378,160 +364,6 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendQueryTokenInfoResponse({ value, fee, memo }: sendQueryTokenInfoResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryTokenInfoResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryTokenInfoResponse({ value: QueryTokenInfoResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryTokenInfoResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryVUSDTreasuryResponse({ value, fee, memo }: sendQueryVUSDTreasuryResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryVUSDTreasuryResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryVusdtreasuryResponse({ value: QueryVUSDTreasuryResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryVUSDTreasuryResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgCreateProfile({ value, fee, memo }: sendMsgCreateProfileParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgCreateProfile: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgCreateProfile({ value: MsgCreateProfile.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreateProfile: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgConvertVUSDToSkill({ value, fee, memo }: sendMsgConvertVUSDToSkillParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgConvertVUSDToSkill: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgConvertVusdtoSkill({ value: MsgConvertVUSDToSkill.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgConvertVUSDToSkill: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryParamsRequest({ value, fee, memo }: sendQueryParamsRequestParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryParamsRequest: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryParamsRequest({ value: QueryParamsRequest.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryParamsRequest: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryUserVUSDPositionResponse({ value, fee, memo }: sendQueryUserVUSDPositionResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryUserVUSDPositionResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryUserVusdpositionResponse({ value: QueryUserVUSDPositionResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryUserVUSDPositionResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendGenesisState({ value, fee, memo }: sendGenesisStateParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendGenesisState: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.genesisState({ value: GenesisState.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendGenesisState: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgBurn({ value, fee, memo }: sendMsgBurnParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgBurn: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgBurn({ value: MsgBurn.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgBurn: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgConvertSkillToVUSD({ value, fee, memo }: sendMsgConvertSkillToVUSDParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgConvertSkillToVUSD: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgConvertSkillToVusd({ value: MsgConvertSkillToVUSD.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgConvertSkillToVUSD: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgConvertVUSDToSkillResponse({ value, fee, memo }: sendMsgConvertVUSDToSkillResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgConvertVUSDToSkillResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgConvertVusdtoSkillResponse({ value: MsgConvertVUSDToSkillResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgConvertVUSDToSkillResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgUpdateVUSDPrice({ value, fee, memo }: sendMsgUpdateVUSDPriceParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateVUSDPrice: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateVusdprice({ value: MsgUpdateVUSDPrice.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateVUSDPrice: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
 		async sendQueryTokenInfoRequest({ value, fee, memo }: sendQueryTokenInfoRequestParams): Promise<DeliverTxResponse> {
 			if (!signer) {
 					throw new Error('TxClient:sendQueryTokenInfoRequest: Unable to sign Tx. Signer is not present.')
@@ -546,73 +378,17 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		async sendQueryVUSDTreasuryRequest({ value, fee, memo }: sendQueryVUSDTreasuryRequestParams): Promise<DeliverTxResponse> {
+		async sendQueryUserVUSDPositionResponse({ value, fee, memo }: sendQueryUserVUSDPositionResponseParams): Promise<DeliverTxResponse> {
 			if (!signer) {
-					throw new Error('TxClient:sendQueryVUSDTreasuryRequest: Unable to sign Tx. Signer is not present.')
+					throw new Error('TxClient:sendQueryUserVUSDPositionResponse: Unable to sign Tx. Signer is not present.')
 			}
 			try {			
 				const { address } = (await signer.getAccounts())[0]; 
 				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryVusdtreasuryRequest({ value: QueryVUSDTreasuryRequest.fromPartial(value) })
+				let msg = this.queryUserVusdpositionResponse({ value: QueryUserVUSDPositionResponse.fromPartial(value) })
 				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
 			} catch (e: any) {
-				throw new Error('TxClient:sendQueryVUSDTreasuryRequest: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgUpdateParamsResponse({ value, fee, memo }: sendMsgUpdateParamsResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgUpdateParamsResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgUpdateParamsResponse({ value: MsgUpdateParamsResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgUpdateParamsResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgBurnResponse({ value, fee, memo }: sendMsgBurnResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgBurnResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgBurnResponse({ value: MsgBurnResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgBurnResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendMsgCreateProfileResponse({ value, fee, memo }: sendMsgCreateProfileResponseParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendMsgCreateProfileResponse: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.msgCreateProfileResponse({ value: MsgCreateProfileResponse.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendMsgCreateProfileResponse: Could not broadcast Tx: '+ e.message)
-			}
-		},
-		
-		async sendQueryUserVUSDPositionRequest({ value, fee, memo }: sendQueryUserVUSDPositionRequestParams): Promise<DeliverTxResponse> {
-			if (!signer) {
-					throw new Error('TxClient:sendQueryUserVUSDPositionRequest: Unable to sign Tx. Signer is not present.')
-			}
-			try {			
-				const { address } = (await signer.getAccounts())[0]; 
-				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
-				let msg = this.queryUserVusdpositionRequest({ value: QueryUserVUSDPositionRequest.fromPartial(value) })
-				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
-			} catch (e: any) {
-				throw new Error('TxClient:sendQueryUserVUSDPositionRequest: Could not broadcast Tx: '+ e.message)
+				throw new Error('TxClient:sendQueryUserVUSDPositionResponse: Could not broadcast Tx: '+ e.message)
 			}
 		},
 		
@@ -644,6 +420,230 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
+		async sendMsgCreateProfileResponse({ value, fee, memo }: sendMsgCreateProfileResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgCreateProfileResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgCreateProfileResponse({ value: MsgCreateProfileResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgCreateProfileResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgConvertVUSDToSkillResponse({ value, fee, memo }: sendMsgConvertVUSDToSkillResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgConvertVUSDToSkillResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgConvertVusdtoSkillResponse({ value: MsgConvertVUSDToSkillResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgConvertVUSDToSkillResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateVUSDPriceResponse({ value, fee, memo }: sendMsgUpdateVUSDPriceResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateVUSDPriceResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdateVusdpriceResponse({ value: MsgUpdateVUSDPriceResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateVUSDPriceResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendParams({ value, fee, memo }: sendParamsParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendParams: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.params({ value: Params.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendParams: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryParamsRequest({ value, fee, memo }: sendQueryParamsRequestParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryParamsRequest: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryParamsRequest({ value: QueryParamsRequest.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryParamsRequest: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryTokenInfoResponse({ value, fee, memo }: sendQueryTokenInfoResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryTokenInfoResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryTokenInfoResponse({ value: QueryTokenInfoResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryTokenInfoResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendGenesisState({ value, fee, memo }: sendGenesisStateParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendGenesisState: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.genesisState({ value: GenesisState.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendGenesisState: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgBurn({ value, fee, memo }: sendMsgBurnParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgBurn: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgBurn({ value: MsgBurn.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgBurn: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateParamsResponse({ value, fee, memo }: sendMsgUpdateParamsResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateParamsResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdateParamsResponse({ value: MsgUpdateParamsResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateParamsResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgConvertVUSDToSkill({ value, fee, memo }: sendMsgConvertVUSDToSkillParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgConvertVUSDToSkill: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgConvertVusdtoSkill({ value: MsgConvertVUSDToSkill.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgConvertVUSDToSkill: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgUpdateVUSDPrice({ value, fee, memo }: sendMsgUpdateVUSDPriceParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateVUSDPrice: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgUpdateVusdprice({ value: MsgUpdateVUSDPrice.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateVUSDPrice: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryVUSDTreasuryResponse({ value, fee, memo }: sendQueryVUSDTreasuryResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryVUSDTreasuryResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryVusdtreasuryResponse({ value: QueryVUSDTreasuryResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryVUSDTreasuryResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgBurnResponse({ value, fee, memo }: sendMsgBurnResponseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgBurnResponse: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgBurnResponse({ value: MsgBurnResponse.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgBurnResponse: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgConvertSkillToVUSD({ value, fee, memo }: sendMsgConvertSkillToVUSDParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgConvertSkillToVUSD: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.msgConvertSkillToVusd({ value: MsgConvertSkillToVUSD.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgConvertSkillToVUSD: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryVUSDTreasuryRequest({ value, fee, memo }: sendQueryVUSDTreasuryRequestParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryVUSDTreasuryRequest: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryVusdtreasuryRequest({ value: QueryVUSDTreasuryRequest.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryVUSDTreasuryRequest: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendQueryUserVUSDPositionRequest({ value, fee, memo }: sendQueryUserVUSDPositionRequestParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendQueryUserVUSDPositionRequest: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry});
+				let msg = this.queryUserVusdpositionRequest({ value: QueryUserVUSDPositionRequest.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendQueryUserVUSDPositionRequest: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
 		
 		msgUpdateParams({ value }: msgUpdateParamsParams): EncodeObject {
 			try {
@@ -653,11 +653,75 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
+		msgCreateProfile({ value }: msgCreateProfileParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.skillchain.MsgCreateProfile", value: MsgCreateProfile.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgCreateProfile: Could not create message: ' + e.message)
+			}
+		},
+		
 		msgConvertSkillToVusdresponse({ value }: msgConvertSkillToVusdresponseParams): EncodeObject {
 			try {
 				return { typeUrl: "/skillchain.skillchain.MsgConvertSkillToVUSDResponse", value: MsgConvertSkillToVUSDResponse.fromPartial( value ) }  
 			} catch (e: any) {
 				throw new Error('TxClient:MsgConvertSkillToVUSDResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryParamsResponse({ value }: queryParamsResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.skillchain.QueryParamsResponse", value: QueryParamsResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryParamsResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryTokenInfoRequest({ value }: queryTokenInfoRequestParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.skillchain.QueryTokenInfoRequest", value: QueryTokenInfoRequest.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryTokenInfoRequest: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryUserVusdpositionResponse({ value }: queryUserVusdpositionResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.skillchain.QueryUserVUSDPositionResponse", value: QueryUserVUSDPositionResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryUserVUSDPositionResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		vusdtreasury({ value }: vusdtreasuryParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.skillchain.VUSDTreasury", value: VUSDTreasury.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:VUSDTreasury: Could not create message: ' + e.message)
+			}
+		},
+		
+		userVusdposition({ value }: userVusdpositionParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.skillchain.UserVUSDPosition", value: UserVUSDPosition.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:UserVUSDPosition: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgCreateProfileResponse({ value }: msgCreateProfileResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.skillchain.MsgCreateProfileResponse", value: MsgCreateProfileResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgCreateProfileResponse: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgConvertVusdtoSkillResponse({ value }: msgConvertVusdtoSkillResponseParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.skillchain.MsgConvertVUSDToSkillResponse", value: MsgConvertVUSDToSkillResponse.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgConvertVUSDToSkillResponse: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -677,46 +741,6 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		queryParamsResponse({ value }: queryParamsResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.skillchain.QueryParamsResponse", value: QueryParamsResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryParamsResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryTokenInfoResponse({ value }: queryTokenInfoResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.skillchain.QueryTokenInfoResponse", value: QueryTokenInfoResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryTokenInfoResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryVusdtreasuryResponse({ value }: queryVusdtreasuryResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.skillchain.QueryVUSDTreasuryResponse", value: QueryVUSDTreasuryResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryVUSDTreasuryResponse: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgCreateProfile({ value }: msgCreateProfileParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.skillchain.MsgCreateProfile", value: MsgCreateProfile.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgCreateProfile: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgConvertVusdtoSkill({ value }: msgConvertVusdtoSkillParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.skillchain.MsgConvertVUSDToSkill", value: MsgConvertVUSDToSkill.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgConvertVUSDToSkill: Could not create message: ' + e.message)
-			}
-		},
-		
 		queryParamsRequest({ value }: queryParamsRequestParams): EncodeObject {
 			try {
 				return { typeUrl: "/skillchain.skillchain.QueryParamsRequest", value: QueryParamsRequest.fromPartial( value ) }  
@@ -725,11 +749,11 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		queryUserVusdpositionResponse({ value }: queryUserVusdpositionResponseParams): EncodeObject {
+		queryTokenInfoResponse({ value }: queryTokenInfoResponseParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.skillchain.QueryUserVUSDPositionResponse", value: QueryUserVUSDPositionResponse.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.skillchain.QueryTokenInfoResponse", value: QueryTokenInfoResponse.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:QueryUserVUSDPositionResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:QueryTokenInfoResponse: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -749,19 +773,19 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		msgConvertSkillToVusd({ value }: msgConvertSkillToVusdParams): EncodeObject {
+		msgUpdateParamsResponse({ value }: msgUpdateParamsResponseParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.skillchain.MsgConvertSkillToVUSD", value: MsgConvertSkillToVUSD.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.skillchain.MsgUpdateParamsResponse", value: MsgUpdateParamsResponse.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgConvertSkillToVUSD: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgUpdateParamsResponse: Could not create message: ' + e.message)
 			}
 		},
 		
-		msgConvertVusdtoSkillResponse({ value }: msgConvertVusdtoSkillResponseParams): EncodeObject {
+		msgConvertVusdtoSkill({ value }: msgConvertVusdtoSkillParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.skillchain.MsgConvertVUSDToSkillResponse", value: MsgConvertVUSDToSkillResponse.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.skillchain.MsgConvertVUSDToSkill", value: MsgConvertVUSDToSkill.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgConvertVUSDToSkillResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgConvertVUSDToSkill: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -773,27 +797,11 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		queryTokenInfoRequest({ value }: queryTokenInfoRequestParams): EncodeObject {
+		queryVusdtreasuryResponse({ value }: queryVusdtreasuryResponseParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.skillchain.QueryTokenInfoRequest", value: QueryTokenInfoRequest.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.skillchain.QueryVUSDTreasuryResponse", value: QueryVUSDTreasuryResponse.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:QueryTokenInfoRequest: Could not create message: ' + e.message)
-			}
-		},
-		
-		queryVusdtreasuryRequest({ value }: queryVusdtreasuryRequestParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.skillchain.QueryVUSDTreasuryRequest", value: QueryVUSDTreasuryRequest.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:QueryVUSDTreasuryRequest: Could not create message: ' + e.message)
-			}
-		},
-		
-		msgUpdateParamsResponse({ value }: msgUpdateParamsResponseParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.skillchain.MsgUpdateParamsResponse", value: MsgUpdateParamsResponse.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:MsgUpdateParamsResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:QueryVUSDTreasuryResponse: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -805,11 +813,19 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
-		msgCreateProfileResponse({ value }: msgCreateProfileResponseParams): EncodeObject {
+		msgConvertSkillToVusd({ value }: msgConvertSkillToVusdParams): EncodeObject {
 			try {
-				return { typeUrl: "/skillchain.skillchain.MsgCreateProfileResponse", value: MsgCreateProfileResponse.fromPartial( value ) }  
+				return { typeUrl: "/skillchain.skillchain.MsgConvertSkillToVUSD", value: MsgConvertSkillToVUSD.fromPartial( value ) }  
 			} catch (e: any) {
-				throw new Error('TxClient:MsgCreateProfileResponse: Could not create message: ' + e.message)
+				throw new Error('TxClient:MsgConvertSkillToVUSD: Could not create message: ' + e.message)
+			}
+		},
+		
+		queryVusdtreasuryRequest({ value }: queryVusdtreasuryRequestParams): EncodeObject {
+			try {
+				return { typeUrl: "/skillchain.skillchain.QueryVUSDTreasuryRequest", value: QueryVUSDTreasuryRequest.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:QueryVUSDTreasuryRequest: Could not create message: ' + e.message)
 			}
 		},
 		
@@ -818,22 +834,6 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 				return { typeUrl: "/skillchain.skillchain.QueryUserVUSDPositionRequest", value: QueryUserVUSDPositionRequest.fromPartial( value ) }  
 			} catch (e: any) {
 				throw new Error('TxClient:QueryUserVUSDPositionRequest: Could not create message: ' + e.message)
-			}
-		},
-		
-		vusdtreasury({ value }: vusdtreasuryParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.skillchain.VUSDTreasury", value: VUSDTreasury.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:VUSDTreasury: Could not create message: ' + e.message)
-			}
-		},
-		
-		userVusdposition({ value }: userVusdpositionParams): EncodeObject {
-			try {
-				return { typeUrl: "/skillchain.skillchain.UserVUSDPosition", value: UserVUSDPosition.fromPartial( value ) }  
-			} catch (e: any) {
-				throw new Error('TxClient:UserVUSDPosition: Could not create message: ' + e.message)
 			}
 		},
 		
