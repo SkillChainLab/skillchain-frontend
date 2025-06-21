@@ -1,84 +1,90 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { MongoClient, ObjectId } from 'mongodb'
 
-// MongoDB Atlas connection
-const MONGODB_URI = process.env.MONGODB_URI || ''
-const MONGODB_DB = process.env.MONGODB_DB || 'skillchain-social'
+// Simple in-memory storage for conversations (in production, this would be a proper database)
+const conversations: any[] = []
 
-let client: MongoClient
-let clientPromise: Promise<MongoClient>
-
-if (!MONGODB_URI) {
-  throw new Error('Please add your MongoDB URI to .env.local')
-}
-
-if (process.env.NODE_ENV === 'development') {
-  if (!(global as any)._mongoClientPromise) {
-    client = new MongoClient(MONGODB_URI)
-    ;(global as any)._mongoClientPromise = client.connect()
-  }
-  clientPromise = (global as any)._mongoClientPromise
-} else {
-  client = new MongoClient(MONGODB_URI)
-  clientPromise = client.connect()
-}
-
-// Create new conversation
-export async function POST(request: NextRequest) {
+export async function GET(request: NextRequest) {
   try {
-    const { participantId, metadata } = await request.json()
-    
-    // Get wallet address from headers (set by middleware/auth)
-    const currentUser = request.headers.get('x-wallet-address')
-    
-    if (!currentUser) {
+    // Get current user from Authorization header
+    const authHeader = request.headers.get('Authorization')
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return NextResponse.json({ error: 'Authentication required' }, { status: 401 })
     }
+    
+    const currentUser = authHeader.substring(7) // Remove 'Bearer ' prefix
 
-    if (!participantId) {
-      return NextResponse.json({ error: 'participantId is required' }, { status: 400 })
+    console.log('💬 Getting conversations for user:', currentUser)
+
+    // Filter conversations where user is a participant
+    const userConversations = conversations.filter(conv => 
+      conv.participants.includes(currentUser)
+    )
+
+    console.log('✅ Returning conversations:', userConversations.length)
+    return NextResponse.json(userConversations)
+
+  } catch (error) {
+    console.error('Error fetching conversations:', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const { participantId, message } = await request.json()
+    
+    // Get current user from Authorization header
+    const authHeader = request.headers.get('Authorization')
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return NextResponse.json({ error: 'Authentication required' }, { status: 401 })
+    }
+    
+    const currentUser = authHeader.substring(7) // Remove 'Bearer ' prefix
+
+    if (!participantId || !message) {
+      return NextResponse.json({ error: 'participantId and message are required' }, { status: 400 })
     }
 
-    if (currentUser === participantId) {
-      return NextResponse.json({ error: 'Cannot create conversation with yourself' }, { status: 400 })
-    }
+    console.log('💬 Creating conversation between:', currentUser, 'and:', participantId)
 
-    const mongoClient = await clientPromise
-    const db = mongoClient.db(MONGODB_DB)
-    const conversations = db.collection('conversations')
-
-    // Check if conversation already exists between these users
-    const existingConversation = await conversations.findOne({
-      participants: { $all: [currentUser, participantId] },
-      isActive: true
-    })
+    // Check if conversation already exists
+    const existingConversation = conversations.find(conv => 
+      conv.participants.includes(currentUser) && conv.participants.includes(participantId)
+    )
 
     if (existingConversation) {
-      return NextResponse.json({
-        id: existingConversation._id.toString(),
-        participants: existingConversation.participants,
-        lastActivity: existingConversation.lastActivity,
-        isActive: existingConversation.isActive,
-        metadata: existingConversation.metadata
-      })
+      // Add message to existing conversation
+      const newMessage = {
+        id: Date.now().toString(),
+        senderId: currentUser,
+        content: message,
+        createdAt: new Date()
+      }
+      
+      existingConversation.messages.push(newMessage)
+      existingConversation.updatedAt = new Date()
+      
+      return NextResponse.json(existingConversation)
+    } else {
+      // Create new conversation
+      const newConversation = {
+        id: Date.now().toString(),
+        participants: [currentUser, participantId],
+        messages: [{
+          id: Date.now().toString(),
+          senderId: currentUser,
+          content: message,
+          createdAt: new Date()
+        }],
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }
+      
+      conversations.push(newConversation)
+      
+      console.log('✅ New conversation created')
+      return NextResponse.json(newConversation)
     }
-
-    // Create new conversation
-    const newConversation = {
-      participants: [currentUser, participantId],
-      lastActivity: new Date().toISOString(),
-      isActive: true,
-      metadata: metadata || {},
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    }
-
-    const result = await conversations.insertOne(newConversation)
-
-    return NextResponse.json({
-      id: result.insertedId.toString(),
-      ...newConversation
-    })
 
   } catch (error) {
     console.error('Error creating conversation:', error)

@@ -8,6 +8,7 @@ import { useWallet } from '@/contexts/WalletContext'
 import { profileApi } from '@/lib/api'
 import { ProfileImageUpload } from '@/lib/profileImageUpload'
 import { socialApi, UserConnection } from '@/lib/socialApi'
+import { useSearchParams } from 'next/navigation'
 
 interface UserProfile {
   id: string
@@ -76,6 +77,12 @@ export default function ProfilePage() {
   const [isMessaging, setIsMessaging] = useState(false)
   
   const { walletInfo } = useWallet()
+  const searchParams = useSearchParams()
+  
+  // Get the user parameter from URL
+  const targetUser = searchParams.get('user')
+  const isViewingOtherUser = targetUser && targetUser !== walletInfo?.address
+  const profileAddress = targetUser || walletInfo?.address
 
   // Profile form state
   const [profileForm, setProfileForm] = useState({
@@ -99,12 +106,12 @@ export default function ProfilePage() {
     experience: ''
   })
 
-  // Load user profile on wallet connection
+  // Load user profile on wallet connection or URL change
   useEffect(() => {
-    if (walletInfo) {
+    if (walletInfo && profileAddress) {
       loadUserProfile()
     }
-  }, [walletInfo])
+  }, [walletInfo, profileAddress])
 
   // Load social connection status when viewing other user's profile
   useEffect(() => {
@@ -122,16 +129,16 @@ export default function ProfilePage() {
   }, [user?.avatar])
 
   const loadUserProfile = async () => {
-    if (!walletInfo) return
+    if (!walletInfo || !profileAddress) return
     
     try {
       setIsLoading(true)
       
-      console.log('Querying blockchain for profile data...')
+      console.log('Querying blockchain for profile data for address:', profileAddress)
       
       // Query profile from blockchain using gRPC-web or REST API
       try {
-        const response = await fetch(`/api/skillchain/skillchain/v1/profiles/${walletInfo.address}`)
+        const response = await fetch(`/api/skillchain/skillchain/v1/profiles/${profileAddress}`)
         
         if (response.ok) {
           const profileData = await response.json()
@@ -142,13 +149,13 @@ export default function ProfilePage() {
             const profile = profileData.profile || profileData.data
             
             // Store profile index for updates
-            setProfileIndex(profile.index || `profile-${walletInfo.address.slice(-8)}`)
+            setProfileIndex(profile.index || `profile-${profileAddress.slice(-8)}`)
             
             // Also fetch user skills
             let userSkills: string[] = []
             let userSkillsDetailed: any[] = []
             try {
-              const skillsResponse = await fetch(`/api/skillchain/skillchain/v1/profiles/${walletInfo.address}/skills`)
+              const skillsResponse = await fetch(`/api/skillchain/skillchain/v1/profiles/${profileAddress}/skills`)
               if (skillsResponse.ok) {
                 const skillsData = await skillsResponse.json()
                 console.log('Skills data from blockchain:', skillsData)
@@ -168,8 +175,8 @@ export default function ProfilePage() {
             }
             
             setUser({
-              id: profile.creator || walletInfo.address,
-              address: profile.creator || walletInfo.address,
+              id: profile.creator || profileAddress,
+              address: profile.creator || profileAddress,
               name: profile.displayName || profile.name || profile.display_name || 'Unknown User',
               title: profile.bio || profile.description || 'SkillChain User',
               avatar: profile.avatar || undefined,
@@ -194,7 +201,7 @@ export default function ProfilePage() {
               connections: 0,
               posts: 0,
               isConnected: false,
-              isOwnProfile: true
+              isOwnProfile: !isViewingOtherUser // Set based on whether viewing other user
             })
           } else {
             console.log('No profile found on blockchain')
@@ -753,11 +760,22 @@ Your skill is now on the blockchain!`)
     
     // If IPFS protocol URL, convert to gateway URL
     if (avatar.startsWith('ipfs://')) {
-      return ProfileImageUpload.getIPFSUrl(avatar.replace('ipfs://', ''))
+      const hash = avatar.replace('ipfs://', '')
+      // Validate IPFS hash length (should be 46+ characters for Qm hashes)
+      if (hash.length < 20) {
+        console.warn('❌ Invalid IPFS hash (too short):', hash)
+        return null
+      }
+      return ProfileImageUpload.getIPFSUrl(hash)
     }
     
     // If just IPFS hash (Qm... format), convert to gateway URL
     if (avatar.startsWith('Qm') || avatar.startsWith('bafy')) {
+      // Validate IPFS hash length
+      if (avatar.length < 20) {
+        console.warn('❌ Invalid IPFS hash (too short):', avatar)
+        return null
+      }
       return ProfileImageUpload.getIPFSUrl(avatar)
     }
     
@@ -1111,30 +1129,68 @@ Your skill is now on the blockchain!`)
                 <div className="flex flex-col items-center lg:items-start">
                   {/* Profile Image */}
                   <div className="relative">
-                    <div className="w-24 h-24 lg:w-32 lg:h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl lg:text-3xl font-bold">
-                      {user?.avatar ? (
+                    <div className="w-24 h-24 lg:w-32 lg:h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl lg:text-3xl font-bold overflow-hidden">
+                      {user?.avatar && getAvatarUrl(user.avatar) ? (
                         <>
                           <img 
                             src={getAvatarUrl(user.avatar) || undefined} 
                             alt={user.name}
                             className="w-full h-full rounded-full object-cover"
-                            onLoad={() => console.log('✅ Avatar loaded:', getAvatarUrl(user.avatar))}
+                            onLoad={() => console.log('✅ Avatar loaded successfully:', getAvatarUrl(user.avatar))}
                             onError={(e) => {
                               console.log('❌ Avatar image failed to load:', getAvatarUrl(user.avatar))
+                              console.log('🔧 Raw avatar value:', user.avatar)
+                              
                               const target = e.currentTarget as HTMLImageElement
+                              const currentSrc = target.src
+                              
+                              // Try alternative IPFS gateways
+                              if (user?.avatar) {
+                                // Extract IPFS hash from current avatar URL
+                                let ipfsHash = user.avatar
+                                if (ipfsHash.includes('/ipfs/')) {
+                                  ipfsHash = ipfsHash.split('/ipfs/')[1]
+                                }
+                                
+                                const fallbackUrls = ProfileImageUpload.getIPFSUrlsWithFallback(ipfsHash)
+                                const currentIndex = fallbackUrls.findIndex(url => url === currentSrc)
+                                const nextIndex = currentIndex + 1
+                                
+                                if (nextIndex < fallbackUrls.length) {
+                                  console.log(`🔄 Trying fallback gateway ${nextIndex + 1}/${fallbackUrls.length}:`, fallbackUrls[nextIndex])
+                                  target.src = fallbackUrls[nextIndex]
+                                  return
+                                }
+                              }
+                              
+                              // All gateways failed, show fallback
+                              console.log('❌ All IPFS gateways failed, showing fallback avatar')
                               target.style.display = 'none'
                               const fallback = target.parentElement?.querySelector('.fallback-avatar') as HTMLElement
                               if (fallback) {
                                 fallback.style.display = 'flex'
+                                fallback.style.flexDirection = 'column'
+                                fallback.style.alignItems = 'center'
+                                fallback.style.justifyContent = 'center'
                               }
                             }}
                           />
-                          <div className="fallback-avatar" style={{ display: 'none' }}>
-                            {user.name[0]}
+                          <div className="fallback-avatar w-full h-full flex flex-col items-center justify-center" style={{ display: 'none' }}>
+                            <div className="text-2xl lg:text-3xl font-bold mb-1">{user.name[0]}</div>
+                            <div className="text-xs text-center opacity-75 px-2">
+                              Avatar failed to load
+                            </div>
                           </div>
                         </>
                       ) : (
-                        user?.name[0]
+                        <div className="w-full h-full flex flex-col items-center justify-center">
+                          <div className="text-2xl lg:text-3xl font-bold mb-1">{user?.name[0]}</div>
+                          {user?.avatar && (
+                            <div className="text-xs text-center opacity-75 px-2">
+                              Invalid avatar URL
+                            </div>
+                          )}
+                        </div>
                       )}
                     </div>
                     {user?.isOwnProfile && (

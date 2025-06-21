@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { ArrowLeft, Plus, Heart, MessageCircle, Share2, Bookmark, MoreHorizontal, Users, TrendingUp, Image, Video, FileText, Camera, Send, Globe } from 'lucide-react'
+import { ArrowLeft, Plus, Heart, MessageCircle, Share2, Bookmark, MoreHorizontal, Users, TrendingUp, Image, Video, FileText, Camera, Send, Globe, Search, X } from 'lucide-react'
 import Link from 'next/link'
 import Footer from '@/components/Footer'
 import { useWallet } from '@/contexts/WalletContext'
@@ -115,6 +115,12 @@ export default function SocialPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [connectionRequests, setConnectionRequests] = useState<UserConnection[]>([])
   
+  // Search functionality state
+  const [showSearch, setShowSearch] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [searchResults, setSearchResults] = useState<SocialProfile[]>([])
+  const [isSearching, setIsSearching] = useState(false)
+  
   const { walletInfo } = useWallet()
 
   // Load social data when wallet is connected
@@ -124,26 +130,67 @@ export default function SocialPage() {
     }
   }, [walletInfo])
 
+  // Search users when query changes
+  useEffect(() => {
+    if (searchQuery.trim() && walletInfo) {
+      const timeoutId = setTimeout(() => {
+        handleSearch()
+      }, 500) // Debounce search
+      
+      return () => clearTimeout(timeoutId)
+    } else {
+      setSearchResults([])
+    }
+  }, [searchQuery, walletInfo])
+
   const loadSocialData = async () => {
     if (!walletInfo) return
     
     setIsLoading(true)
     try {
-      // Load suggested connections
-      const suggestions = await socialApi.getSuggestedConnections(walletInfo.address, 5)
-      setConnections(suggestions)
+      console.log('🔄 Loading social data for user:', walletInfo.address)
+      
+      // Load suggested connections with wallet address in Authorization header
+      const suggestions = await fetch(`/api/social/users/suggestions/${walletInfo.address}?limit=5`, {
+        headers: {
+          'Authorization': `Bearer ${walletInfo.address}`
+        }
+      })
+      
+      console.log('📡 Suggestions API response status:', suggestions.status)
+      
+      if (suggestions.ok) {
+        const suggestionsData = await suggestions.json()
+        console.log('📋 Suggestions data received:', suggestionsData)
+        setConnections(suggestionsData)
+      } else {
+        console.error('❌ Suggestions API failed:', suggestions.status, suggestions.statusText)
+      }
       
       // Load pending connection requests
-      const requests = await socialApi.getUserConnections(walletInfo.address, 'pending')
-      setConnectionRequests(requests.filter(req => req.toUser === walletInfo.address))
+      const requests = await fetch(`/api/social/users/${walletInfo.address}?status=pending`, {
+        headers: {
+          'Authorization': `Bearer ${walletInfo.address}`
+        }
+      })
       
-      // Update online status
-      await socialApi.updateOnlineStatus(true)
+      console.log('📡 Requests API response status:', requests.status)
+      
+      if (requests.ok) {
+        const requestsData = await requests.json()
+        console.log('📋 Requests data received:', requestsData)
+        const filteredRequests = requestsData.filter((req: UserConnection) => req.toUser === walletInfo.address)
+        console.log('📋 Filtered requests for current user:', filteredRequests)
+        setConnectionRequests(filteredRequests)
+      } else {
+        console.error('❌ Requests API failed:', requests.status, requests.statusText)
+      }
       
       console.log('✅ Social data loaded successfully')
     } catch (error) {
       console.error('❌ Failed to load social data:', error)
       // Fallback to mock data for development
+      console.log('🔄 Using fallback mock data')
       setConnections(SUGGESTED_CONNECTIONS.map(conn => ({
         walletAddress: conn.id,
         displayName: conn.name,
@@ -156,25 +203,68 @@ export default function SocialPage() {
     }
   }
 
+  const handleSearch = async () => {
+    if (!searchQuery.trim() || !walletInfo) return
+    
+    setIsSearching(true)
+    try {
+      const response = await fetch(`/api/social/search/users?q=${encodeURIComponent(searchQuery)}&limit=10`, {
+        headers: {
+          'Authorization': `Bearer ${walletInfo.address}`
+        }
+      })
+      
+      if (response.ok) {
+        const results = await response.json()
+        setSearchResults(results)
+      } else {
+        console.error('Search failed:', response.statusText)
+        setSearchResults([])
+      }
+    } catch (error) {
+      console.error('Search error:', error)
+      setSearchResults([])
+    } finally {
+      setIsSearching(false)
+    }
+  }
+
   const handleConnect = async (connectionId: string) => {
     if (!walletInfo) return
     
     try {
-      // Find connection in suggestions
-      const connection = connections.find(conn => conn.walletAddress === connectionId)
-      if (!connection) return
+      // Send connection request with proper authentication
+      const response = await fetch('/api/social/connections/request', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${walletInfo.address}`
+        },
+        body: JSON.stringify({ toUser: connectionId })
+      })
       
-      // Send connection request
-      await socialApi.sendConnectionRequest(connection.walletAddress)
-      
-      // Update UI - add isConnected property temporarily
-      setConnections(prev => prev.map(conn => 
-        conn.walletAddress === connectionId 
-          ? { ...conn, isConnected: true } as SocialProfile & { isConnected: boolean }
-          : conn
-      ))
-      
-      alert(`Connection request sent to ${connection.displayName}! 🤝`)
+      if (response.ok) {
+        // Update UI for both suggestions and search results
+        setConnections(prev => prev.map(conn => 
+          conn.walletAddress === connectionId 
+            ? { ...conn, isConnected: true } as SocialProfile & { isConnected: boolean }
+            : conn
+        ))
+        
+        setSearchResults(prev => prev.map(user => 
+          user.walletAddress === connectionId 
+            ? { ...user, isConnected: true } as SocialProfile & { isConnected: boolean }
+            : user
+        ))
+        
+        const connection = connections.find(conn => conn.walletAddress === connectionId) ||
+                          searchResults.find(user => user.walletAddress === connectionId)
+        
+        alert(`Connection request sent to ${connection?.displayName || 'user'}! 🤝`)
+      } else {
+        const error = await response.json()
+        throw new Error(error.error || 'Failed to send connection request')
+      }
     } catch (error: any) {
       console.error('Failed to send connection request:', error)
       alert(`Failed to send connection request: ${error.message}`)
@@ -183,15 +273,25 @@ export default function SocialPage() {
 
   const handleAcceptConnection = async (connectionId: string) => {
     try {
-      await socialApi.acceptConnectionRequest(connectionId)
+      const response = await fetch(`/api/social/connections/${connectionId}/accept`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${walletInfo?.address}`
+        }
+      })
       
-      // Remove from pending requests
-      setConnectionRequests(prev => prev.filter(req => req.id !== connectionId))
-      
-      alert('Connection request accepted! 🎉')
-      
-      // Reload social data
-      await loadSocialData()
+      if (response.ok) {
+        // Remove from pending requests
+        setConnectionRequests(prev => prev.filter(req => req.id !== connectionId))
+        
+        alert('Connection request accepted! 🎉')
+        
+        // Reload social data
+        await loadSocialData()
+      } else {
+        const error = await response.json()
+        throw new Error(error.error || 'Failed to accept connection')
+      }
     } catch (error: any) {
       console.error('Failed to accept connection:', error)
       alert(`Failed to accept connection: ${error.message}`)
@@ -200,12 +300,22 @@ export default function SocialPage() {
 
   const handleRejectConnection = async (connectionId: string) => {
     try {
-      await socialApi.rejectConnectionRequest(connectionId)
+      const response = await fetch(`/api/social/connections/${connectionId}/reject`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${walletInfo?.address}`
+        }
+      })
       
-      // Remove from pending requests
-      setConnectionRequests(prev => prev.filter(req => req.id !== connectionId))
-      
-      alert('Connection request rejected.')
+      if (response.ok) {
+        // Remove from pending requests
+        setConnectionRequests(prev => prev.filter(req => req.id !== connectionId))
+        
+        alert('Connection request rejected.')
+      } else {
+        const error = await response.json()
+        throw new Error(error.error || 'Failed to reject connection')
+      }
     } catch (error: any) {
       console.error('Failed to reject connection:', error)
       alert(`Failed to reject connection: ${error.message}`)
@@ -277,9 +387,151 @@ export default function SocialPage() {
             <Link href="/marketplace" className="text-gray-300 hover:text-white transition-colors">Marketplace</Link>
             <Link href="/profile" className="text-gray-300 hover:text-white transition-colors">Profile</Link>
             <Link href="/messages" className="text-gray-300 hover:text-white transition-colors">Messages</Link>
+            {walletInfo && (
+              <button
+                onClick={() => setShowSearch(true)}
+                className="text-gray-300 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10"
+              >
+                <Search className="w-5 h-5" />
+              </button>
+            )}
           </div>
         </div>
       </nav>
+
+      {/* Search Overlay */}
+      {showSearch && walletInfo && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-start justify-center pt-20">
+          <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 w-full max-w-2xl mx-6 text-white">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-xl font-bold">Search Users</h3>
+              <button
+                onClick={() => {
+                  setShowSearch(false)
+                  setSearchQuery('')
+                  setSearchResults([])
+                }}
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            
+            {/* Search Input */}
+            <div className="relative mb-6">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search by name, skills, or wallet address..."
+                className="w-full bg-white/10 border border-white/20 rounded-xl pl-12 pr-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors"
+                autoFocus
+              />
+            </div>
+            
+            {/* Search Results */}
+            <div className="max-h-96 overflow-y-auto">
+              {isSearching ? (
+                <div className="text-center py-8">
+                  <div className="w-8 h-8 border-2 border-blue-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                  <p className="text-gray-400">Searching users...</p>
+                </div>
+              ) : searchResults.length > 0 ? (
+                <div className="space-y-4">
+                  {searchResults.map(user => (
+                    <div key={user.walletAddress} className="flex items-center gap-4 p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
+                      <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center font-bold overflow-hidden flex-shrink-0">
+                        {(user as any).avatar ? (
+                          <img 
+                            src={(user as any).avatar} 
+                            alt={user.displayName}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              const target = e.currentTarget as HTMLImageElement
+                              target.style.display = 'none'
+                              const fallback = target.parentElement?.querySelector('.fallback-avatar') as HTMLElement
+                              if (fallback) {
+                                fallback.style.display = 'flex'
+                              }
+                            }}
+                          />
+                        ) : null}
+                        <div className={`fallback-avatar w-full h-full flex items-center justify-center ${(user as any).avatar ? 'hidden' : ''}`}>
+                          {user.displayName?.[0] || user.walletAddress.slice(0, 1).toUpperCase()}
+                        </div>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <p className="font-semibold truncate">{user.displayName || `User ${user.walletAddress.slice(-6)}`}</p>
+                          {(user as any).reputationScore && (user as any).reputationScore > 80 && (
+                            <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
+                              <span className="text-white text-xs">✓</span>
+                            </div>
+                          )}
+                          {user.isOnline && (
+                            <span className="text-xs text-green-400">• Online</span>
+                          )}
+                        </div>
+                        <p className="text-sm text-gray-400 truncate mb-1">{(user as any).bio || 'SkillChain Professional'}</p>
+                        {(user as any).location && (
+                          <p className="text-xs text-gray-500 truncate mb-1">📍 {(user as any).location}</p>
+                        )}
+                        <div className="flex items-center gap-4 mt-2">
+                          <span className="text-xs text-gray-500">{user.connections} connections</span>
+                          {(user as any).reputationScore && (
+                            <span className="text-xs text-yellow-400">⭐ {(user as any).reputationScore}</span>
+                          )}
+                        </div>
+                        {(user as any).skills && (user as any).skills.length > 0 && (
+                          <div className="flex flex-wrap gap-1 mt-2">
+                            {(user as any).skills.slice(0, 3).map((skill: string) => (
+                              <span key={skill} className="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full">
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => handleConnect(user.walletAddress)}
+                          disabled={(user as any).isConnected}
+                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                            (user as any).isConnected
+                              ? 'bg-gray-600 text-gray-300 cursor-not-allowed'
+                              : 'bg-blue-500 hover:bg-blue-600 text-white'
+                          }`}
+                        >
+                          {(user as any).isConnected ? 'Sent' : 'Connect'}
+                        </button>
+                        <Link
+                          href={`/profile?user=${user.walletAddress}`}
+                          className="px-4 py-2 border border-gray-500 hover:bg-white/10 rounded-lg text-sm font-medium transition-colors"
+                        >
+                          View
+                        </Link>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : searchQuery.trim() ? (
+                <div className="text-center py-8">
+                  <Users className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-400">No users found for "{searchQuery}"</p>
+                  <p className="text-sm text-gray-500 mt-2">Try searching by name, skills, or wallet address</p>
+                </div>
+              ) : (
+                <div className="text-center py-8">
+                  <Search className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-400">Start typing to search for users</p>
+                  <p className="text-sm text-gray-500 mt-2">Search by name, skills, or wallet address</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Main Content */}
       <div className="flex-1 relative z-10 container mx-auto px-6 py-8">
@@ -306,6 +558,17 @@ export default function SocialPage() {
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
               {/* Left Sidebar - Quick Actions & Connection Requests */}
               <div className="space-y-6">
+                {/* Search Button for Mobile */}
+                <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 text-white md:hidden">
+                  <button
+                    onClick={() => setShowSearch(true)}
+                    className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 py-3 rounded-xl font-semibold transition-all transform hover:scale-105 flex items-center justify-center gap-2"
+                  >
+                    <Search className="w-4 h-4" />
+                    Search Users
+                  </button>
+                </div>
+
                 {/* Create Post */}
                 <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 text-white">
                   <h3 className="text-lg font-bold mb-4">Share Update</h3>
@@ -365,21 +628,58 @@ export default function SocialPage() {
                   ) : (
                     <div className="space-y-4">
                       {connections.map(connection => (
-                        <div key={connection.walletAddress} className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center font-bold">
-                            {connection.displayName?.[0] || connection.walletAddress.slice(0, 1).toUpperCase()}
+                        <div key={connection.walletAddress} className="flex items-start gap-3 p-3 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
+                          <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center font-bold flex-shrink-0 overflow-hidden">
+                            {(connection as any).avatar ? (
+                              <img 
+                                src={(connection as any).avatar} 
+                                alt={connection.displayName}
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                  const target = e.currentTarget as HTMLImageElement
+                                  target.style.display = 'none'
+                                  const fallback = target.parentElement?.querySelector('.fallback-avatar') as HTMLElement
+                                  if (fallback) {
+                                    fallback.style.display = 'flex'
+                                  }
+                                }}
+                              />
+                            ) : null}
+                            <div className={`fallback-avatar w-full h-full flex items-center justify-center ${(connection as any).avatar ? 'hidden' : ''}`}>
+                              {connection.displayName?.[0] || connection.walletAddress.slice(0, 1).toUpperCase()}
+                            </div>
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="font-medium text-sm truncate">{connection.displayName || `User ${connection.walletAddress.slice(-6)}`}</p>
-                            <p className="text-xs text-gray-400 truncate">SkillChain Professional</p>
-                            <p className="text-xs text-gray-500">{connection.connections || 0} connections</p>
+                            <div className="flex items-center gap-2 mb-1">
+                              <p className="font-semibold text-sm truncate">{connection.displayName || `User ${connection.walletAddress.slice(-6)}`}</p>
+                              {(connection as any).reputationScore && (connection as any).reputationScore > 80 && (
+                                <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
+                                  <span className="text-white text-xs">✓</span>
+                                </div>
+                              )}
+                              {connection.isOnline && (
+                                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                              )}
+                            </div>
+                            <p className="text-xs text-gray-400 truncate mb-1">
+                              {(connection as any).bio || 'SkillChain Professional'}
+                            </p>
+                            {(connection as any).location && (
+                              <p className="text-xs text-gray-500 truncate mb-1">📍 {(connection as any).location}</p>
+                            )}
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs text-gray-500">{connection.connections || 0} connections</span>
+                              {(connection as any).reputationScore && (
+                                <span className="text-xs text-yellow-400">⭐ {(connection as any).reputationScore}</span>
+                              )}
+                            </div>
                           </div>
                           <button
                             onClick={() => handleConnect(connection.walletAddress)}
                             disabled={(connection as any).isConnected}
-                            className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
+                            className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors flex-shrink-0 ${
                               (connection as any).isConnected
-                                ? 'bg-gray-600 text-gray-300'
+                                ? 'bg-gray-600 text-gray-300 cursor-not-allowed'
                                 : 'bg-blue-500 hover:bg-blue-600 text-white'
                             }`}
                           >

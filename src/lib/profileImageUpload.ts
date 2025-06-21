@@ -238,6 +238,8 @@ export class ProfileImageUpload {
    */
   static async uploadToIPFS(file: File): Promise<string> {
     try {
+      console.log('🔄 Attempting to upload to IPFS via Pinata...')
+      
       // Option 1: Local IPFS node kullanarak
       // const ipfs = create({ url: 'http://localhost:5001' })
       // const result = await ipfs.add(file)
@@ -248,7 +250,12 @@ export class ProfileImageUpload {
       formData.append('file', file)
 
       // JWT token'ı environment variable'dan alın
-      const pinataJWT = process.env.NEXT_PUBLIC_PINATA_JWT || 'YOUR_PINATA_JWT_TOKEN'
+      const pinataJWT = process.env.NEXT_PUBLIC_PINATA_JWT
+      
+      if (!pinataJWT || pinataJWT === 'YOUR_PINATA_JWT_TOKEN') {
+        console.warn('⚠️ Pinata JWT token not configured, using mock hash for development')
+        throw new Error('Pinata JWT token not configured')
+      }
       
       const pinataResponse = await fetch('https://api.pinata.cloud/pinning/pinFileToIPFS', {
         method: 'POST',
@@ -259,35 +266,67 @@ export class ProfileImageUpload {
       })
 
       if (!pinataResponse.ok) {
-        throw new Error(`Pinata upload failed: ${pinataResponse.status} ${pinataResponse.statusText}`)
+        const errorText = await pinataResponse.text()
+        throw new Error(`Pinata upload failed: ${pinataResponse.status} ${pinataResponse.statusText} - ${errorText}`)
       }
 
       const pinataResult = await pinataResponse.json()
+      console.log('✅ Successfully uploaded to Pinata IPFS:', pinataResult.IpfsHash)
       return pinataResult.IpfsHash
 
     } catch (error) {
-      console.error('IPFS upload error:', error)
+      console.error('❌ IPFS upload error:', error)
       
-      // Fallback: Mock hash for development
-      const mockHash = 'Qm' + Math.random().toString(36).substr(2, 44)
-      console.warn('Using mock IPFS hash for development:', mockHash)
+      // Fallback: Generate a proper mock hash for development
+      // Standard IPFS hash format: Qm + 44 characters (base58)
+      const mockHashSuffix = Array.from({ length: 44 }, () => 
+        'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz123456789'[
+          Math.floor(Math.random() * 58)
+        ]
+      ).join('')
+      
+      const mockHash = 'Qm' + mockHashSuffix
+      
+      console.warn('⚠️ Using mock IPFS hash for development (46 chars):', mockHash)
+      console.warn('📝 Note: This is a development fallback. Configure NEXT_PUBLIC_PINATA_JWT for real IPFS uploads.')
+      
       return mockHash
     }
   }
 
   /**
-   * Get IPFS URL for display
+   * Get IPFS URL for display with multiple gateway fallbacks
    */
   static getIPFSUrl(ipfsHash: string): string {
+    // Clean the hash (remove ipfs:// prefix if present)
+    const cleanHash = ipfsHash.replace('ipfs://', '')
+    
     // Multiple IPFS gateways for better reliability
     const gateways = [
-      'https://ipfs.io/ipfs/',
       'https://gateway.pinata.cloud/ipfs/',
-      'https://cloudflare-ipfs.com/ipfs/'
+      'https://dweb.link/ipfs/',
+      'https://ipfs.io/ipfs/',
+      'https://gateway.ipfs.io/ipfs/'
     ]
     
-    // Use the first gateway (you can implement fallback logic)
-    return `${gateways[0]}${ipfsHash.replace('ipfs://', '')}`
+    // Use Pinata gateway first (usually faster and more reliable)
+    return `${gateways[0]}${cleanHash}`
+  }
+
+  /**
+   * Get multiple IPFS URLs for fallback
+   */
+  static getIPFSUrlsWithFallback(ipfsHash: string): string[] {
+    const cleanHash = ipfsHash.replace('ipfs://', '')
+    
+    const gateways = [
+      'https://gateway.pinata.cloud/ipfs/',
+      'https://dweb.link/ipfs/',
+      'https://ipfs.io/ipfs/',
+      'https://gateway.ipfs.io/ipfs/'
+    ]
+    
+    return gateways.map(gateway => `${gateway}${cleanHash}`)
   }
 
   /**
