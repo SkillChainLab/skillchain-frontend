@@ -38,6 +38,32 @@ export interface DatabaseConnection {
   updatedAt: Date
 }
 
+export interface DatabaseConversation {
+  _id?: ObjectId
+  participants: string[] // Array of wallet addresses
+  lastMessage?: ObjectId // Reference to last message
+  lastActivity: Date
+  createdAt: Date
+  updatedAt: Date
+}
+
+export interface DatabaseMessage {
+  _id?: ObjectId
+  conversationId: ObjectId
+  senderId: string // wallet address
+  content: string
+  type: 'text' | 'image' | 'file' | 'system'
+  attachments?: {
+    filename: string
+    url: string
+    type: string
+    size: number
+  }[]
+  isRead: boolean
+  editedAt?: Date
+  createdAt: Date
+}
+
 export async function connectToDatabase(): Promise<Db> {
   if (db) {
     return db
@@ -77,6 +103,18 @@ async function createIndexes() {
     await connectionsCollection.createIndex({ status: 1 })
     await connectionsCollection.createIndex({ fromUser: 1, toUser: 1 }, { unique: true })
 
+    // Conversations collection indexes
+    const conversationsCollection = db.collection<DatabaseConversation>('conversations')
+    await conversationsCollection.createIndex({ participants: 1 })
+    await conversationsCollection.createIndex({ lastActivity: -1 })
+
+    // Messages collection indexes
+    const messagesCollection = db.collection<DatabaseMessage>('messages')
+    await messagesCollection.createIndex({ conversationId: 1 })
+    await messagesCollection.createIndex({ senderId: 1 })
+    await messagesCollection.createIndex({ createdAt: -1 })
+    await messagesCollection.createIndex({ conversationId: 1, createdAt: 1 })
+
     console.log('✅ Database indexes created successfully')
   } catch (error) {
     console.error('❌ Failed to create indexes:', error)
@@ -91,6 +129,16 @@ export async function getUsersCollection(): Promise<Collection<DatabaseUser>> {
 export async function getConnectionsCollection(): Promise<Collection<DatabaseConnection>> {
   const database = await connectToDatabase()
   return database.collection<DatabaseConnection>('connections')
+}
+
+export async function getConversationsCollection(): Promise<Collection<DatabaseConversation>> {
+  const database = await connectToDatabase()
+  return database.collection<DatabaseConversation>('conversations')
+}
+
+export async function getMessagesCollection(): Promise<Collection<DatabaseMessage>> {
+  const database = await connectToDatabase()
+  return database.collection<DatabaseMessage>('messages')
 }
 
 // User operations
@@ -206,6 +254,131 @@ export async function deleteConnection(connectionId: string): Promise<boolean> {
   
   const result = await collection.deleteOne({ _id: new ObjectId(connectionId) })
   return result.deletedCount > 0
+}
+
+// Message operations
+export async function findOrCreateConversation(participants: string[]): Promise<DatabaseConversation> {
+  const collection = await getConversationsCollection()
+  
+  // Sort participants to ensure consistent order
+  const sortedParticipants = participants.sort()
+  
+  // Find existing conversation
+  let conversation = await collection.findOne({
+    participants: { $all: sortedParticipants, $size: sortedParticipants.length }
+  })
+  
+  if (!conversation) {
+    // Create new conversation
+    const now = new Date()
+    const conversationData: DatabaseConversation = {
+      participants: sortedParticipants,
+      lastActivity: now,
+      createdAt: now,
+      updatedAt: now
+    }
+    
+    const result = await collection.insertOne(conversationData)
+    conversation = { ...conversationData, _id: result.insertedId }
+  }
+  
+  return conversation
+}
+
+export async function getUserConversations(walletAddress: string): Promise<DatabaseConversation[]> {
+  const collection = await getConversationsCollection()
+  
+  return await collection.find({
+    participants: walletAddress
+  }).sort({ lastActivity: -1 }).toArray()
+}
+
+export async function createMessage(
+  conversationId: string, 
+  senderId: string, 
+  content: string, 
+  type: 'text' | 'image' | 'file' | 'system' = 'text',
+  attachments?: { filename: string; url: string; type: string; size: number }[]
+): Promise<DatabaseMessage> {
+  const messagesCollection = await getMessagesCollection()
+  const conversationsCollection = await getConversationsCollection()
+  const { ObjectId } = await import('mongodb')
+  
+  const now = new Date()
+  const messageData: DatabaseMessage = {
+    conversationId: new ObjectId(conversationId),
+    senderId,
+    content,
+    type,
+    attachments,
+    isRead: false,
+    createdAt: now
+  }
+  
+  const result = await messagesCollection.insertOne(messageData)
+  const message = { ...messageData, _id: result.insertedId }
+  
+  // Update conversation last activity and last message
+  await conversationsCollection.updateOne(
+    { _id: new ObjectId(conversationId) },
+    {
+      $set: {
+        lastMessage: result.insertedId,
+        lastActivity: now,
+        updatedAt: now
+      }
+    }
+  )
+  
+  return message
+}
+
+export async function getConversationMessages(conversationId: string, limit: number = 50): Promise<DatabaseMessage[]> {
+  const collection = await getMessagesCollection()
+  const { ObjectId } = await import('mongodb')
+  
+  return await collection.find({
+    conversationId: new ObjectId(conversationId)
+  }).sort({ createdAt: -1 }).limit(limit).toArray()
+}
+
+export async function markMessagesAsRead(conversationId: string, userId: string): Promise<void> {
+  const collection = await getMessagesCollection()
+  const { ObjectId } = await import('mongodb')
+  
+  await collection.updateMany(
+    {
+      conversationId: new ObjectId(conversationId),
+      senderId: { $ne: userId },
+      isRead: false
+    },
+    {
+      $set: { isRead: true }
+    }
+  )
+}
+
+export async function getConnectedUsers(walletAddress: string): Promise<DatabaseUser[]> {
+  const connectionsCollection = await getConnectionsCollection()
+  const usersCollection = await getUsersCollection()
+  
+  // Get accepted connections
+  const connections = await connectionsCollection.find({
+    $or: [
+      { fromUser: walletAddress, status: 'accepted' },
+      { toUser: walletAddress, status: 'accepted' }
+    ]
+  }).toArray()
+  
+  // Extract connected user addresses
+  const connectedAddresses = connections.map(conn => 
+    conn.fromUser === walletAddress ? conn.toUser : conn.fromUser
+  )
+  
+  // Get user details
+  return await usersCollection.find({
+    walletAddress: { $in: connectedAddresses }
+  }).toArray()
 }
 
 // Utility function to sync user from blockchain to database

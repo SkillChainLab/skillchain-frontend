@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { UserPlus, Check, Clock, X } from 'lucide-react'
+import { UserPlus, Check, Clock, X, MessageCircle } from 'lucide-react'
 import { useWallet } from '@/contexts/WalletContext'
+import Link from 'next/link'
 
 interface ConnectButtonProps {
   targetUser: {
@@ -95,11 +96,12 @@ export default function ConnectButton({
       
       case 'connected':
         return {
-          icon: <Check className="w-4 h-4" />,
-          text: 'Connected',
-          className: 'bg-green-600 text-white cursor-not-allowed',
+          icon: <MessageCircle className="w-4 h-4" />,
+          text: 'Message',
+          className: 'bg-green-600 hover:bg-green-700 text-white',
           onClick: () => {},
-          disabled: true
+          disabled: false,
+          isMessage: true
         }
       
       case 'blocked':
@@ -128,6 +130,23 @@ export default function ConnectButton({
   }
 
   const buttonConfig = getButtonContent()
+
+  // If it's a message button, render as Link
+  if (buttonConfig.isMessage) {
+    return (
+      <Link 
+        href="/messages"
+        className={`
+          flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors
+          ${buttonConfig.className}
+          ${className}
+        `}
+      >
+        {buttonConfig.icon}
+        {buttonConfig.text}
+      </Link>
+    )
+  }
 
   return (
     <button
