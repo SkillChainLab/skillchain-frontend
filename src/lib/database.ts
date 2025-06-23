@@ -154,6 +154,18 @@ export async function findUserConnections(walletAddress: string, status?: string
   return await collection.find(query).toArray()
 }
 
+export async function findConnectionById(connectionId: string): Promise<DatabaseConnection | null> {
+  const collection = await getConnectionsCollection()
+  const { ObjectId } = await import('mongodb')
+  
+  try {
+    return await collection.findOne({ _id: new ObjectId(connectionId) })
+  } catch (error) {
+    console.error('Error finding connection by ID:', error)
+    return null
+  }
+}
+
 export async function createConnection(fromUser: string, toUser: string): Promise<DatabaseConnection> {
   const collection = await getConnectionsCollection()
   

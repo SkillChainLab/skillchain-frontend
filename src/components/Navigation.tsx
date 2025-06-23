@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom'
 import { ChevronDown, Users, Shield, ArrowRight, Wallet as WalletIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useWallet } from '@/contexts/WalletContext'
+import NotificationCenter from './NotificationCenter'
 
 interface NavigationProps {
   title?: string
@@ -61,6 +62,7 @@ export default function Navigation({
         
         <div className="hidden md:flex items-center gap-8">
           <Link href="/marketplace" className="text-gray-300 hover:text-white transition-colors">Marketplace</Link>
+          <Link href="/users" className="text-gray-300 hover:text-white transition-colors">Users</Link>
           <Link href="/dashboard" className="text-gray-300 hover:text-white transition-colors">Dashboard</Link>
           <Link href="/convert" className="text-gray-300 hover:text-white transition-colors">Convert</Link>
           
@@ -73,21 +75,27 @@ export default function Navigation({
               {isConnecting ? 'Connecting...' : 'Connect Wallet'}
             </button>
           ) : (
-            <div className="relative">
-              <button
-                ref={buttonRef}
-                onClick={() => setShowProfileDropdown(!showProfileDropdown)}
-                className="flex items-center gap-3 bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-full text-white transition-all"
-              >
-                <div className="w-8 h-8 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">{walletInfo.address.slice(5, 6).toUpperCase()}</span>
-                </div>
-                <div className="text-left">
-                  <div className="font-medium">{formatAddress(walletInfo.address)}</div>
-                  <div className="text-xs text-gray-300">{walletInfo.skillBalance} SKILL</div>
-                </div>
-                <ChevronDown className="w-4 h-4" />
-              </button>
+            <div className="flex items-center gap-4">
+              {/* Notification Center */}
+              <NotificationCenter />
+              
+              {/* Profile Dropdown */}
+              <div className="relative">
+                <button
+                  ref={buttonRef}
+                  onClick={() => setShowProfileDropdown(!showProfileDropdown)}
+                  className="flex items-center gap-3 bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-full text-white transition-all"
+                >
+                  <div className="w-8 h-8 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">{walletInfo.address.slice(5, 6).toUpperCase()}</span>
+                  </div>
+                  <div className="text-left">
+                    <div className="font-medium">{formatAddress(walletInfo.address)}</div>
+                    <div className="text-xs text-gray-300">{walletInfo.skillBalance} SKILL</div>
+                  </div>
+                  <ChevronDown className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           )}
         </div>

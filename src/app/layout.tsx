@@ -1,35 +1,35 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { WalletProvider } from '@/contexts/WalletContext'
+import AppLayout from '@/components/layout/AppLayout'
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
   title: "SkillChain - Decentralized Freelancing Platform",
   description: "Connect talent with opportunity on the blockchain. Secure payments, transparent contracts, and global accessibility.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en" className={inter.variable}>
+      <body className={`${inter.className} antialiased`}>
         <WalletProvider>
-          {children}
+          <AppLayout>
+            {children}
+          </AppLayout>
         </WalletProvider>
       </body>
     </html>
