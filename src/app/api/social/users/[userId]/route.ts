@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-
-// Simple in-memory storage for connections (in production, this would be a proper database)
-const connections: any[] = []
+import { findUserConnections } from '@/lib/database'
 
 export async function GET(
   request: NextRequest,
@@ -14,19 +12,21 @@ export async function GET(
 
     console.log('🔍 Getting connections for user:', userId, 'with status:', status)
 
-    // Filter connections based on status if provided
-    const filteredConnections = connections.filter(conn => {
-      const isUserInvolved = conn.fromUser === userId || conn.toUser === userId
-      if (!isUserInvolved) return false
-      
-      if (status) {
-        return conn.status === status
-      }
-      return true
-    })
+    // Get connections from database
+    const connections = await findUserConnections(userId, status || undefined)
+    
+    // Convert ObjectId to string for JSON serialization
+    const serializedConnections = connections.map(conn => ({
+      id: conn._id?.toString(),
+      fromUser: conn.fromUser,
+      toUser: conn.toUser,
+      status: conn.status,
+      createdAt: conn.createdAt,
+      updatedAt: conn.updatedAt
+    }))
 
-    console.log('✅ Returning connections:', filteredConnections.length)
-    return NextResponse.json(filteredConnections)
+    console.log('✅ Returning connections:', serializedConnections.length)
+    return NextResponse.json(serializedConnections)
 
   } catch (error) {
     console.error('Error fetching user connections:', error)

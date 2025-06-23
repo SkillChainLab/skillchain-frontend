@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-
-// Simple in-memory storage for connections (in production, this would be a proper database)
-const connections: any[] = []
+import { createConnection, findUserByWallet } from '@/lib/database'
 
 export async function POST(request: NextRequest) {
   try {
@@ -25,37 +23,39 @@ export async function POST(request: NextRequest) {
 
     console.log('🤝 Creating connection request from:', fromUser, 'to:', toUser)
 
-    // Check if connection already exists
-    const existingConnection = connections.find(conn => 
-      (conn.fromUser === fromUser && conn.toUser === toUser) ||
-      (conn.fromUser === toUser && conn.toUser === fromUser)
-    )
-
-    if (existingConnection) {
-      return NextResponse.json({ error: 'Connection already exists or pending' }, { status: 409 })
+    // Check if both users exist in database
+    const fromUserExists = await findUserByWallet(fromUser)
+    const toUserExists = await findUserByWallet(toUser)
+    
+    if (!fromUserExists) {
+      return NextResponse.json({ error: 'Sender user not found' }, { status: 404 })
+    }
+    
+    if (!toUserExists) {
+      return NextResponse.json({ error: 'Target user not found' }, { status: 404 })
     }
 
-    // Create new connection request
-    const newConnection = {
-      id: Date.now().toString(),
-      fromUser,
-      toUser,
-      status: 'pending',
-      createdAt: new Date(),
-      updatedAt: new Date()
+    try {
+      // Create new connection request
+      const newConnection = await createConnection(fromUser, toUser)
+      
+      console.log('✅ Connection request created successfully')
+      return NextResponse.json({
+        id: newConnection._id,
+        fromUser: newConnection.fromUser,
+        toUser: newConnection.toUser,
+        status: newConnection.status,
+        createdAt: newConnection.createdAt,
+        updatedAt: newConnection.updatedAt
+      })
+      
+    } catch (dbError: any) {
+      // Handle duplicate connection error
+      if (dbError.code === 11000) { // MongoDB duplicate key error
+        return NextResponse.json({ error: 'Connection already exists or pending' }, { status: 409 })
+      }
+      throw dbError
     }
-
-    connections.push(newConnection)
-
-    console.log('✅ Connection request created successfully')
-    return NextResponse.json({
-      id: newConnection.id,
-      fromUser: newConnection.fromUser,
-      toUser: newConnection.toUser,
-      status: newConnection.status,
-      createdAt: newConnection.createdAt,
-      updatedAt: newConnection.updatedAt
-    })
 
   } catch (error) {
     console.error('Error creating connection request:', error)

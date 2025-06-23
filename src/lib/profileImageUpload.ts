@@ -1,4 +1,7 @@
 import { fileStorageApi, profileApi } from './api'
+import { Registry } from '@cosmjs/proto-signing'
+import { SigningStargateClient, defaultRegistryTypes } from '@cosmjs/stargate'
+import axios from 'axios'
 
 // IPFS client import
 // const { create } = require('ipfs-http-client')
@@ -7,96 +10,61 @@ import { fileStorageApi, profileApi } from './api'
 export class ProfileImageUpload {
   
   /**
-   * Upload profile image to IPFS and update profile via blockchain transaction
+   * Upload profile image to IPFS and update user profile on blockchain and database
    */
   static async uploadProfileImage(
     file: File, 
     walletAddress: string
   ): Promise<{ success: boolean; ipfsHash?: string; error?: string }> {
     try {
-      // 1. Validate file
-      const validation = this.validateImageFile(file)
-      if (!validation.valid) {
-        return { success: false, error: validation.error }
-      }
-
-      console.log('🔄 Starting profile image upload...')
-
-      // 2. Upload to IPFS first
-      const ipfsHash = await this.uploadToIPFS(file)
-      console.log('📤 File uploaded to IPFS:', ipfsHash)
+      console.log('📸 Starting profile image upload for:', walletAddress)
       
-      // 3. Pin to IPFS for permanent storage (HTTP API)
-      try {
-        const pinResponse = await fetch(`/api/skillchain/skillchain/v1/ipfs/${ipfsHash}/pin`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-        
-        if (pinResponse.ok) {
-          console.log('📌 File pinned to IPFS successfully')
-        } else {
-          console.warn('⚠️ IPFS pinning failed, but continuing...')
+      // 1. Upload image to IPFS via Pinata
+      const formData = new FormData()
+      formData.append('file', file)
+      
+      const pinataMetadata = JSON.stringify({
+        name: `profile-${walletAddress}-${Date.now()}`,
+        keyvalues: {
+          walletAddress: walletAddress,
+          type: 'profile-image'
         }
-      } catch (pinError) {
-        console.warn('⚠️ IPFS pinning failed, but continuing...', pinError)
-      }
-
-      // 4. Create file record via HTTP API
-      console.log('📝 Creating file record via API...')
-      
-      const fileRecordData = {
-        creator: walletAddress,
-        filename: `profile-${walletAddress}-${Date.now()}.${file.type.split('/')[1]}`,
-        content_type: file.type,
-        file_size: file.size,
-        ipfs_hash: ipfsHash,
-        is_public: true,
-        metadata: JSON.stringify({
-          type: 'profile_photo',
-          purpose: 'profile_avatar',
-          originalName: file.name,
-          uploadedAt: new Date().toISOString()
-        })
-      }
-
-      const fileResponse = await fetch('/api/skillchain/skillchain/v1/files', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(fileRecordData)
       })
-
-      if (!fileResponse.ok) {
-        const errorData = await fileResponse.text()
-        throw new Error(`File record creation failed: ${fileResponse.status} - ${errorData}`)
-      }
-
-      const fileResult = await fileResponse.json()
-      console.log('✅ File record created:', fileResult)
-
-      // 5. Update profile avatar via blockchain transaction
-      console.log('📝 Updating profile avatar via blockchain...')
+      formData.append('pinataMetadata', pinataMetadata)
       
-      // Get Keplr signer for blockchain transactions
+      const pinataOptions = JSON.stringify({
+        cidVersion: 0,
+      })
+      formData.append('pinataOptions', pinataOptions)
+      
+      console.log('📤 Uploading to IPFS via Pinata...')
+      
+      const pinataResponse = await axios.post(
+        'https://api.pinata.cloud/pinning/pinFileToIPFS',
+        formData,
+        {
+          maxBodyLength: Infinity,
+          headers: {
+            'Content-Type': `multipart/form-data`,
+            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_PINATA_JWT}`
+          }
+        }
+      )
+      
+      const ipfsHash = pinataResponse.data.IpfsHash
+      console.log('✅ Image uploaded to IPFS successfully:', ipfsHash)
+      
+      // 2. Update profile on blockchain
+      console.log('📝 Updating profile on blockchain...')
+      
       const offlineSigner = (window as any).keplr?.getOfflineSigner('skillchain')
       if (!offlineSigner) {
         throw new Error('Keplr signer not available. Please make sure Keplr is connected.')
       }
-
-      // Import required CosmJS modules and Profile types
-      const { SigningStargateClient } = await import('@cosmjs/stargate')
-      const { Registry } = await import('@cosmjs/proto-signing')
-      const { defaultRegistryTypes } = await import('@cosmjs/stargate')
       
-      // Import Profile message types  
+      // Import required modules
       const { msgTypes: profileMsgTypes } = await import('@/lib/ts-client/skillchain.profile/registry')
       const { MsgUpdateUserProfile } = await import('@/lib/ts-client/skillchain.profile/types/skillchain/profile/tx')
-
-      console.log('🔧 Creating blockchain registry...')
       
       // Create registry with Profile types
       const registry = new Registry([
@@ -114,7 +82,7 @@ export class ProfileImageUpload {
       // Get current profile data to preserve other fields
       let existingProfile: any = null
       try {
-        const profileResponse = await fetch(`/api/skillchain/skillchain/v1/profiles/${walletAddress}`)
+        const profileResponse = await fetch(`/api/skillchain/v1/profiles/${walletAddress}`)
         if (profileResponse.ok) {
           const profileData = await profileResponse.json()
           existingProfile = profileData.profile || profileData.data
@@ -150,60 +118,81 @@ export class ProfileImageUpload {
         updatedAt: currentTimestamp
       })
 
-      const profileMsg = {
-        typeUrl: '/skillchain.profile.MsgUpdateUserProfile',
-        value: profileUpdateMessage
-      }
-
-      console.log('🔐 Signing profile update transaction with Keplr...')
-
-      const profileResult = await client.signAndBroadcast(
+      console.log('🔗 Broadcasting transaction to blockchain...')
+      
+      // Sign and broadcast profile update transaction
+      const result = await client.signAndBroadcast(
         walletAddress,
-        [profileMsg],
+        [
+          { typeUrl: '/skillchain.profile.MsgUpdateUserProfile', value: profileUpdateMessage }
+        ],
         {
-          amount: [{ denom: 'uskill', amount: '5000' }],
-          gas: '200000',
-        },
-        'SkillChain Profile Avatar Update'
+          amount: [{ denom: 'uskill', amount: '2500' }],
+          gas: '150000',
+        }
       )
 
-      if (profileResult.code !== 0) {
-        throw new Error(`Profile update failed: ${profileResult.rawLog}`)
-      }
-
-      console.log('✅ Profile updated on blockchain:', profileResult.transactionHash)
-
-      return { 
-        success: true, 
-        ipfsHash: ipfsHash
-      }
-
-    } catch (error: any) {
-      console.error('❌ Profile image upload error:', error)
-      
-      // More detailed error message
-      let errorMessage = 'Profile image upload failed. '
-      if (error.message?.includes('IPFS upload failed')) {
-        errorMessage += 'Failed to upload image to IPFS. Please check your internet connection.'
-      } else if (error.message?.includes('File record creation failed')) {
-        errorMessage += 'Failed to create file record. Please ensure SkillChain API is running.'
-      } else if (error.message?.includes('Keplr signer not available')) {
-        errorMessage += 'Keplr wallet not available. Please connect Keplr.'
-      } else if (error.message?.includes('User rejected')) {
-        errorMessage += 'Transaction was rejected in Keplr wallet.'
-      } else if (error.message?.includes('insufficient funds')) {
-        errorMessage += 'Insufficient balance for transaction.'
-      } else if (error.message?.includes('Profile update failed')) {
-        errorMessage += 'Failed to update profile on blockchain. Please try again.'
-      } else if (error.message?.includes('Profile not found')) {
-        errorMessage += 'Please create your profile first before uploading an image.'
+      if (result.code === 0) {
+        console.log('✅ Profile updated on blockchain:', result.transactionHash)
+        
+        // 3. Update database via API call
+        console.log('💾 Updating database with new profile data...')
+        
+        try {
+          await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              walletAddress,
+              displayName: existingProfile.displayName || 'Unknown User',
+              bio: existingProfile.bio || '',
+              location: existingProfile.location || '',
+              website: existingProfile.website || '',
+              github: existingProfile.github || '',
+              linkedin: existingProfile.linkedin || '',
+              twitter: existingProfile.twitter || '',
+              avatar: avatarUrl, // Update with new avatar URL
+              transactionHash: result.transactionHash
+            })
+          })
+          
+          console.log('✅ Database updated successfully')
+          
+        } catch (dbError) {
+          console.error('⚠️ Database update failed (blockchain update succeeded):', dbError)
+          // Don't fail the entire operation if only database update fails
+        }
+        
+        return { 
+          success: true, 
+          ipfsHash,
+        }
       } else {
-        errorMessage += `Error: ${error.message || 'Unknown error'}`
+        throw new Error(`Profile update failed: ${result.rawLog}`)
+      }
+      
+    } catch (error: any) {
+      console.error('❌ Profile image upload failed:', error)
+      
+      if (error.response?.status === 401) {
+        return { 
+          success: false, 
+          error: 'IPFS upload failed: Invalid Pinata credentials. Please check your API keys.' 
+        }
+      }
+      
+      if (error.message?.includes('User denied')) {
+        return { 
+          success: false, 
+          error: 'Transaction was cancelled by user.' 
+        }
       }
       
       return { 
         success: false, 
-        error: errorMessage
+        error: error.message || 'Failed to upload profile image. Please try again.' 
       }
     }
   }

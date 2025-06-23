@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-
-// Simple in-memory storage for connections (in production, this would be a proper database)
-const connections: any[] = []
+import { deleteConnection, getConnectionsCollection } from '@/lib/database'
 
 export async function POST(
   request: NextRequest,
@@ -20,22 +18,27 @@ export async function POST(
 
     console.log('❌ Rejecting connection request:', connectionId, 'by user:', currentUser)
 
-    // Find the connection
-    const connectionIndex = connections.findIndex(conn => conn.id === connectionId)
+    // First, find the connection to verify authorization
+    const connectionsCollection = await getConnectionsCollection()
+    const { ObjectId } = await import('mongodb')
     
-    if (connectionIndex === -1) {
+    const connection = await connectionsCollection.findOne({ _id: new ObjectId(connectionId) })
+    
+    if (!connection) {
       return NextResponse.json({ error: 'Connection request not found' }, { status: 404 })
     }
-
-    const connection = connections[connectionIndex]
 
     // Verify the current user is the recipient of the request
     if (connection.toUser !== currentUser) {
       return NextResponse.json({ error: 'Unauthorized to reject this connection' }, { status: 403 })
     }
 
-    // Remove the connection request (reject by deletion)
-    connections.splice(connectionIndex, 1)
+    // Delete the connection request (reject by deletion)
+    const deleted = await deleteConnection(connectionId)
+    
+    if (!deleted) {
+      return NextResponse.json({ error: 'Failed to reject connection request' }, { status: 500 })
+    }
 
     console.log('✅ Connection request rejected successfully')
     return NextResponse.json({ message: 'Connection request rejected' })

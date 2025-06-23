@@ -5,10 +5,11 @@ import { ArrowLeft, MapPin, Star, Calendar, Briefcase, Users, MessageSquare, Use
 import Link from 'next/link'
 import Footer from '@/components/Footer'
 import { useWallet } from '@/contexts/WalletContext'
-import { profileApi } from '@/lib/api'
 import { ProfileImageUpload } from '@/lib/profileImageUpload'
 import { socialApi, UserConnection } from '@/lib/socialApi'
 import { useSearchParams } from 'next/navigation'
+
+// Database functions are only used in API routes, not client-side
 
 interface UserProfile {
   id: string
@@ -138,7 +139,7 @@ export default function ProfilePage() {
       
       // Query profile from blockchain using gRPC-web or REST API
       try {
-        const response = await fetch(`/api/skillchain/skillchain/v1/profiles/${profileAddress}`)
+        const response = await fetch(`/api/skillchain/v1/profiles/${profileAddress}`)
         
         if (response.ok) {
           const profileData = await response.json()
@@ -155,7 +156,7 @@ export default function ProfilePage() {
             let userSkills: string[] = []
             let userSkillsDetailed: any[] = []
             try {
-              const skillsResponse = await fetch(`/api/skillchain/skillchain/v1/profiles/${profileAddress}/skills`)
+              const skillsResponse = await fetch(`/api/skillchain/v1/profiles/${profileAddress}/skills`)
               if (skillsResponse.ok) {
                 const skillsData = await skillsResponse.json()
                 console.log('Skills data from blockchain:', skillsData)
@@ -172,6 +173,39 @@ export default function ProfilePage() {
               }
             } catch (skillsError) {
               console.log('Error fetching skills:', skillsError)
+            }
+
+            // 🔄 AUTO-SYNC TO MONGODB: Check if profile exists in database, if not sync it
+            try {
+              console.log('🔄 Syncing blockchain profile to MongoDB...')
+              
+              const syncResponse = await fetch('/api/auth/register', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  walletAddress: profileAddress,
+                  displayName: profile.displayName || 'SkillChain User',
+                  bio: profile.bio || '',
+                  location: profile.location || '',
+                  website: profile.website || '',
+                  github: profile.github || '',
+                  linkedin: profile.linkedin || '',
+                  twitter: profile.twitter || '',
+                  avatar: profile.avatar || '',
+                  transactionHash: 'BLOCKCHAIN_SYNC_' + Date.now() // Mark as synced from blockchain
+                })
+              })
+              
+              if (syncResponse.ok) {
+                const syncResult = await syncResponse.json()
+                console.log('✅ Profile synced to MongoDB:', syncResult.message)
+              } else {
+                console.warn('⚠️ MongoDB sync failed, but continuing with blockchain data')
+              }
+            } catch (syncError) {
+              console.warn('⚠️ MongoDB sync error (continuing with blockchain data):', syncError)
             }
             
             setUser({
@@ -283,7 +317,7 @@ export default function ProfilePage() {
             })
           }
 
-          const fileResponse = await fetch('/api/skillchain/skillchain/v1/files', {
+          const fileResponse = await fetch('/api/skillchain/v1/files', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -420,16 +454,43 @@ ${avatarUrl ? '🖼️ Avatar: Uploaded to IPFS' : ''}
 
 Your profile is now on the blockchain!`)
         
+        // Save profile to database
+        console.log('💾 Saving profile to database...')
+        try {
+          await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              walletAddress: walletInfo.address,
+              displayName: profileForm.displayName,
+              bio: profileForm.bio,
+              location: profileForm.location,
+              website: profileForm.website,
+              github: profileForm.github,
+              linkedin: profileForm.linkedin,
+              twitter: profileForm.twitter,
+              avatar: avatarUrl,
+              transactionHash: result.transactionHash
+            })
+          })
+          console.log('✅ Profile saved to database successfully')
+        } catch (dbError) {
+          console.error('⚠️ Database save failed (blockchain transaction succeeded):', dbError)
+          // Don't fail the entire operation if only database save fails
+        }
+        
         // Update user state with form data
-        setUser(prev => ({
-          id: walletInfo.address,
-          address: walletInfo.address,
+        setUser((prev: UserProfile | null) => ({
+          id: walletInfo!.address,
+          address: walletInfo!.address,
           name: profileForm.displayName || 'SkillChain User',
           title: profileForm.bio || 'SkillChain Professional',
-          avatar: avatarUrl || prev?.avatar, // Use new avatar or keep existing
+          avatar: avatarUrl || prev?.avatar || '', // Use new avatar, existing avatar, or empty string
           location: profileForm.location || '',
           joinedDate: prev?.joinedDate || new Date().toISOString(),
-          type: 'freelancer',
+          type: 'freelancer' as const,
           rating: prev?.rating || 5.0,
           totalJobs: prev?.totalJobs || 0,
           totalEarned: prev?.totalEarned || 0,
@@ -644,7 +705,7 @@ Your skill is now on the blockchain!`)
         
         // Update user connections count
         setUser(prev => prev ? {
-          ...prev,
+      ...prev, 
           connections: prev.connections + 1
         } : null)
         
@@ -1213,7 +1274,7 @@ Your skill is now on the blockchain!`)
                             isUploadingImage ? 'opacity-50 cursor-not-allowed' : ''
                           }`}
                         >
-                          <Camera className="w-4 h-4 text-white" />
+                        <Camera className="w-4 h-4 text-white" />
                         </label>
                         {isUploadingImage && (
                           <div className="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center">

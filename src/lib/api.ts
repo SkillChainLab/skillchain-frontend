@@ -1,5 +1,5 @@
 // SkillChain API Configuration - Use proxy to avoid CORS
-const API_BASE_URL = '/api/skillchain/skillchain/v1'
+const API_BASE_URL = '/api/skillchain/v1'
 
 // Response interface matching documentation
 interface ApiResponse<T = any> {

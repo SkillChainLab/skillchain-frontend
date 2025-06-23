@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-
-// Simple in-memory storage for connections (in production, this would be a proper database)
-const connections: any[] = []
+import { updateConnectionStatus } from '@/lib/database'
 
 export async function POST(
   request: NextRequest,
@@ -20,35 +18,26 @@ export async function POST(
 
     console.log('✅ Accepting connection request:', connectionId, 'by user:', currentUser)
 
-    // Find the connection
-    const connectionIndex = connections.findIndex(conn => conn.id === connectionId)
+    // Update connection status in database
+    const updatedConnection = await updateConnectionStatus(connectionId, 'accepted')
     
-    if (connectionIndex === -1) {
+    if (!updatedConnection) {
       return NextResponse.json({ error: 'Connection request not found' }, { status: 404 })
     }
 
-    const connection = connections[connectionIndex]
-
     // Verify the current user is the recipient of the request
-    if (connection.toUser !== currentUser) {
+    if (updatedConnection.toUser !== currentUser) {
       return NextResponse.json({ error: 'Unauthorized to accept this connection' }, { status: 403 })
-    }
-
-    // Update connection status
-    connections[connectionIndex] = {
-      ...connection,
-      status: 'accepted',
-      updatedAt: new Date()
     }
 
     console.log('✅ Connection request accepted successfully')
     return NextResponse.json({
-      id: connections[connectionIndex].id,
-      fromUser: connections[connectionIndex].fromUser,
-      toUser: connections[connectionIndex].toUser,
-      status: connections[connectionIndex].status,
-      createdAt: connections[connectionIndex].createdAt,
-      updatedAt: connections[connectionIndex].updatedAt
+      id: updatedConnection._id?.toString(),
+      fromUser: updatedConnection.fromUser,
+      toUser: updatedConnection.toUser,
+      status: updatedConnection.status,
+      createdAt: updatedConnection.createdAt,
+      updatedAt: updatedConnection.updatedAt
     })
 
   } catch (error) {
