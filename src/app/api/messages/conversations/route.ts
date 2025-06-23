@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getUserConversations, getConnectedUsers, findUserByWallet } from '@/lib/database'
+import { getUserConversations, getConnectedUsers, findUserByWallet, getMessagesCollection } from '@/lib/database'
 
 export async function GET(request: NextRequest) {
   try {
@@ -20,12 +20,29 @@ export async function GET(request: NextRequest) {
       // Get connected users for creating new conversations
       const connectedUsers = await getConnectedUsers(currentUser)
       
-      // Format conversations with participant details
+      // Get messages collection for unread count
+      const messagesCollection = await getMessagesCollection()
+      const { ObjectId } = await import('mongodb')
+      
+      // Format conversations with participant details and unread count
       const formattedConversations = await Promise.all(
         conversations.map(async (conversation) => {
           // Find the other participant
           const otherParticipant = conversation.participants.find(p => p !== currentUser)
           const participantDetails = await findUserByWallet(otherParticipant || '')
+          
+          // Get unread message count
+          const unreadCount = await messagesCollection.countDocuments({
+            conversationId: conversation._id,
+            senderId: { $ne: currentUser },
+            isRead: false
+          })
+          
+          // Get last message
+          const lastMessage = await messagesCollection.findOne(
+            { conversationId: conversation._id },
+            { sort: { createdAt: -1 } }
+          )
           
           return {
             id: conversation._id?.toString(),
@@ -33,7 +50,10 @@ export async function GET(request: NextRequest) {
             participantName: participantDetails?.displayName || 'Unknown User',
             participantAvatar: participantDetails?.avatar || '',
             lastActivity: conversation.lastActivity,
-            createdAt: conversation.createdAt
+            createdAt: conversation.createdAt,
+            unreadCount,
+            lastMessage: lastMessage?.content || '',
+            lastMessageSender: lastMessage?.senderId || ''
           }
         })
       )

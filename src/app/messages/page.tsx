@@ -41,6 +41,10 @@ interface Conversation {
   participantAvatar: string
   lastActivity: string
   createdAt: string
+  unreadCount?: number
+  lastMessage?: string
+  lastMessageSender?: string
+  isParticipantTyping?: boolean
 }
 
 interface ConnectedUser {
@@ -59,19 +63,44 @@ export default function MessagesPage() {
   const [isLoadingMessages, setIsLoadingMessages] = useState(false)
   const [showNewChatModal, setShowNewChatModal] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
+  const [otherUserTyping, setOtherUserTyping] = useState(false)
+  const [isCurrentlyTyping, setIsCurrentlyTyping] = useState(false)
+  const [conversationTypingStatus, setConversationTypingStatus] = useState<Record<string, boolean>>({})
   
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const messagePollingRef = useRef<NodeJS.Timeout | null>(null)
+  const typingPollingRef = useRef<NodeJS.Timeout | null>(null)
+  const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const conversationTypingPollingRef = useRef<NodeJS.Timeout | null>(null)
+  const conversationUpdatingRef = useRef<NodeJS.Timeout | null>(null)
   const { walletInfo } = useWallet()
 
   useEffect(() => {
     if (walletInfo) {
       loadConversations()
+      startConversationTypingPolling()
+      startConversationUpdating()
+    }
+    
+    return () => {
+      stopConversationTypingPolling()
+      stopConversationUpdating()
     }
   }, [walletInfo])
 
   useEffect(() => {
     if (selectedConversation) {
       loadMessages(selectedConversation.id)
+      startMessagePolling()
+      startTypingPolling()
+    } else {
+      stopMessagePolling()
+      stopTypingPolling()
+    }
+    
+    return () => {
+      stopMessagePolling()
+      stopTypingPolling()
     }
   }, [selectedConversation])
 
@@ -79,15 +108,197 @@ export default function MessagesPage() {
     scrollToBottom()
   }, [messages])
 
+  // Track typing status based on newMessage content
+  useEffect(() => {
+    if (!selectedConversation) return
+
+    // Clear existing timeout
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current)
+    }
+
+    if (newMessage.trim()) {
+      // Send typing status immediately
+      sendTypingStatus(true)
+      setIsCurrentlyTyping(true)
+    } else {
+      // Stop typing immediately when input is empty
+      sendTypingStatus(false)
+      setIsCurrentlyTyping(false)
+    }
+  }, [newMessage, selectedConversation])
+
+  // Send periodic typing updates while actively typing
+  useEffect(() => {
+    if (!isCurrentlyTyping || !selectedConversation || !newMessage.trim()) return
+
+    const interval = setInterval(() => {
+      sendTypingStatus(true)
+    }, 2000)
+
+    return () => clearInterval(interval)
+  }, [isCurrentlyTyping, selectedConversation, newMessage])
+
+  // Check typing status for all conversations
+  const startConversationTypingPolling = () => {
+    stopConversationTypingPolling()
+    
+    conversationTypingPollingRef.current = setInterval(() => {
+      checkAllConversationsTyping()
+    }, 1000)
+  }
+
+  const stopConversationTypingPolling = () => {
+    if (conversationTypingPollingRef.current) {
+      clearInterval(conversationTypingPollingRef.current)
+      conversationTypingPollingRef.current = null
+    }
+  }
+
+  const checkAllConversationsTyping = async () => {
+    if (!walletInfo || conversations.length === 0) return
+
+    try {
+      const typingPromises = conversations.map(async (conversation) => {
+        const response = await fetch(`/api/messages/typing?conversationId=${conversation.id}`, {
+          headers: {
+            'Authorization': `Bearer ${walletInfo.address}`
+          }
+        })
+
+        if (response.ok) {
+          const data = await response.json()
+          return { conversationId: conversation.id, isTyping: data.isTyping }
+        }
+        return { conversationId: conversation.id, isTyping: false }
+      })
+
+      const results = await Promise.all(typingPromises)
+      const newTypingStatus: Record<string, boolean> = {}
+      
+      results.forEach(result => {
+        newTypingStatus[result.conversationId] = result.isTyping
+      })
+
+      // Only update state if typing status actually changed
+      setConversationTypingStatus(prevStatus => {
+        const hasChanged = JSON.stringify(prevStatus) !== JSON.stringify(newTypingStatus)
+        return hasChanged ? newTypingStatus : prevStatus
+      })
+    } catch (error) {
+      console.error('Error checking conversations typing:', error)
+    }
+  }
+
+  const selectConversation = async (conversation: Conversation) => {
+    setSelectedConversation(conversation)
+    
+    // Mark messages as read when conversation is opened
+    if ((conversation.unreadCount || 0) > 0) {
+      try {
+        await fetch(`/api/messages/${conversation.id}/mark-read`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${walletInfo?.address}`
+          }
+        })
+        
+        // Silently refresh conversations to update unread count without loading indicator
+        setTimeout(() => {
+          loadConversations(true) // Silent reload
+        }, 300)
+      } catch (error) {
+        console.error('Error marking messages as read:', error)
+      }
+    }
+  }
+
+  // Real-time message polling
+  const startMessagePolling = () => {
+    stopMessagePolling()
+    
+    if (selectedConversation) {
+      messagePollingRef.current = setInterval(() => {
+        loadMessages(selectedConversation.id, true) // silent reload
+      }, 2000) // Poll every 2 seconds
+    }
+  }
+
+  const stopMessagePolling = () => {
+    if (messagePollingRef.current) {
+      clearInterval(messagePollingRef.current)
+      messagePollingRef.current = null
+    }
+  }
+
+  // Real-time typing polling
+  const startTypingPolling = () => {
+    stopTypingPolling()
+    
+    if (selectedConversation) {
+      typingPollingRef.current = setInterval(() => {
+        checkTypingStatus()
+      }, 1000) // Check every second
+    }
+  }
+
+  const stopTypingPolling = () => {
+    if (typingPollingRef.current) {
+      clearInterval(typingPollingRef.current)
+      typingPollingRef.current = null
+    }
+  }
+
+  const checkTypingStatus = async () => {
+    if (!walletInfo || !selectedConversation) return
+
+    try {
+      const response = await fetch(`/api/messages/typing?conversationId=${selectedConversation.id}`, {
+        headers: {
+          'Authorization': `Bearer ${walletInfo.address}`
+        }
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        setOtherUserTyping(data.isTyping)
+      }
+    } catch (error) {
+      console.error('Error checking typing status:', error)
+    }
+  }
+
+  const sendTypingStatus = async (isTyping: boolean) => {
+    if (!walletInfo || !selectedConversation) return
+
+    try {
+      await fetch('/api/messages/typing', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${walletInfo.address}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          recipientId: selectedConversation.participantId,
+          isTyping
+        })
+      })
+    } catch (error) {
+      console.error('Error sending typing status:', error)
+    }
+  }
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
 
-  const loadConversations = async () => {
+  const loadConversations = async (silent = false) => {
     if (!walletInfo) return
 
     try {
-      setIsLoading(true)
+      if (!silent) {
+        setIsLoading(true)
+      }
       
       const response = await fetch('/api/messages/conversations', {
         headers: {
@@ -99,22 +310,28 @@ export default function MessagesPage() {
         const data = await response.json()
         setConversations(data.conversations || [])
         setConnectedUsers(data.connectedUsers || [])
-        console.log('💬 Loaded conversations:', data.conversations?.length || 0)
+        if (!silent) {
+          console.log('💬 Loaded conversations:', data.conversations?.length || 0)
+        }
       } else {
         console.error('Failed to load conversations:', response.status)
       }
     } catch (error) {
       console.error('Error loading conversations:', error)
     } finally {
-      setIsLoading(false)
+      if (!silent) {
+        setIsLoading(false)
+      }
     }
   }
 
-  const loadMessages = async (conversationId: string) => {
+  const loadMessages = async (conversationId: string, silent = false) => {
     if (!walletInfo) return
 
     try {
-      setIsLoadingMessages(true)
+      if (!silent) {
+        setIsLoadingMessages(true)
+      }
       
       const response = await fetch(`/api/messages/${conversationId}`, {
         headers: {
@@ -124,21 +341,37 @@ export default function MessagesPage() {
 
       if (response.ok) {
         const data = await response.json()
-        setMessages(data.messages || [])
-        console.log('📨 Loaded messages:', data.messages?.length || 0)
+        const newMessages = data.messages || []
+        
+        // Only update state if messages actually changed
+        setMessages(prevMessages => {
+          if (JSON.stringify(prevMessages) !== JSON.stringify(newMessages)) {
+            return newMessages
+          }
+          return prevMessages
+        })
+        
+        if (!silent) {
+          console.log('📨 Loaded messages:', newMessages.length)
+        }
       } else {
         console.error('Failed to load messages:', response.status)
       }
     } catch (error) {
       console.error('Error loading messages:', error)
     } finally {
-      setIsLoadingMessages(false)
+      if (!silent) {
+        setIsLoadingMessages(false)
+      }
     }
   }
 
   const sendMessage = async () => {
     if (!walletInfo || !selectedConversation || !newMessage.trim()) return
 
+    const messageContent = newMessage.trim()
+    setNewMessage('') // Clear input immediately - this will trigger useEffect to stop typing
+    
     try {
       const response = await fetch('/api/messages/send', {
         method: 'POST',
@@ -148,27 +381,37 @@ export default function MessagesPage() {
         },
         body: JSON.stringify({
           recipientId: selectedConversation.participantId,
-          content: newMessage.trim(),
+          content: messageContent,
           type: 'text'
         })
       })
 
       if (response.ok) {
         const data = await response.json()
+        
+        // Add message immediately to UI for instant feedback
         setMessages(prev => [...prev, data.message])
-        setNewMessage('')
+        
         console.log('✅ Message sent successfully')
         
-        // Refresh conversations to update last activity
-        loadConversations()
+        // Silently refresh conversations to update last activity without loading
+        setTimeout(() => {
+          loadConversations(true) // Silent reload
+        }, 200)
       } else {
         console.error('Failed to send message:', response.status)
         alert('Failed to send message')
+        setNewMessage(messageContent) // Restore message if failed
       }
     } catch (error) {
       console.error('Error sending message:', error)
       alert('Error sending message')
+      setNewMessage(messageContent) // Restore message if failed
     }
+  }
+
+  const handleTyping = (value: string) => {
+    setNewMessage(value) // This will trigger the useEffect to handle typing status
   }
 
   const startNewConversation = async (user: ConnectedUser) => {
@@ -205,8 +448,10 @@ export default function MessagesPage() {
         setSelectedConversation(newConversation)
         setMessages([data.message])
         
-        // Refresh conversations
-        loadConversations()
+        // Silently refresh conversations
+        setTimeout(() => {
+          loadConversations(true) // Silent reload
+        }, 200)
       } else {
         console.error('Failed to start conversation:', response.status)
         alert('Failed to start conversation')
@@ -254,6 +499,22 @@ export default function MessagesPage() {
     user.displayName.toLowerCase().includes(searchTerm.toLowerCase()) ||
     user.walletAddress.toLowerCase().includes(searchTerm.toLowerCase())
   )
+
+  // Regular conversation updates to show new messages
+  const startConversationUpdating = () => {
+    stopConversationUpdating()
+    
+    conversationUpdatingRef.current = setInterval(() => {
+      loadConversations(true) // Silent reload every 5 seconds
+    }, 5000)
+  }
+
+  const stopConversationUpdating = () => {
+    if (conversationUpdatingRef.current) {
+      clearInterval(conversationUpdatingRef.current)
+      conversationUpdatingRef.current = null
+    }
+  }
 
   if (!walletInfo) {
     return (
@@ -329,37 +590,87 @@ export default function MessagesPage() {
               conversations.map((conversation) => (
                 <div
                   key={conversation.id}
-                  onClick={() => setSelectedConversation(conversation)}
+                  onClick={() => selectConversation(conversation)}
                   className={cn(
                     'p-4 border-b border-gray-100 dark:border-gray-800 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors',
                     selectedConversation?.id === conversation.id && 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800'
                   )}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold overflow-hidden flex-shrink-0">
-                      {conversation.participantAvatar && getAvatarUrl(conversation.participantAvatar) ? (
-                        <img 
-                          src={getAvatarUrl(conversation.participantAvatar) || undefined} 
-                          alt={conversation.participantName}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        conversation.participantName[0]?.toUpperCase() || '?'
+                    <div className="relative">
+                      <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold overflow-hidden flex-shrink-0">
+                        {conversation.participantAvatar && getAvatarUrl(conversation.participantAvatar) ? (
+                          <img 
+                            src={getAvatarUrl(conversation.participantAvatar) || undefined} 
+                            alt={conversation.participantName}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          conversation.participantName[0]?.toUpperCase() || '?'
+                        )}
+                      </div>
+                      
+                      {/* Unread message badge */}
+                      {(conversation.unreadCount || 0) > 0 && (
+                        <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1">
+                          {conversation.unreadCount! > 99 ? '99+' : conversation.unreadCount}
+                        </div>
                       )}
                     </div>
                     
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between mb-1">
-                        <h3 className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                        <h3 className={cn(
+                          "text-sm truncate",
+                          (conversation.unreadCount || 0) > 0
+                            ? "font-bold text-gray-900 dark:text-white"
+                            : "font-medium text-gray-900 dark:text-white"
+                        )}>
                           {conversation.participantName}
                         </h3>
                         <span className="text-xs text-gray-500 dark:text-gray-400">
                           {formatTime(conversation.lastActivity)}
                         </span>
                       </div>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
-                        Click to open conversation
-                      </p>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1 min-w-0">
+                          {conversationTypingStatus[conversation.id] ? (
+                            <div className="flex items-center gap-1 text-blue-500 dark:text-blue-400">
+                              <div className="flex space-x-1">
+                                <div className="w-1 h-1 bg-blue-500 rounded-full animate-bounce"></div>
+                                <div className="w-1 h-1 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                                <div className="w-1 h-1 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                              </div>
+                              <span className="text-xs">typing...</span>
+                            </div>
+                          ) : conversation.lastMessage ? (
+                            <div className="flex items-center gap-1">
+                              {conversation.lastMessageSender === walletInfo?.address && (
+                                <div className="flex-shrink-0">
+                                  {(conversation.unreadCount || 0) === 0 ? (
+                                    <CheckCheck className="w-3 h-3 text-blue-500" />
+                                  ) : (
+                                    <Check className="w-3 h-3 text-gray-400" />
+                                  )}
+                                </div>
+                              )}
+                              <p className={cn(
+                                "text-xs truncate",
+                                (conversation.unreadCount || 0) > 0
+                                  ? "font-semibold text-gray-700 dark:text-gray-300"
+                                  : "text-gray-500 dark:text-gray-400"
+                              )}>
+                                {conversation.lastMessage}
+                              </p>
+                            </div>
+                          ) : (
+                            <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                              Click to open conversation
+                            </p>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -391,7 +702,7 @@ export default function MessagesPage() {
                       {selectedConversation.participantName}
                     </h2>
                     <p className="text-sm text-gray-500 dark:text-gray-400">
-                      Connected user
+                      {otherUserTyping ? 'typing...' : 'Connected user'}
                     </p>
                   </div>
                 </div>
@@ -418,7 +729,7 @@ export default function MessagesPage() {
                         key={message.id}
                         className={cn(
                           'flex gap-3',
-                          isOwnMessage ? 'flex-row-reverse' : ''
+                          isOwnMessage ? 'justify-end' : 'justify-start'
                         )}
                       >
                         {!isOwnMessage && (
@@ -436,20 +747,20 @@ export default function MessagesPage() {
                         )}
                         
                         <div className={cn(
-                          'max-w-[70%]',
-                          isOwnMessage ? 'text-right' : ''
+                          'max-w-[70%] flex flex-col',
+                          isOwnMessage 
+                            ? 'items-end' : 'items-start'
                         )}>
                           <div className={cn(
-                            'rounded-2xl px-4 py-2 inline-block',
+                            'rounded-2xl px-4 py-2',
                             isOwnMessage 
-                              ? 'bg-blue-600 text-white' 
-                              : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700'
+                              ? 'bg-blue-600 text-white rounded-br-md' 
+                              : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-bl-md'
                           )}>
                             <p className="text-sm whitespace-pre-wrap">{message.content}</p>
                           </div>
                           <div className={cn(
-                            'flex items-center gap-1 mt-1 text-xs text-gray-500 dark:text-gray-400',
-                            isOwnMessage ? 'justify-end' : ''
+                            'flex items-center gap-1 mt-1 text-xs text-gray-500 dark:text-gray-400'
                           )}>
                             <Clock className="w-3 h-3" />
                             <span>{formatTime(message.createdAt)}</span>
@@ -462,10 +773,50 @@ export default function MessagesPage() {
                             )}
                           </div>
                         </div>
+
+                        {isOwnMessage && (
+                          <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm overflow-hidden flex-shrink-0">
+                            {walletInfo.address && getAvatarUrl(walletInfo.address) ? (
+                              <img 
+                                src={getAvatarUrl(walletInfo.address) || undefined} 
+                                alt="You"
+                                className="w-full h-full object-cover"
+                              />
+                            ) : (
+                              'You'[0]?.toUpperCase() || '?'
+                            )}
+                          </div>
+                        )}
                       </div>
                     )
                   })
                 )}
+
+                {/* Typing Indicator - Only show when OTHER user is typing */}
+                {otherUserTyping && (
+                  <div className="flex gap-3 justify-start">
+                    <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm overflow-hidden flex-shrink-0">
+                      {selectedConversation.participantAvatar && getAvatarUrl(selectedConversation.participantAvatar) ? (
+                        <img 
+                          src={getAvatarUrl(selectedConversation.participantAvatar) || undefined} 
+                          alt={selectedConversation.participantName}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        selectedConversation.participantName[0]?.toUpperCase() || '?'
+                      )}
+                    </div>
+                    
+                    <div className="bg-gray-200 dark:bg-gray-700 rounded-2xl rounded-bl-md px-4 py-2">
+                      <div className="flex space-x-1">
+                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
+                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 <div ref={messagesEndRef} />
               </div>
 
@@ -475,7 +826,7 @@ export default function MessagesPage() {
                   <div className="flex-1">
                     <textarea
                       value={newMessage}
-                      onChange={(e) => setNewMessage(e.target.value)}
+                      onChange={(e) => handleTyping(e.target.value)}
                       onKeyPress={handleKeyPress}
                       placeholder="Type a message..."
                       rows={1}
