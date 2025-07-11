@@ -30,13 +30,13 @@ declare const window: KeplrWindow
 
 const WalletContext = createContext<WalletContextType | undefined>(undefined)
 
-// Using our actual SkillChain network that's running locally
+// Using our SkillChain network that's running on virtual server
 const SKILLCHAIN_CHAIN_ID = 'skillchain'
 const SKILLCHAIN_CHAIN_CONFIG = {
   chainId: SKILLCHAIN_CHAIN_ID,
   chainName: 'SkillChain',
-  rpc: 'http://localhost:26657',
-  rest: 'http://localhost:1317',
+  rpc: process.env.NEXT_PUBLIC_SKILLCHAIN_RPC || 'http://45.83.20.3:26657',
+  rest: process.env.NEXT_PUBLIC_SKILLCHAIN_API || 'http://45.83.20.3:1317',
   bip44: {
     coinType: 118,
   },
@@ -87,10 +87,12 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
   const [initialized, setInitialized] = useState(false)
 
   useEffect(() => {
+    // Wallet connection disabled for landing page
     // Only initialize once
-    if (!initialized) {
-      initializeWallet()
-    }
+    // if (!initialized) {
+    //   initializeWallet()
+    // }
+    setInitialized(true) // Mark as initialized without connecting
     
     // Listen for Keplr account changes
     const handleKeplrAccountChange = () => {

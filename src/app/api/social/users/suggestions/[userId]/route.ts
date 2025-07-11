@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-// SkillChain blockchain API configuration
-const SKILLCHAIN_API_URL = process.env.NEXT_PUBLIC_SKILLCHAIN_API || 'http://localhost:1317'
+// SkillChain blockchain API configuration - Updated for Virtual Server
+const SKILLCHAIN_API_URL = process.env.NEXT_PUBLIC_SKILLCHAIN_API || 'http://45.83.20.3:1317'
 
 interface BlockchainProfile {
   index: string

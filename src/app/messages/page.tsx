@@ -554,7 +554,7 @@ export default function MessagesPage() {
               </Button>
             </div>
             
-            {/* Search */}
+          {/* Search */}
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
@@ -588,16 +588,16 @@ export default function MessagesPage() {
               </div>
             ) : (
               conversations.map((conversation) => (
-                <div
-                  key={conversation.id}
+              <div
+                key={conversation.id}
                   onClick={() => selectConversation(conversation)}
                   className={cn(
                     'p-4 border-b border-gray-100 dark:border-gray-800 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors',
                     selectedConversation?.id === conversation.id && 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800'
                   )}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="relative">
+              >
+                <div className="flex items-center gap-3">
+                  <div className="relative">
                       <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold overflow-hidden flex-shrink-0">
                         {conversation.participantAvatar && getAvatarUrl(conversation.participantAvatar) ? (
                           <img 
@@ -607,8 +607,8 @@ export default function MessagesPage() {
                           />
                         ) : (
                           conversation.participantName[0]?.toUpperCase() || '?'
-                        )}
-                      </div>
+                    )}
+                  </div>
                       
                       {/* Unread message badge */}
                       {(conversation.unreadCount || 0) > 0 && (
@@ -652,8 +652,8 @@ export default function MessagesPage() {
                                     <CheckCheck className="w-3 h-3 text-blue-500" />
                                   ) : (
                                     <Check className="w-3 h-3 text-gray-400" />
-                                  )}
-                                </div>
+                      )}
+                    </div>
                               )}
                               <p className={cn(
                                 "text-xs truncate",
@@ -685,7 +685,7 @@ export default function MessagesPage() {
             <>
               {/* Chat Header */}
               <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
-                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold overflow-hidden">
                     {selectedConversation.participantAvatar && getAvatarUrl(selectedConversation.participantAvatar) ? (
                       <img 
@@ -695,9 +695,9 @@ export default function MessagesPage() {
                       />
                     ) : (
                       selectedConversation.participantName[0]?.toUpperCase() || '?'
-                    )}
-                  </div>
-                  <div>
+                      )}
+                    </div>
+                    <div>
                     <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                       {selectedConversation.participantName}
                     </h2>
@@ -725,8 +725,8 @@ export default function MessagesPage() {
                   messages.map((message) => {
                     const isOwnMessage = message.senderId === walletInfo.address
                     return (
-                      <div
-                        key={message.id}
+                  <div
+                    key={message.id}
                         className={cn(
                           'flex gap-3',
                           isOwnMessage ? 'justify-end' : 'justify-start'
@@ -758,7 +758,7 @@ export default function MessagesPage() {
                               : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-bl-md'
                           )}>
                             <p className="text-sm whitespace-pre-wrap">{message.content}</p>
-                          </div>
+                              </div>
                           <div className={cn(
                             'flex items-center gap-1 mt-1 text-xs text-gray-500 dark:text-gray-400'
                           )}>
@@ -771,7 +771,7 @@ export default function MessagesPage() {
                                 <Check className="w-3 h-3" />
                               )
                             )}
-                          </div>
+                            </div>
                         </div>
 
                         {isOwnMessage && (
@@ -876,7 +876,7 @@ export default function MessagesPage() {
                   >
                     <X className="w-4 h-4" />
                   </Button>
-                </div>
+            </div>
               </CardHeader>
               <CardContent>
                 <div className="mb-4">
@@ -889,8 +889,8 @@ export default function MessagesPage() {
                       onChange={(e) => setSearchTerm(e.target.value)}
                       className="w-full pl-9 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                     />
-                  </div>
                 </div>
+              </div>
 
                 <div className="max-h-64 overflow-y-auto space-y-2">
                   {filteredConnectedUsers.length === 0 ? (
@@ -901,7 +901,7 @@ export default function MessagesPage() {
                           ? 'No connected users. Connect with users first to start conversations.'
                           : 'No users found matching your search.'}
                       </p>
-                    </div>
+                </div>
                   ) : (
                     filteredConnectedUsers.map((user) => (
                       <div

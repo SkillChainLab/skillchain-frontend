@@ -384,7 +384,7 @@ export default function SocialPage() {
             </div>
           </Link>
           <div className="hidden md:flex items-center gap-6">
-            <Link href="/marketplace" className="text-gray-300 hover:text-white transition-colors">Marketplace</Link>
+            <Link href="/explorer" className="text-gray-300 hover:text-white transition-colors">Marketplace</Link>
             <Link href="/profile" className="text-gray-300 hover:text-white transition-colors">Profile</Link>
             <Link href="/messages" className="text-gray-300 hover:text-white transition-colors">Messages</Link>
             {walletInfo && (
@@ -692,7 +692,7 @@ export default function SocialPage() {
                           No suggestions available yet
                         </p>
                       )}
-                    </div>
+                </div>
                   )}
               </div>
             </div>

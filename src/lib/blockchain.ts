@@ -7,12 +7,12 @@ declare global {
   interface Window extends KeplrWindow {}
 }
 
-// SkillChain network configuration
+// SkillChain network configuration - Updated for Virtual Server
 export const SKILLCHAIN_CONFIG = {
   chainId: 'skillchain',
   chainName: 'SkillChain',
-  rpc: 'http://localhost:26657',
-  rest: 'http://localhost:1317',
+  rpc: process.env.NEXT_PUBLIC_SKILLCHAIN_RPC || 'http://45.83.20.3:26657',
+  rest: process.env.NEXT_PUBLIC_SKILLCHAIN_API || 'http://45.83.20.3:1317',
   bech32Config: {
     bech32PrefixAccAddr: 'skill',
     bech32PrefixAccPub: 'skillpub',

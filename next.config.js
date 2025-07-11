@@ -41,12 +41,12 @@ const nextConfig = {
   // Updated config for Next.js 15
   serverExternalPackages: ['mongodb'],
   
-  // Proxy configuration for CORS issues
+  // Proxy configuration for CORS issues - Updated for Virtual Server
   async rewrites() {
     return [
       {
         source: '/api/skillchain/:path*',
-        destination: 'http://localhost:1317/skillchain/:path*'
+        destination: process.env.NEXT_PUBLIC_SKILLCHAIN_API + '/skillchain/:path*' || 'http://45.83.20.3:1317/skillchain/:path*'
       }
     ]
   }

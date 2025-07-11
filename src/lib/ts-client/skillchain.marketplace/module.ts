@@ -2166,7 +2166,7 @@ interface QueryClientOptions {
   addr: string
 }
 
-export const queryClient = ({ addr: addr }: QueryClientOptions = { addr: "http://localhost:1317" }) => {
+export const queryClient = ({ addr: addr }: QueryClientOptions = { addr: process.env.NEXT_PUBLIC_SKILLCHAIN_API || "http://45.83.20.3:1317" }) => {
   return new Api({ baseURL: addr });
 };
 

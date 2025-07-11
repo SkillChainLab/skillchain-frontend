@@ -35,7 +35,7 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4 text-white">Platform</h4>
             <div className="space-y-2">
-              <Link href="/marketplace" className="block text-gray-400 hover:text-white transition-colors">
+              <Link href="/explorer" className="block text-gray-400 hover:text-white transition-colors">
                 Marketplace
               </Link>
               <Link href="/dashboard" className="block text-gray-400 hover:text-white transition-colors">

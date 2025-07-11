@@ -14,7 +14,7 @@ export async function GET(
 
     // Get connections from database
     const connections = await findUserConnections(userId, status || undefined)
-    
+
     // Convert ObjectId to string for JSON serialization
     const serializedConnections = connections.map(conn => ({
       id: conn._id?.toString(),

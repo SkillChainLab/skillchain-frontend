@@ -13,6 +13,7 @@ SkillChain is a revolutionary freelancing platform that leverages blockchain tec
 - 🔒 **Secure Wallet Integration** - Keplr wallet support
 - 📊 **Real-time API** - RESTful API for all blockchain operations
 - 🎨 **Modern UI/UX** - Beautiful, responsive design with Tailwind CSS
+- 🪙 **Token Faucet** - Get test tokens for development
 
 ## 🛠 **Technology Stack**
 
@@ -29,7 +30,7 @@ SkillChain is a revolutionary freelancing platform that leverages blockchain tec
 - Node.js 18+ 
 - npm or yarn
 - Keplr wallet extension
-- SkillChain blockchain node running on localhost:26657
+- SkillChain blockchain node running
 
 ### Installation
 
@@ -41,6 +42,9 @@ cd skillchain-frontend
 # Install dependencies
 npm install
 
+# Copy environment variables
+cp env.example .env.local
+
 # Start development server
 npm run dev
 ```
@@ -49,75 +53,32 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 ## 🔧 **API Integration**
 
-The application integrates with SkillChain's REST API endpoints:
+The application integrates with SkillChain's REST API endpoints on virtual server:
 
-### **Base URL:** `http://localhost:1317`
+### **Live Server URLs:**
+- **Tendermint RPC:** `http://45.83.20.3:26657`
+- **REST API:** `http://45.83.20.3:1317`
+- **Token Faucet:** `http://45.83.20.3:4500`
 
 ### **Available APIs:**
 - **Bank Operations** - Balance queries and token operations
 - **Conversion APIs** - SKILL ↔ VUSD conversion
 - **Marketplace** - Job posting, proposals, project management
-- **Profile Management** - User profiles and skill endorsements
-- **Transfer Operations** - Token transfers with memos
+- **Profile Management** - User profiles, skills, endorsements
+- **Social Features** - User connections, messaging, notifications
+- **File Storage** - IPFS integration for file uploads
+- **Analytics** - Platform metrics and user statistics
 
-### **Key Modules:**
-```typescript
-import { 
-  bankApi, 
-  conversionApi, 
-  marketplaceApi, 
-  profileApi, 
-  transferApi 
-} from '@/lib/api'
-```
+## 🪙 **Getting Test Tokens**
 
-## 📱 **Features & Usage**
+Use the token faucet to get test tokens for development:
 
-### **1. Wallet Connection**
-- Connect your Keplr wallet to access SkillChain network
-- Automatic balance fetching for SKILL and VUSD tokens
-- Secure transaction signing
+```bash
+# Get SKILL tokens
+curl -X POST http://45.83.20.3:4500/faucet -H "Content-Type: application/json" -d '{"address": "your-skill-address"}'
 
-### **2. Token Conversion**
-- Convert SKILL tokens to stable VUSD for payments
-- Real-time conversion rates (1 SKILL = $0.50, 1 VUSD = $1.00)
-- Instant balance updates
-
-### **3. Marketplace**
-- Browse available freelance opportunities
-- Filter by category, budget, and skills
-- Post new job listings (requires wallet connection)
-- Submit proposals to jobs
-
-### **4. Profile Management**
-- Create comprehensive freelancer/employer profiles
-- Add and showcase skills with proficiency levels
-- Portfolio display and social links
-- Skill endorsement system
-
-### **5. Job Workflow**
-```
-1. Employer posts job → 2. Freelancer submits proposal → 
-3. Employer accepts → 4. Project execution → 5. Payment release
-```
-
-## 🗂 **Project Structure**
-
-```
-src/
-├── app/                    # Next.js app router pages
-│   ├── marketplace/        # Job marketplace
-│   ├── convert/           # Token conversion
-│   ├── profile/           # User profiles
-│   ├── dashboard/         # User dashboard
-│   └── page.tsx           # Landing page
-├── components/            # Reusable UI components
-├── contexts/              # React Context providers
-│   └── WalletContext.tsx  # Wallet state management
-├── lib/                   # Utilities and configurations
-│   ├── api.ts            # API integration layer
-│   └── blockchain.ts     # Blockchain utilities
-└── generated/            # Protobuf generated types
+# Get VUSD tokens  
+curl -X POST http://45.83.20.3:4500/faucet/vusd -H "Content-Type: application/json" -d '{"address": "your-skill-address"}'
 ```
 
 ## 🔗 **API Endpoints Documentation**
@@ -163,11 +124,12 @@ const result = await conversionApi.convertSkillToVUSD({
 
 ## 🌐 **Environment Setup**
 
-### **Local SkillChain Network**
-Ensure your SkillChain blockchain is running with:
-- RPC endpoint: `http://localhost:26657`
-- REST endpoint: `http://localhost:1317`
+### **SkillChain Virtual Server Network**
+The application connects to SkillChain blockchain running on virtual server:
+- RPC endpoint: `http://45.83.20.3:26657`
+- REST endpoint: `http://45.83.20.3:1317`
 - Chain ID: `skillchain`
+- Faucet: `http://45.83.20.3:4500`
 
 ### **Keplr Configuration**
 The application automatically configures Keplr with SkillChain network settings:

@@ -6,7 +6,8 @@ export async function GET(
 ) {
   try {
     const { path } = await params
-    const skillchainApiUrl = process.env.NEXT_PUBLIC_SKILLCHAIN_API || 'http://localhost:1317'
+    // Updated to use virtual server endpoint
+    const skillchainApiUrl = process.env.NEXT_PUBLIC_SKILLCHAIN_API || 'http://45.83.20.3:1317'
     const targetUrl = `${skillchainApiUrl}/skillchain/${path.join('/')}`
     
     // Get query parameters from the original request
@@ -63,7 +64,8 @@ export async function POST(
 ) {
   try {
     const { path } = await params
-    const skillchainApiUrl = process.env.NEXT_PUBLIC_SKILLCHAIN_API || 'http://localhost:1317'
+    // Updated to use virtual server endpoint
+    const skillchainApiUrl = process.env.NEXT_PUBLIC_SKILLCHAIN_API || 'http://45.83.20.3:1317'
     const targetUrl = `${skillchainApiUrl}/skillchain/${path.join('/')}`
     
     const body = await request.text()
@@ -78,22 +80,6 @@ export async function POST(
       },
       body
     })
-    
-    if (!response.ok) {
-      console.error('❌ SkillChain API error:', response.status, response.statusText)
-      const errorText = await response.text()
-      console.error('❌ Error details:', errorText)
-      
-      return NextResponse.json(
-        { 
-          error: 'SkillChain API error', 
-          status: response.status, 
-          statusText: response.statusText,
-          details: errorText
-        }, 
-        { status: response.status }
-      )
-    }
     
     const data = await response.json()
     console.log('✅ SkillChain API response:', data)

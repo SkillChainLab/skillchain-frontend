@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { WalletProvider } from '@/contexts/WalletContext'
 import AppLayout from '@/components/layout/AppLayout'
 
 const inter = Inter({
@@ -26,11 +25,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className={`${inter.className} antialiased`}>
-        <WalletProvider>
-          <AppLayout>
-            {children}
-          </AppLayout>
-        </WalletProvider>
+        <AppLayout>
+          {children}
+        </AppLayout>
       </body>
     </html>
   );
