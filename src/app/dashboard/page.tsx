@@ -771,7 +771,6 @@ export default function DashboardPage() {
                     </div>
                   </div>
                 </div>
-                
                 <button
                   onClick={handleLogout}
                   className="p-2 rounded-lg bg-red-100 hover:bg-red-200 text-red-600 transition-all duration-200"
